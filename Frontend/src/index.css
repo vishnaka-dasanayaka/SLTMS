@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.backImage{
+    background-image: url("../public/img/math.jpg");
+}
+
+.categoryBackImage{
+    background-image: url("../public/img/al.jpg");
+}
+
+.active{
+    scale: 1.2;
+    color: #128270;
+}
