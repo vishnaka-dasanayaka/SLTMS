@@ -1,6 +1,6 @@
 import Home from "./pages/Home/Home";
 import  ReactDOM  from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Routes, Route, BrowserRouter } from 'react-router-dom';
 import About from "./pages/About/About";
 import SignUp from "./pages/SignUp/SignUp";
 import TeacherSignUp from "./pages/TeacherSignUp/TeacherSignUp";
@@ -19,26 +19,29 @@ import SignIn from "./pages/SignIn/SignIn";
 
 function App() {
   return (
-    <BrowserRouter>
-    <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="signin" element={<SignIn/>} />
-        <Route path="teachersignup" element={<TeacherSignUp />} />
-        <Route path="studentsignup" element={<StudentSignUp />} />
-        <Route path="teacherDashboard" element={<TeacherDashboard/>} />
-        <Route path="studentDashboard" element={<StudentDashboard/>} />
-        <Route path="courseCRUD" element={<CourseCRUD/>} />
-        <Route path="teacherHelp" element={<TeacherHelp/>} />
-        <Route path="teacherPay" element={<TeacherPay/>} />
-        <Route path="teacherProfile" element={<TeacherProfile/>} />
-        <Route path="studentCourses" element={<StudentCourses/>} />
-        <Route path="studentProfile" element={<StudentProfile/>} />
-        <Route path="specificTeacher" element={<SpecificTeacher/>} />
-        <Route path="specificCourse" element={<SpecificCourse/>} />
-      </Routes>
+
+    <div>
+      <BrowserRouter basename="/grp8">
+  <Routes>
+    <Route exact path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/signup" element={<SignUp />} />
+    <Route path="/signin" element={<SignIn />} />
+    <Route path="/teachersignup" element={<TeacherSignUp />} />
+    <Route path="/studentsignup" element={<StudentSignUp />} />
+    <Route path="/teacherDashboard" element={<TeacherDashboard />} />
+    <Route path="/studentDashboard" element={<StudentDashboard />} />
+    <Route path="/courseCRUD" element={<CourseCRUD />} />
+    <Route path="/teacherHelp" element={<TeacherHelp />} />
+    <Route path="/teacherPay" element={<TeacherPay />} />
+    <Route path="/teacherProfile" element={<TeacherProfile />} />
+    <Route path="/studentCourses" element={<StudentCourses />} />
+    <Route path="/studentProfile" element={<StudentProfile />} />
+    <Route path="/specificTeacher" element={<SpecificTeacher />} />
+    <Route path="/specificCourse" element={<SpecificCourse />} />
+  </Routes>
   </BrowserRouter>
+    </div>
   );
 }
 
