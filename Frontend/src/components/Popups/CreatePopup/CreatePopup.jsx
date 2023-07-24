@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
-
+import {url} from '../../../config';
 
 function CreatePopup(props) {
 
@@ -35,7 +35,7 @@ function CreatePopup(props) {
             desc: input.desc
         }
 
-        axios.post('http://localhost:3001/create-course', newResult);
+        axios.post(`${url}/create-course`, newResult);
         alert("Succesfully added to the database");
         window.location.reload();
     } 

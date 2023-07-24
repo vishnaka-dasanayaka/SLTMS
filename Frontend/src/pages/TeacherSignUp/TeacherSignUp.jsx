@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import Navbar from '../../components/Navigation/Navbar'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import {url} from '../../config';
 
 function TeacherSignUp() {
 
@@ -36,7 +37,7 @@ function TeacherSignUp() {
             password: input.password
         }
 
-        axios.post('http://localhost:3001/newTeacher', newResult);
+        axios.post(`${url}/newTeacher`, newResult);
         alert("Succesfully added to the database");
         window.location.reload();
     } 
