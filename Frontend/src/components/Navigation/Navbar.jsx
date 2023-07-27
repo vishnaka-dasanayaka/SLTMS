@@ -8,7 +8,7 @@ function Navbar() {
         <div className='flex items-center justify-center min-w-full bg-white shadow-lg shadow-gray-600 '>
 
             <div className='px-10'>
-                <img className='xl:h-[130px]' src="../grp8/img/logo.png" alt="" />
+                <img className='xl:h-[130px]' src="../img/logo.png" alt="" />
             </div>
 
             <div className='px-10'>

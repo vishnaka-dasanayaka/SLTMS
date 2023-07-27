@@ -40,7 +40,7 @@ function Hero() {
             </div>
 
             <div className='w-2/5'>
-                <img className='-ml-20 mb-10 scale-[1.6]' src="../grp8/img/hero_side.png" alt="" />
+                <img className='-ml-20 mb-10 scale-[1.6]' src="../img/hero_side.png" alt="" />
             </div>
 
         </div>

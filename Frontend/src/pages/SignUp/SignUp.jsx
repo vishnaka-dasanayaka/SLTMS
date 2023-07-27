@@ -12,7 +12,7 @@ function SignUp() {
         <div className='flex justify-center items-center h-40 m-10 bg-gradient-to-l from-[#e99f69] shadow-lg w-96'>
             <div className='ml-10 text-3xl font-extrabold uppercase'>student</div>
             <div>
-                <img className='scale-[0.7]' src="../grp8/img/student.png" alt="" />
+                <img className='scale-[0.7]' src="../img/student.png" alt="" />
             </div>
         </div>
         </Link>
@@ -21,7 +21,7 @@ function SignUp() {
             
             <div className='ml-10 text-3xl font-extrabold uppercase'>teacher</div>
             <div>
-                <img className='mb-5 scale-[0.8]' src="../grp8/img/teacher.png" alt="" />
+                <img className='mb-5 scale-[0.8]' src="../img/teacher.png" alt="" />
             </div>
           </div>
         </Link>

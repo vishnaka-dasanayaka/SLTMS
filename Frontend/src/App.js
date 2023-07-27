@@ -19,10 +19,10 @@ import SignIn from "./pages/SignIn/SignIn";
 
 function App() {
 
-  const basename = '/grp8';
+  //const basename = '/grp8';
   return (
     <div>
-    <BrowserRouter basename={basename}>
+    <BrowserRouter >
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

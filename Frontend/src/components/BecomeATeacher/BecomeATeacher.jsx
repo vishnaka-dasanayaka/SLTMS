@@ -40,7 +40,7 @@ function BecomeATeacher() {
         </div>
 
         <div className='w-[400px]'>
-            <img src="../grp8/img/teacher.jpg" alt="" />
+            <img src="../img/teacher.jpg" alt="" />
         </div>
 
       </div>
