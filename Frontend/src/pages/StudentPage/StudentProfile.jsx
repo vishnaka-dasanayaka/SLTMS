@@ -61,7 +61,7 @@ function StudentProfile() {
               <div className="flex flex-col w-56 mt-10 ml-16">
                 <img
                   className="w-full h-56 rounded-2xl"
-                  src="../img/teacher.jpg"
+                  src="../grp8/img/teacher.jpg"
                   alt=""
                 />
                 <label className="mt-5 text-center" htmlFor="">

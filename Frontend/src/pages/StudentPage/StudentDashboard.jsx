@@ -93,7 +93,7 @@ function StudentDashboard() {
                         <div className="w-full h-2/3">
                           <img
                             className="w-full h-full"
-                            src="../img/teacher.jpg"
+                            src="../grp8/img/teacher.jpg"
                             alt=""
                           />
                         </div>
@@ -137,7 +137,7 @@ function StudentDashboard() {
                         <div className="w-full h-2/3">
                           <img
                             className="w-full h-full"
-                            src="../img/math.jpg"
+                            src="../grp8/img/math.jpg"
                             alt=""
                           />
                         </div>

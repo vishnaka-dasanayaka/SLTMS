@@ -94,7 +94,7 @@ function StudentCourses() {
                         <div className="w-full h-2/3">
                           <img
                             className="w-full h-full"
-                            src="../img/math.jpg"
+                            src="../grp8/img/math.jpg"
                             alt=""
                           />
                         </div>

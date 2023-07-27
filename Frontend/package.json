@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "homepage": "http://demo.eminenceapps.com/grp8",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

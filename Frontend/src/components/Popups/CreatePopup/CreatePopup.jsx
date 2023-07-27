@@ -35,7 +35,7 @@ function CreatePopup(props) {
             desc: input.desc
         }
 
-        axios.post(`${url}/create-course`, newResult);
+        axios.post(`${url}create-course`, newResult);
         alert("Succesfully added to the database");
         window.location.reload();
     } 
