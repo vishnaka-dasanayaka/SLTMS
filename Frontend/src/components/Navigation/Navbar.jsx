@@ -5,11 +5,12 @@ function Navbar() {
   return (
     <div>
       <div>
-        <div className='flex items-center justify-center min-w-full bg-white shadow-lg shadow-gray-600 '>
+        <div className= 'flex items-center justify-center min-w-full bg-white shadow-lg shadow-gray-600 '>
 
             <div className='px-10'>
                 <img className='xl:h-[130px]' src="../img/logo.png" alt="" />
             </div>
+            <div className='items-center justify-center hidden sm:flex'>
 
             <div className='px-10'>
               <Link to={"/"}>
@@ -26,6 +27,7 @@ function Navbar() {
               <Link to={"/studentsignup"}>
               <h2 className='px-10'>Learn on Edu.com</h2>
               </Link>
+            </div>
             </div>
 
             <div className='flex px-10'>
