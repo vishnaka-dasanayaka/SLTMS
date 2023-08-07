@@ -16,10 +16,7 @@ connectDB();
 
 const port = process.env.PORT || 3003;
 
-//send courses to the database
-app.use("/create-course", require('./route/courseRoute'));
-
-//view all courses
+// GET and POST courses
 app.use("/courses", require('./route/courseRoute'));
 
 
@@ -36,9 +33,6 @@ app.post('/deleteCourse', async(req,res)=>{
         console.log(error);
     }
 });
-
-
-
 
 
 // Teacher 
@@ -64,6 +58,15 @@ app.post("/newTeacher", async (req, res) => {
 
     newTeacher.save();
 });
+
+
+/* ************** */
+
+app.get('/goals',(req,res)=>{
+    res.status(200).json({message:"Get all goals"})
+})
+
+/* ************** */
 
 app.listen(port,() => {
     console.log(`Server is running on the port ${port}`);
