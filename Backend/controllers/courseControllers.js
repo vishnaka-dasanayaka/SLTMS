@@ -7,13 +7,13 @@ const asyncHandler = require('express-async-handler');
 
 const setCourse = asyncHandler(async(req,res)=>{
 
-    if(!req.body.text){
+    if(!req.body.courseID){
         res.status(400)
         throw new Error("Text area should be filled");
     }
 
-    res.status(200).json({message:"Set Goal"});
-    /*const courseID = req.body.courseID;
+    
+    const courseID = req.body.courseID;
     const category = req.body.category;
     const subject = req.body.subject;
     const courseTitle = req.body.courseTitle;
@@ -29,7 +29,9 @@ const setCourse = asyncHandler(async(req,res)=>{
         desc
     });
 
-    newCourse.save();*/
+    newCourse.save();
+
+    res.status(200).json(newCourse);
 })
 
 // @desc    Get courses
@@ -45,21 +47,42 @@ const getCourses = asyncHandler(async(req,res)=>{
     }
 })
 
+// @desc    Update courses
+// @route   PUT/courses
+// @access  Private
+
+const updateCourse = asyncHandler(async(req,res)=>{
+
+    const course = await Course.findById(req.params.id)
+
+    if(!course){
+        res.status(400)
+        throw new Error('Course not found')
+    }
+
+    const updatedCourse = await Course.findByIdAndUpdate(req.params.id,req.body,{new:true})
+
+    res.status(200).json(updatedCourse)
+})
+
+  
+
 // @desc    Delete courses
 // @route   DELETE/courses
 // @access  Private
 
-const updateCourse = asyncHandler(async(req,res)=>{
-    res.status(200).json({message:`Updated goal ${req.params.id}`})
-})
-
-
-// @desc    Get courses
-// @route   GET/courses
-// @access  Private
-
 const deleteCourse = asyncHandler(async(req,res)=>{
-    res.status(200).json({message:`Deleted goal ${req.params.id}`})
+
+    const course = await Course.findById(req.params.id);
+
+    if(!course){
+        res.status(400)
+        throw new Error('Relavent course is not found')
+    }
+
+    const deletedCourse = await Course.findByIdAndRemove(req.params.id)
+
+    res.status(200).json(deletedCourse)
 })
 
 
