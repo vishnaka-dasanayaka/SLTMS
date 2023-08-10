@@ -28,6 +28,9 @@ app.use("/courses", require('./route/courseRoute'));
 // Routes for Teacher
 app.use("/teachers", require('./route/teacherRoute'));
 
+// Routs for Students
+app.use("/students", require('./route/studentRoute'));
+
 
 //delete a course
 

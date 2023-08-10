@@ -14,7 +14,17 @@ const teacherSchema = mongoose.Schema({
 
     email:{
         type:String,
-        required:[true,'Please add a email ! ']
+        required:[true,'Please add an email ! ']
+    },
+
+    teachingArea:{
+        type:String,
+        required:[true,'Please add a teaching area ! ']
+    },
+
+    about:{
+        type:String,
+        required:[true,'Please add an about ! ']
     },
 
     password:{
