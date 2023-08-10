@@ -1,10 +1,11 @@
 const Course = require('../models/courseModel');
+const asyncHandler = require('express-async-handler');
 
 // @desc    Set a course
 // @route   POST/courses
 // @access  Private
 
-const setCourse = (req,res)=>{
+const setCourse = asyncHandler(async(req,res)=>{
 
     if(!req.body.text){
         res.status(400)
@@ -29,37 +30,37 @@ const setCourse = (req,res)=>{
     });
 
     newCourse.save();*/
-}
+})
 
 // @desc    Get courses
 // @route   GET/courses
 // @access  Private
 
-const getCourses = async(req,res)=>{
+const getCourses = asyncHandler(async(req,res)=>{
     try {
         const allCourses = await Course.find({});
         res.send({status:"ok", data:allCourses});
     } catch (error) {
         console.log(error);
     }
-}
+})
 
 // @desc    Delete courses
 // @route   DELETE/courses
 // @access  Private
 
-const updateCourse = (req,res)=>{
+const updateCourse = asyncHandler(async(req,res)=>{
     res.status(200).json({message:`Updated goal ${req.params.id}`})
-}
+})
 
 
 // @desc    Get courses
 // @route   GET/courses
 // @access  Private
 
-const deleteCourse = (req,res)=>{
+const deleteCourse = asyncHandler(async(req,res)=>{
     res.status(200).json({message:`Deleted goal ${req.params.id}`})
-}
+})
 
 
 module.exports = {
