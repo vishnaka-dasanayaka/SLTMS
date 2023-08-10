@@ -142,7 +142,7 @@ export default function CourseCRUD(props) {
                           <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.courseTitle}</td>
                           <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.fee}</td>
                           <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.desc}</td>
-                          <td className="text-green-500 cursor-pointer hover:scale-110"><EditIcon onClick={editCourse}/></td>
+                          <Link to={'/uploadLesson'}><td className="text-green-500 cursor-pointer hover:scale-110"><EditIcon onClick={editCourse}/></td></Link>
                           <td className="text-red-500 cursor-pointer hover:scale-110"><DeleteIcon onClick={()=>deleteCourse(i._id,i.courseTitle)}/></td>
                         </tr>
                       )

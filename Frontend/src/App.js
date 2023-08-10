@@ -16,6 +16,7 @@ import StudentProfile from "./pages/StudentPage/StudentProfile";
 import SpecificTeacher from "./pages/StudentPage/SpecificTeacher";
 import SpecificCourse from "./pages/StudentPage/SpecificCourse";
 import SignIn from "./pages/SignIn/SignIn";
+import UploadLesson from "./pages/CourseCRUD/UploadLesson";
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/studentProfile" element={<StudentProfile />} />
         <Route path="/specificTeacher" element={<SpecificTeacher />} />
         <Route path="/specificCourse" element={<SpecificCourse />} />
+        <Route path="/uploadLesson" element={<UploadLesson />} />
       </Routes>
     </BrowserRouter></div>
   );
