@@ -1,50 +1,15 @@
 import React from "react";
 import Navbar from "../../components/Navigation/Navbar";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import PaidIcon from "@mui/icons-material/Paid";
-import HelpCenterIcon from "@mui/icons-material/HelpCenter";
-import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import Sidebar from "../../components/Navigation/Sidebar";
 
 function TeacherProfile() {
   return (
     <div>
       <Navbar />
       <div className="flex justify-center">
-        <div className="w-1/12 bg-[#d9d9d9] opacity-50 h-[100vh]">
-          <ol className="text-center scale-[2] mt-32">
-            <li className="py-2">
-              <Link to={"/teacherDashboard"}>
-                <DashboardIcon />
-              </Link>
-            </li>
-
-            <li className="py-2 ">
-              <Link to={"/courseCRUD"}>
-                <LibraryBooksIcon />
-              </Link>
-            </li>
-
-            <li className="py-2 active">
-              <Link to={"/teacherProfile"}>
-                <AccountBoxIcon />
-              </Link>
-            </li>
-
-            <li className="py-2 ">
-              <Link to={"/teacherPay"}>
-                <PaidIcon />
-              </Link>
-            </li>
-
-            <li className="py-2 ">
-              <Link to={"/teacherHelp"}>
-                <HelpCenterIcon />
-              </Link>
-            </li>
-          </ol>
+        <div className="w-1/12">
+        <Sidebar/>
         </div>
 
         <div className="flex flex-col w-11/12 mt-10">
@@ -55,7 +20,7 @@ function TeacherProfile() {
               <div className="flex flex-col w-56 mt-10 ml-16">
                 <img
                   className="w-full h-56 rounded-2xl"
-                  src="../grp8/img/teacher.jpg"
+                  src="../img/teacher.jpg"
                   alt=""
                 />
                 <label className="mt-5 text-center" htmlFor="">

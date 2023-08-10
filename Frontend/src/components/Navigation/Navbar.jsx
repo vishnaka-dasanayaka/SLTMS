@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <div>
       <div>
-        <div className= 'flex items-center justify-center min-w-full bg-red-500 shadow-lg shadow-gray-600 '>
+        <div className= 'flex items-center justify-center min-w-full bg-red-500 shadow-lg md:bg-primary lg:bg-btn_color shadow-gray-600 '>
 
             <div className='px-10'>
                 <img className='xl:h-[130px]' src="../img/logo.png" alt="" />
