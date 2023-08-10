@@ -5,6 +5,7 @@ const connectDB = require("./config/dbConnection");
 const { default: mongoose } = require("mongoose");
 const Course = require("./models/courseModel");
 const Teacher = require("./models/teacherModel");
+const {errorHandler} = require('./middleware/errorMiddleware');
 mongoose.set('strictQuery',false);
 
 const app = express();
@@ -15,6 +16,11 @@ app.use(express.json());
 connectDB();
 
 const port = process.env.PORT || 3003;
+
+
+// middle ware
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 
 // GET and POST courses
 app.use("/courses", require('./route/courseRoute'));
@@ -59,14 +65,8 @@ app.post("/newTeacher", async (req, res) => {
     newTeacher.save();
 });
 
-
-/* ************** */
-
-app.get('/goals',(req,res)=>{
-    res.status(200).json({message:"Get all goals"})
-})
-
-/* ************** */
+// errorHandler
+app.use(errorHandler);
 
 app.listen(port,() => {
     console.log(`Server is running on the port ${port}`);
