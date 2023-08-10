@@ -25,6 +25,9 @@ app.use(express.urlencoded({extended: false}))
 // GET and POST courses
 app.use("/courses", require('./route/courseRoute'));
 
+// Routes for Teacher
+app.use("/teachers", require('./route/teacherRoute'));
+
 
 //delete a course
 
@@ -38,31 +41,6 @@ app.post('/deleteCourse', async(req,res)=>{
     } catch (error) {
         console.log(error);
     }
-});
-
-
-// Teacher 
-
-// sign Up a teacher
-app.post("/newTeacher", async (req, res) => {
-
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const email = req.body.email;
-    const teachingArea = req.body.teachingArea;
-    const about = req.body.about;
-    const password = req.body.password;
-
-    const newTeacher = new Teacher({
-        firstName,
-        lastName,
-        email,
-        teachingArea,
-        about,
-        password
-    });
-
-    newTeacher.save();
 });
 
 // errorHandler

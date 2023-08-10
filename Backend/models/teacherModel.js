@@ -1,15 +1,32 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const teacherSchema = {
+const teacherSchema = mongoose.Schema({
 
-   firstName:String,
-   lastName:String,
-   email:String,
-   teachingArea:String,
-   about:String,
-   password:String
+    firstName:{
+        type:String,
+        required:[true,'Please add a first name ! ']
+    },
+
+    lastName:{
+        type:String,
+        required:[true,'Please add a last name ! ']
+    },
+
+    email:{
+        type:String,
+        required:[true,'Please add a email ! ']
+    },
+
+    password:{
+        type:String,
+        required:[true,'Please add a password ! ']
+    },
+
+},
+
+{
+    timestamps:true
 }
+)
 
-const Teacher = mongoose.model("Teacher",teacherSchema);
-
-module.exports = Teacher;
+module.exports = mongoose.model('Teacher',teacherSchema)

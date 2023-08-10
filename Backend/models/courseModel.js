@@ -1,7 +1,12 @@
-const { Timestamp } = require("mongodb");
 const mongoose = require("mongoose");
 
-const courseSchema = {
+const courseSchema = mongoose.Schema( {
+
+    teacher:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'Teacher'
+    },
 
     courseID:{
         type:String,
@@ -27,7 +32,7 @@ const courseSchema = {
         type:String,
         required:[true,'Please add a desc']
     }
-}
+})
 
 const Course = mongoose.model("Course",courseSchema);
 
