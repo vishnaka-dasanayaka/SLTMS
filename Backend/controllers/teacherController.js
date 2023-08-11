@@ -55,7 +55,23 @@ const registerTeacher = asyncHandler(async (req,res) => {
 // @route  POST/teacher/login
 // @access Public
 const loginTeacher = asyncHandler(async (req,res) => {
-    res.json({message:'Login a Teacher'})
+
+    const {email,password} = req.body
+
+    //checking email
+    const teacher = await Teacher.findOne({email})
+
+    if(teacher && (await bcrypt.compare(password,teacher.password))){
+        res.json({
+            _id:teacher.id,
+            firstName:teacher.firstName,
+            lastName:teacher.lastName,
+            email:teacher.email
+        })
+    } else{
+        res.json(400)
+        throw new Error('Invalid email or password !!! Try again')
+    }
 })
 
 // @desc   Get teacher data 
