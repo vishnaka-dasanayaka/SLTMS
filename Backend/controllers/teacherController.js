@@ -43,7 +43,8 @@ const registerTeacher = asyncHandler(async (req,res) => {
             _id:teacher.id,
             firstName:teacher.firstName,
             lastName:teacher.lastName,
-            email:teacher.email
+            email:teacher.email,
+            token: generateJWT(teacher._id)
         })
     }else{
         res.status(400)
@@ -66,7 +67,8 @@ const loginTeacher = asyncHandler(async (req,res) => {
             _id:teacher.id,
             firstName:teacher.firstName,
             lastName:teacher.lastName,
-            email:teacher.email
+            email:teacher.email,
+            token: generateJWT(teacher._id)
         })
     } else{
         res.json(400)
@@ -76,10 +78,18 @@ const loginTeacher = asyncHandler(async (req,res) => {
 
 // @desc   Get teacher data 
 // @route  GET/teacher/me
-// @access Public
+// @access Private
 const getMe = asyncHandler(async (req,res) => {
     res.json({message:'Teacher data display'})
 })
+
+
+// Generate JWT
+const generateJWT = (id) => {
+    return jwt.sign({id},process.env.JWT_SECRET,{
+        expiresIn: '30d'
+    })
+}
 
 module.exports = {
     registerTeacher,
