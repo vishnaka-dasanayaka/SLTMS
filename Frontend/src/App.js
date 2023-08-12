@@ -17,6 +17,9 @@ import SpecificTeacher from "./pages/StudentPage/SpecificTeacher";
 import SpecificCourse from "./pages/StudentPage/SpecificCourse";
 import SignIn from "./pages/SignIn/SignIn";
 import UploadLesson from "./pages/CourseCRUD/UploadLesson";
+import {ToastContainer} from 'react-toastify'
+import { Provider } from "react-redux";
+import store from './app/store';
 
 function App() {
 
@@ -29,7 +32,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/teachersignup" element={<TeacherSignUp />} />
+        <Route path="/teachersignup" element={<Provider store={store}><TeacherSignUp /></Provider> } />
         <Route path="/studentsignup" element={<StudentSignUp />} />
         <Route path="/teacherDashboard" element={<TeacherDashboard />}/>
         <Route path="/studentDashboard" element={<StudentDashboard />}/>
@@ -43,7 +46,9 @@ function App() {
         <Route path="/specificCourse" element={<SpecificCourse />} />
         <Route path="/uploadLesson" element={<UploadLesson />} />
       </Routes>
-    </BrowserRouter></div>
+    </BrowserRouter>
+    <ToastContainer />
+    </div>
   );
 }
 
