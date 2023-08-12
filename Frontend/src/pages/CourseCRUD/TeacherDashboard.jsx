@@ -54,8 +54,9 @@ function TeacherDashboard() {
           </ol>
         </div>
 
-        <div className="flex w-11/12 p-24">
-          <div className='bg-gradient-to-bl from-[#c5774a] to-[#E3E3E3] w-[350px] h-[141px]'>
+        <div className="flex flex-col justify-start w-11/12 p-24 sm:justify-center sm:flex-row min-w-fit">
+
+          <div className='bg-gradient-to-bl from-[#c5774a] to-[#E3E3E3] w-[350px] h-[141px] mb-[10vh] sm:mb-0'>
             <div className='flex text-left justify-self-end'>
               <div className='pl-5 pt-7'>
               <label className='text-xl font-extrabold ' htmlFor="">Enrolled Students</label>
@@ -69,7 +70,7 @@ function TeacherDashboard() {
             </div>
           </div>
 
-          <div className='bg-gradient-to-bl from-[#F84B4C] ml-20 to-[#E3E3E3] w-[350px] h-[141px]'>
+          <div className='bg-gradient-to-bl from-[#F84B4C] sm:ml-10 to-[#E3E3E3] w-[350px] h-[141px]'>
             <div className='flex text-left justify-self-end'>
               <div className='pl-5 pt-7'>
               <label className='text-xl font-extrabold ' htmlFor="">Enrolled Students</label>
@@ -82,6 +83,7 @@ function TeacherDashboard() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
