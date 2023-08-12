@@ -1,52 +1,41 @@
-import React, {useState} from 'react';
-import axios from "axios";
-import Navbar from '../../components/Navigation/Navbar'
-import { Link } from 'react-router-dom';
-import {url} from '../../config';
+import Navbar from "../../components/Navigation/Navbar";
+import { useEffect, useState } from "react";
 
 function TeacherSignUp() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    teachingArea: "",
+    about: "",
+    password: "",
+    rePassword: "",
+  });
 
-    const [input, setInput] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        teachingArea: '',
-        about: '',
-        password: ''
-    });
+  const {
+    firstName,
+    lastName,
+    email,
+    teachingArea,
+    about,
+    password,
+    rePassword,
+  } = formData;
 
-    function handleChange(event){
-        const {name,value} = event.target;
+  const onChange = (e) => {
+    setFormData((prevState)=>({
+        ...prevState,
+        [e.target.name]:e.target.value
+    }))
+};
 
-        setInput(prevInput => {
-            return {
-                ...prevInput,
-                [name]:value
-            }
-        })
-    }
-
-    function handleClick(event){
-        event.preventDefault();
-        const newResult = {
-            firstName: input.firstName,
-            lastName: input.lastName,
-            email: input.email,
-            teachingArea: input.teachingArea,
-            about: input.about,
-            password: input.password
-        }
-
-        axios.post(`${url}/newTeacher`, newResult);
-        alert("Succesfully added to the database");
-        window.location.reload();
-    } 
-
-
+  const onSubmit = (e) => {
+    e.preventDefault();
+  }
 
   return (
-    <div className='h-fit lg:h-screen bg-gradient-to-l from-[#79e2db]'>
-      <Navbar/>
+    <div className="h-fit lg:h-screen bg-gradient-to-l from-[#79e2db]">
+      <Navbar />
       {/* <div className='mt-5 m-auto h-full rounded-xl w-8/12 bg-[#265451]'>
 
         <form className='m-auto' action="" method="post">
@@ -107,104 +96,155 @@ function TeacherSignUp() {
     
       </div> */}
 
-        <div className='flex flex-col w-8/12 m-auto rounded-xl bg-[#265451] mt-[5vh] pb-[5vh] min-w-[400px]'>
-
-            <div className='flex mt-[5vh] justify-between mx-[5vw] lg:flex-row flex-col'>
-
-                <div className='flex mb-5 lg:mb-0'>
-                    <div className='text-white min-w-[150px]'>
-                        <label htmlFor="">First Name</label>
-                    </div>
-                    <div>
-                        <input type="text" className='min-w-[15vw] h-7'/>
-                    </div>
-                </div>
-
-                <div className='flex'>
-                    <div className='text-white min-w-[150px]'>
-                        <label htmlFor="">Last Name</label>
-                    </div>
-                    <div>
-                        <input type="text" className='min-w-[15vw] h-7'/>
-                    </div>
-                </div>
-
+      <form action="" onSubmit={onSubmit}>
+        <div className="flex flex-col w-8/12 m-auto rounded-xl bg-[#265451] mt-[5vh] pb-[5vh] min-w-[400px]">
+          <div className="flex mt-[5vh] justify-between mx-[5vw] lg:flex-row flex-col">
+            <div className="flex mb-5 lg:mb-0">
+              <div className="text-white min-w-[150px]">
+                <label htmlFor="">First Name</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="min-w-[15vw] h-7 pl-3"
+                  id="firstName"
+                  name="firstName"
+                  value={firstName}
+                  placeholder="Enter your first name"
+                  onChange={onChange}
+                />
+              </div>
             </div>
 
-            <div className='flex mt-[3vh] justify-between mx-[5vw] lg:flex-row flex-col'>
+            <div className="flex">
+              <div className="text-white min-w-[150px]">
+                <label htmlFor="">Last Name</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="min-w-[15vw] h-7 pl-3"
+                  id="lastName"
+                  name="lastName"
+                  value={lastName}
+                  placeholder="Enter your last name"
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+          </div>
 
-                <div className='flex mb-5 lg:mb-0'>
-                    <div className='text-white min-w-[150px]'>
-                        <label htmlFor="">Email</label>
-                    </div>
-                    <div>
-                        <input type="text" className='min-w-[15vw] h-7'/>
-                    </div>
-                </div>
-
-                <div className='flex'>
-                    <div className='text-white min-w-[150px]'>
-                        <label htmlFor="">Teaching Area</label>
-                    </div>
-                    <div className='min-w-[15vw]'>
-                        {/* <input type="text" className='min-w-[15vw] h-7'/> */}
-                        <select name="area" id="area" className="min-w-[15vw] h-7 border-solid border-4">
-                            <option value="a">OL</option>
-                            <option value="b">AL</option>
-                            <option value="c">Scholarship</option>
-                            <option value="c">University</option>
-                        </select>
-                    </div>
-                </div>
-
+          <div className="flex mt-[3vh] justify-between mx-[5vw] lg:flex-row flex-col">
+            <div className="flex mb-5 lg:mb-0">
+              <div className="text-white min-w-[150px]">
+                <label htmlFor="">Email</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="min-w-[15vw] h-7 pl-3"
+                  id="email"
+                  name="email"
+                  value={email}
+                  placeholder="Enter your email"
+                  onChange={onChange}
+                />
+              </div>
             </div>
 
-            <div className='flex flex-col mx-[5vw] mt-[5vh]'>
-                <div className='text-white mb-[2vh]'>
-                    <label htmlFor="">About:</label>
-                </div>
-                <div>
-                   <input type="text" className='w-full h-[16vh]'/>
-                </div>
+            <div className="flex">
+              <div className="text-white min-w-[150px]">
+                <label htmlFor="">Teaching Area</label>
+              </div>
+              <div className="min-w-[15vw]">
+                {/* <input type="text" className='min-w-[15vw] h-7'/> */}
+                <input
+                  type="text"
+                  className="min-w-[15vw] h-7 pl-3"
+                  id="teachingArea"
+                  name="teachingArea"
+                  value={teachingArea}
+                  placeholder="eg: Advanced Level"
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col mx-[5vw] mt-[5vh]">
+            <div className="text-white mb-[2vh]">
+              <label htmlFor="">About:</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                className="w-full h-32 pl-3"
+                id="about"
+                name="about"
+                value={about}
+                placeholder="Brief description about you (eg: qualifications)"
+                onChange={onChange}
+              />
+            </div>
+          </div>
+
+          <div className="flex mt-[3vh] justify-between mx-[5vw] lg:flex-row flex-col">
+            <div className="flex mb-5 lg:mb-0">
+              <div className="text-white min-w-[150px]">
+                <label htmlFor="">Enter password</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="min-w-[15vw] h-7 pl-3"
+                  id="password"
+                  name="password"
+                  value={password}
+                  placeholder="Enter your password"
+                  onChange={onChange}
+                />
+              </div>
             </div>
 
-            <div className='flex mt-[3vh] justify-between mx-[5vw] lg:flex-row flex-col'>
-
-                <div className='flex mb-5 lg:mb-0'>
-                    <div className='text-white min-w-[150px]'>
-                        <label htmlFor="">Enter password</label>
-                    </div>
-                    <div>
-                        <input type="text" className='min-w-[15vw] h-7'/>
-                    </div>
-                </div>
-
-                <div className='flex'>
-                    <div className='text-white min-w-[150px]'>
-                        <label htmlFor="">Re-Enter password</label>
-                    </div>
-                    <div>
-                        <input type="text" className='min-w-[15vw] h-7'/>
-                    </div>
-                </div>
-
+            <div className="flex">
+              <div className="text-white min-w-[150px]">
+                <label htmlFor="">Confirm password</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="min-w-[15vw] h-7 pl-3"
+                  id="rePassword"
+                  name="rePassword"
+                  value={rePassword}
+                  placeholder="Confirm your password"
+                  onChange={onChange}
+                />
+              </div>
             </div>
+          </div>
 
-            <div className='flex flex-col items-center w-full mt-[5vh]'>
-
-                <div className='mb-5'>
-                    <input type="submit" value="Sign Up" className='px-5 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl'/>
-                </div>
-                <div className='text-white'>
-                    <p>Already Have an Account ? <span className='tracking-widest text-orange-500 underline'>Sign In</span></p>
-                </div>
-
+          <div className="flex flex-col items-center w-full mt-[5vh]">
+            <div className="mb-5">
+              <input
+                type="submit"
+                value="Sign Up"
+                className="px-5 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl"
+              />
             </div>
-
-        </div> 
-
+            <div className="text-white">
+              <p>
+                Already Have an Account ?{" "}
+                <span className="tracking-widest text-orange-500 underline">
+                  Sign In
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-  )
+  );
 }
 
-export default TeacherSignUp
+export default TeacherSignUp;
