@@ -1,5 +1,10 @@
 import Navbar from "../../components/Navigation/Navbar";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../../features/auth/authSlice";
+import Spinner from "../../components/Spinner/Spinner";
 
 function TeacherSignUp() {
   const [formData, setFormData] = useState({
@@ -22,79 +27,59 @@ function TeacherSignUp() {
     rePassword,
   } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if(isError){
+      toast.error(message)
+    }
+
+    if(isSuccess || user){
+      navigate('/teacherDashboard')
+    }
+
+    dispatch(reset())
+
+  },[user,isError,isSuccess,message,navigate,dispatch])
+
   const onChange = (e) => {
-    setFormData((prevState)=>({
-        ...prevState,
-        [e.target.name]:e.target.value
-    }))
-};
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (password !== rePassword) {
+      toast.error("Passwords do not match");
+    } else {
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        teachingArea,
+        about,
+        password,
+      };
+
+      dispatch(register(userData));
+    }
+  };
+
+  if(isLoading){
+    return <Spinner/>
   }
 
   return (
     <div className="h-fit lg:h-screen bg-gradient-to-l from-[#79e2db]">
       <Navbar />
-      {/* <div className='mt-5 m-auto h-full rounded-xl w-8/12 bg-[#265451]'>
-
-        <form className='m-auto' action="" method="post">
-            <br />
-            <br />
-            <table className='m-auto text-lg text-white'>
-                <tr className=''>
-                    <td className='w-40'><label htmlFor="">First Name</label></td>
-                    <td className='w-80'><input className='text-black' name='firstName' value={input.firstName} onChange={handleChange} type="text" /></td>
-                    <td><label htmlFor="">Last Name</label></td>
-                    <td><input className='text-black' name='lastName' value={input.lastName} onChange={handleChange} type="text" /></td>
-                </tr>
-                <br />
-                <br />
-
-                <tr>
-                    <td><label htmlFor="">E-mail</label></td>
-                    <td><input className='text-black' name='email' value={input.email} onChange={handleChange} type="text" /></td>
-                    <td><label htmlFor="">Teaching Area</label></td>
-                    <td><input className='text-black' name='teachingArea' value={input.teachingArea} onChange={handleChange} type="text" /></td>
-                </tr>
-            </table>
-
-            <br /><br />
-
-            <div className='ml-[55px] text-white text-lg'>
-                <label htmlFor="">About :</label>
-                <br /><br />
-                <input className='w-[850px] h-24 text-black' name='about' value={input.about} onChange={handleChange} type="text" />
-            </div>
-            <br />
-            <table className='m-auto'>
-                <tr className='text-lg text-white'>
-                    <td className='w-[195px]'><label htmlFor="">Enter a password</label></td>
-                    <td className='w-52'><input className='text-black' name='password' value={input.password} onChange={handleChange} type="text"/></td>
-                    <td><label htmlFor="">Re-Enter password</label></td>
-                    <td><input className='text-black' type="text" name="" id="" /></td>
-                </tr>
-            </table>
-        </form>
-
-        
-
-    
-
-        <br />
-        <div className='text-center'>
-            <Link to={"/teacherDashboard"}><button onClick={handleClick}  className='px-5 py-2 text-white bg-orange-400 rounded-xl hover:text-orange-400 hover:bg-white'>
-            
-                Sign Up
-            
-            </button></Link>
-        </div>
-        <br />
-        <div className='text-center text-white'>
-            <h3>Already Have an Account ? <span className='text-orange-500 underline'><Link to={"/signin"}>Sign In</Link></span></h3>
-        </div>
-    
-      </div> */}
 
       <form action="" onSubmit={onSubmit}>
         <div className="flex flex-col w-8/12 m-auto rounded-xl bg-[#265451] mt-[5vh] pb-[5vh] min-w-[400px]">
