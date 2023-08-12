@@ -1,4 +1,5 @@
 const Course = require('../models/courseModel');
+const Teacher = require('../models/teacherModel');
 const asyncHandler = require('express-async-handler');
 
 // @desc    Set a course
@@ -19,6 +20,7 @@ const setCourse = asyncHandler(async(req,res)=>{
     const courseTitle = req.body.courseTitle;
     const fee = req.body.fee;
     const desc = req.body.desc;
+    const teacher = req.teacher.id;
 
     const newCourse = new Course({
         courseID,
@@ -26,7 +28,8 @@ const setCourse = asyncHandler(async(req,res)=>{
         subject,
         courseTitle,
         fee,
-        desc
+        desc,
+        teacher
     });
 
     newCourse.save();
@@ -40,7 +43,7 @@ const setCourse = asyncHandler(async(req,res)=>{
 
 const getCourses = asyncHandler(async(req,res)=>{
     try {
-        const allCourses = await Course.find({});
+        const allCourses = await Course.find({teacher:req.teacher.id});
         res.send({status:"ok", data:allCourses});
     } catch (error) {
         console.log(error);
@@ -58,6 +61,20 @@ const updateCourse = asyncHandler(async(req,res)=>{
     if(!course){
         res.status(400)
         throw new Error('Course not found')
+    }
+
+    const teacher = await Teacher.findById(req.teacher.id)
+
+    //check for teacher
+    if(!teacher){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //check for exact owner
+    if(course.teacher.toString() !== teacher.id){
+        res.status(401)
+        throw new Error('Unauthorized')
     }
 
     const updatedCourse = await Course.findByIdAndUpdate(req.params.id,req.body,{new:true})
@@ -78,6 +95,20 @@ const deleteCourse = asyncHandler(async(req,res)=>{
     if(!course){
         res.status(400)
         throw new Error('Relavent course is not found')
+    }
+
+    const teacher = await Teacher.findById(req.teacher.id)
+
+    //check for teacher
+    if(!teacher){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //check for exact owner
+    if(course.teacher.toString() !== teacher.id){
+        res.status(401)
+        throw new Error('Unauthorized')
     }
 
     const deletedCourse = await Course.findByIdAndRemove(req.params.id)

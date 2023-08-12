@@ -80,7 +80,17 @@ const loginTeacher = asyncHandler(async (req,res) => {
 // @route  GET/teacher/me
 // @access Private
 const getMe = asyncHandler(async (req,res) => {
-    res.json({message:'Teacher data display'})
+    const {_id,firstName,lastName,email,teachingArea,about} = await Teacher.findById(req.teacher.id)
+
+    res.status(200).json({
+        id:_id,
+        firstName,
+        lastName,
+        email,
+        teachingArea,
+        about
+    })
+
 })
 
 
