@@ -147,7 +147,7 @@ function UploadLesson() {
                 </div>
 
                 <div className="flex justify-center">
-                  <input type="submit" value="Submit" className="bg-[#058d83] text-white p-[10px] rounded-xl"/>
+                  <input type="submit" value="Submit" className="px-5 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl uppercase"/>
                 </div>
                 
               </div>
