@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../../components/Navigation/Navbar";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login, reset } from "../../features/auth/authSlice";
+import Spinner from "../../components/Spinner/Spinner";
 
 function SignIn() {
   const [formData, setFormData] = useState({
@@ -10,6 +15,25 @@ function SignIn() {
 
   const { email, password } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/teacherDashboard");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -17,15 +41,26 @@ function SignIn() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onTeacherClick = (e) => {
     e.preventDefault();
+
+    const userData = {
+      email,
+      password
+    }
+
+    dispatch(login(userData))    
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
       <Navbar />
 
-      <form action="" onSubmit={onSubmit}>
+      <form action="" onSubmit={onTeacherClick}>
         <div>
           <div className="flex flex-col items-center justify-center mt-10">
             <div className="px-5 py-3 rounded-lg bg-primary w-fit h-fit">
@@ -36,7 +71,6 @@ function SignIn() {
 
             <div className="p-5 mt-5 flex flex-col items-start justify-center border-black border-[2px] rounded-xl">
               <div className="flex items-center justify-between mt-5">
-                
                 <label className="text-lg font-bold uppercase" htmlFor="">
                   username :{" "}
                 </label>
@@ -53,7 +87,7 @@ function SignIn() {
 
               <div className="flex items-start justify-between mt-5">
                 <label className="text-lg font-bold uppercase" htmlFor="">
-                  password :{" "}
+                  password :
                 </label>
                 <input
                   type="text"
