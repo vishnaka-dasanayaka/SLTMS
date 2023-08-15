@@ -12,9 +12,10 @@ const studentSchema = mongoose.Schema({
         required:[true,'Please enter a last name']
     },
 
-    ElementInternals:{
+    email:{
         type:String,
-        required:[true,'Please enter an emai;']
+        required:[true,'Please enter an emai;'],
+        unique: true
     },
 
     password:{

@@ -71,7 +71,7 @@ const loginTeacher = asyncHandler(async (req,res) => {
             token: generateJWT(teacher._id)
         })
     } else{
-        res.json(400)
+        res.status(400)
         throw new Error('Invalid email or password !!! Try again')
     }
 })

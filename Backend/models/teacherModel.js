@@ -14,7 +14,8 @@ const teacherSchema = mongoose.Schema({
 
     email:{
         type:String,
-        required:[true,'Please add an email ! ']
+        required:[true,'Please add an email ! '],
+        unique: true
     },
 
     teachingArea:{

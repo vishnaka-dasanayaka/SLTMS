@@ -28,6 +28,7 @@ function SignIn() {
     }
 
     if (isSuccess || user) {
+      toast.success('Successfully logged as a Teacher');
       navigate("/teacherDashboard");
     }
 
@@ -46,10 +47,10 @@ function SignIn() {
 
     const userData = {
       email,
-      password
-    }
+      password,
+    };
 
-    dispatch(login(userData))    
+    dispatch(login(userData));
   };
 
   if (isLoading) {
