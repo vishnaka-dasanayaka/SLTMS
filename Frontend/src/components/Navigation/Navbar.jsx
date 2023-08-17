@@ -78,7 +78,7 @@ function Navbar() {
           </Link> 
         </div>
 
-        <div>
+        <div className='mr-[-5vw]'>
           <Link to={"/signup"}>
            <button className='hover:bg-white hover:text-[#058d83] mx-10 py-2 px-5 border-[2px] border-black text-white bg-[#058d83] rounded-3xl'>Sign Up</button> 
           </Link> 
