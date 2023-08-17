@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
-import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const navigate = useNavigate();

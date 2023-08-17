@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, reset } from "../../features/auth/authSlice";
+import {
+  loginStudent,
+  loginTeacher,
+  reset,
+} from "../../features/auth/authSlice";
 import Spinner from "../../components/Spinner/Spinner";
 
 function SignIn() {
@@ -27,9 +31,14 @@ function SignIn() {
       toast.error(message);
     }
 
-    if (isSuccess || user) {
-      navigate("/teacherDashboard");
-      toast.success('Successfully logged as a Teacher');
+    if (isSuccess && user) {
+      if (user.role) {
+        navigate("/studentDashboard");
+        toast.success("Successfully logged as a Student");
+      } else {
+        navigate("/teacherDashboard");
+        toast.success("Successfully logged as a Teacher");
+      }
     }
 
     dispatch(reset());
@@ -50,7 +59,18 @@ function SignIn() {
       password,
     };
 
-    dispatch(login(userData));
+    dispatch(loginTeacher(userData));
+  };
+
+  const onStudentClick = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(loginStudent(userData));
   };
 
   if (isLoading) {
@@ -102,10 +122,16 @@ function SignIn() {
               </div>
 
               <div className="flex items-center justify-center mt-10">
-                <button onClick={onTeacherClick} className="px-3 py-1 font-bold text-white uppercase rounded-md border-btn_color border-[1px] hover:bg-white hover:text-btn_color bg-btn_color">
+                <button
+                  onClick={onTeacherClick}
+                  className="px-3 py-1 font-bold text-white uppercase rounded-md border-btn_color border-[1px] hover:bg-white hover:text-btn_color bg-btn_color"
+                >
                   Log In as Teacher
                 </button>
-                <button className="ml-5 px-3 py-1 font-bold text-white uppercase rounded-md border-btn_color border-[1px] hover:bg-white hover:text-btn_color bg-btn_color">
+                <button
+                  onClick={onStudentClick}
+                  className="ml-5 px-3 py-1 font-bold text-white uppercase rounded-md border-btn_color border-[1px] hover:bg-white hover:text-btn_color bg-btn_color"
+                >
                   Log In as student
                 </button>
               </div>
