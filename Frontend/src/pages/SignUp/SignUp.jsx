@@ -7,7 +7,9 @@ function SignUp() {
     <div>
       <Navbar/>
       <h1 className='mt-20 text-2xl font-extrabold tracking-widest text-center uppercase'>smart teaching and learning management system</h1>
-      <div className='flex items-center justify-center mt-24'>
+      
+      <div className='flex flex-col items-center justify-center mt-24 md:flex-row'>
+
       <Link to="/studentsignup">
         <div className='flex justify-center items-center h-40 m-10 bg-gradient-to-l from-[#e99f69] shadow-lg w-96'>
             <div className='ml-10 text-3xl font-extrabold uppercase'>student</div>
@@ -25,7 +27,9 @@ function SignUp() {
             </div>
           </div>
         </Link>
+
       </div>
+
     </div>
   )
 }
