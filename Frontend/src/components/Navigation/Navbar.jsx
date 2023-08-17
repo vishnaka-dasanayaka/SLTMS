@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
@@ -19,7 +18,7 @@ function Navbar() {
 
   return (
     <div className="flex items-center justify-between bg-white shadow-lg shadow-gray-600 px-[5vw] max-h-[20vh]">
-      <ToastContainer />
+      
 
       <div>
         <Link to={"/"}>

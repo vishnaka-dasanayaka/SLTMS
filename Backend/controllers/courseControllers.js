@@ -5,7 +5,6 @@ const asyncHandler = require('express-async-handler');
 // @desc    Set a course
 // @route   POST/courses
 // @access  Private
-
 const setCourse = asyncHandler(async(req,res)=>{
 
     if(!req.body.courseID){
