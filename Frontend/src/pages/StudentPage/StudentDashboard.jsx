@@ -7,7 +7,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
-import StarIcon from "@mui/icons-material/Star";
+//import StarIcon from "@mui/icons-material/Star";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {url} from '../../config';
@@ -85,7 +85,7 @@ function StudentDashboard() {
           <div>
             <h2 className="text-2xl font-extrabold tracking-wide">Teachers</h2>
             <div className="grid justify-center grid-cols-3">
-              {data.map((i) => {
+              {/* {data.map((i) => {
                 return (
                   <Link to={"/specificCourse"}>
                     <div className="mx-5 mt-10">
@@ -119,7 +119,7 @@ function StudentDashboard() {
                     </div>
                   </Link>
                 );
-              })}
+              })} */}
             </div>
           </div>
           <br />
@@ -129,7 +129,7 @@ function StudentDashboard() {
             </h2>
 
             <div className="grid justify-center grid-cols-3">
-              {data.map((i) => {
+              {/* {data.map((i) => {
                 return (
                   <Link to={"/specificCourse"}>
                     <div className="mx-5 mt-10">
@@ -163,7 +163,7 @@ function StudentDashboard() {
                     </div>
                   </Link>
                 );
-              })}
+              })} */}
             </div>
           </div>
         </div>
