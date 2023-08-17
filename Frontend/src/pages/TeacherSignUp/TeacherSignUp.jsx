@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/Spinner/Spinner";
+import { Link } from "react-router-dom";
+
 
 function TeacherSignUp() {
   const [formData, setFormData] = useState({
@@ -221,7 +223,7 @@ function TeacherSignUp() {
               <p>
                 Already Have an Account ?{" "}
                 <span className="tracking-widest text-orange-500 underline">
-                  Sign In
+                  <Link to={'/signin'}>Sign In</Link>
                 </span>
               </p>
             </div>

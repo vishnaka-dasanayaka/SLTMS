@@ -28,8 +28,8 @@ function SignIn() {
     }
 
     if (isSuccess || user) {
-      toast.success('Successfully logged as a Teacher');
       navigate("/teacherDashboard");
+      toast.success('Successfully logged as a Teacher');
     }
 
     dispatch(reset());
@@ -61,7 +61,7 @@ function SignIn() {
     <div>
       <Navbar />
 
-      <form action="" onSubmit={onTeacherClick}>
+      <form action="">
         <div>
           <div className="flex flex-col items-center justify-center mt-10">
             <div className="px-5 py-3 rounded-lg bg-primary w-fit h-fit">
@@ -70,7 +70,7 @@ function SignIn() {
               </h1>
             </div>
 
-            <div className="p-5 mt-5 flex flex-col items-start justify-center border-black border-[2px] rounded-xl">
+            <div className="p-5 mt-5 flex flex-col items-center justify-center border-black border-[2px] rounded-xl">
               <div className="flex items-center justify-between mt-5">
                 <label className="text-lg font-bold uppercase" htmlFor="">
                   username :{" "}
@@ -102,7 +102,7 @@ function SignIn() {
               </div>
 
               <div className="flex items-center justify-center mt-10">
-                <button className="px-3 py-1 font-bold text-white uppercase rounded-md border-btn_color border-[1px] hover:bg-white hover:text-btn_color bg-btn_color">
+                <button onClick={onTeacherClick} className="px-3 py-1 font-bold text-white uppercase rounded-md border-btn_color border-[1px] hover:bg-white hover:text-btn_color bg-btn_color">
                   Log In as Teacher
                 </button>
                 <button className="ml-5 px-3 py-1 font-bold text-white uppercase rounded-md border-btn_color border-[1px] hover:bg-white hover:text-btn_color bg-btn_color">

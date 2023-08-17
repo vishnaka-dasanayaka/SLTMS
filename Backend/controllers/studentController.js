@@ -79,7 +79,6 @@ const loginStudent = asyncHandler(async(req,res) => {
 // @route  Get/student/me
 // @access Private
 const getStudent = asyncHandler(async (req,res) => {
-    console.log(req.student);
     const {_id,firstName,lastName,email} = await Student.findById(req.student.id)
 
     res.status(200).json({
