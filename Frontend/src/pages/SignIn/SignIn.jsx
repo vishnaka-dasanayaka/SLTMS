@@ -74,7 +74,7 @@ function SignIn() {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner/>
   }
 
   return (

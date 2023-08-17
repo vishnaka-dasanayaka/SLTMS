@@ -62,16 +62,15 @@ const updateCourse = asyncHandler(async(req,res)=>{
         throw new Error('Course not found')
     }
 
-    const teacher = await Teacher.findById(req.teacher.id)
 
     //check for teacher
-    if(!teacher){
+    if(!req.teacher){
         res.status(401)
         throw new Error('User not found')
     }
 
     //check for exact owner
-    if(course.teacher.toString() !== teacher.id){
+    if(course.teacher.toString() !== req.teacher.id){
         res.status(401)
         throw new Error('Unauthorized')
     }
@@ -96,16 +95,15 @@ const deleteCourse = asyncHandler(async(req,res)=>{
         throw new Error('Relavent course is not found')
     }
 
-    const teacher = await Teacher.findById(req.teacher.id)
 
     //check for teacher
-    if(!teacher){
+    if(!req.teacher){
         res.status(401)
         throw new Error('User not found')
     }
 
     //check for exact owner
-    if(course.teacher.toString() !== teacher.id){
+    if(course.teacher.toString() !== req.teacher.id){
         res.status(401)
         throw new Error('Unauthorized')
     }

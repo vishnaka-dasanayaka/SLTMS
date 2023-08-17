@@ -1,61 +1,67 @@
-import React from 'react'
-import Navbar from '../../components/Navigation/Navbar'
+import { useEffect } from "react";
+import Navbar from "../../components/Navigation/Navbar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
-import { Link } from 'react-router-dom';
-import EditIcon from '@mui/icons-material/Edit';
+import { Link } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 function StudentProfile() {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      toast.warning("First, you should login to the system");
+      navigate("/signin");
+    }
+  }, [user, navigate]);
+
   return (
     <div>
-        <Navbar/>
-        <div className="flex justify-center">
+      <Navbar />
+      <div className="flex justify-center">
         <div className="w-1/12 bg-[#d9d9d9] opacity-50 h-[100vh]">
           <ol className="text-center scale-[2] mt-32">
-          <li className="py-2 ">
-            <Link to={"/studentDashboard"}>
-            <DashboardIcon />
-              </Link>  
-              
+            <li className="py-2 ">
+              <Link to={"/studentDashboard"}>
+                <DashboardIcon />
+              </Link>
             </li>
 
-            
             <li className="py-2 ">
-            <Link to={"/studentCourses"}>
-            <LibraryBooksIcon />
-              </Link>  
-              
+              <Link to={"/studentCourses"}>
+                <LibraryBooksIcon />
+              </Link>
             </li>
 
             <li className="py-2 active">
-            <Link to={"/studentProfile"}>
-            <AccountBoxIcon />
-              </Link>  
-              
+              <Link to={"/studentProfile"}>
+                <AccountBoxIcon />
+              </Link>
             </li>
 
             <li className="py-2 ">
-            <Link to={"/studentProfile"}>
-            <PaidIcon />
-              </Link>  
-              
+              <Link to={"/studentProfile"}>
+                <PaidIcon />
+              </Link>
             </li>
 
             <li className="py-2 ">
-            <Link to={"/studentProfile"}>
-            <HelpCenterIcon />
-              </Link>  
-              
+              <Link to={"/studentProfile"}>
+                <HelpCenterIcon />
+              </Link>
             </li>
           </ol>
         </div>
 
         <div className="flex flex-col w-11/12">
-         
-
           <div className="flex">
             <div className="w-1/4">
               <div className="flex flex-col w-56 mt-10 ml-16">
@@ -184,7 +190,7 @@ function StudentProfile() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default StudentProfile
+export default StudentProfile;

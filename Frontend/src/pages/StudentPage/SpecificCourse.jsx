@@ -8,8 +8,21 @@ import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import {toast} from 'react-toastify'
+import { useSelector } from "react-redux";
 function SpecificCourse() {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      toast.warning('First, you should login to the system')
+      navigate("/signin");
+    }
+  }, [user, navigate]);
   return (
     <div>
     <Navbar />

@@ -11,8 +11,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom'
 import {url} from '../../config';
-
+import { useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify'
+import { useSelector } from "react-redux";
 export default function CourseCRUD(props) {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      toast.warning('First, you should login to the system')
+      navigate("/signin");
+    }
+  }, [user, navigate]);
+
+
   const [createButtonPop, setCreateButtonPopup] = useState(false);
   const [data,setData] = useState([]);
 
