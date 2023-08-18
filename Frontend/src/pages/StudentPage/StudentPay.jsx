@@ -91,7 +91,7 @@ function StudentPay() {
                             </div>
                             <div className="w-[90%] my-4 border border-black p-2">
                                 <input type="radio" id="creditCard" name="creditCard" value="creditCard"/>
-                                <label for="creditCard" className="ml-2"> Debit Card</label>
+                                <label for="creditCard" className="ml-2"> Bank Transfer</label>
                             </div>
                         </div>
                     </div>
