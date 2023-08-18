@@ -1,8 +1,14 @@
 import { useDispatch } from "react-redux";
 import { deleteCourse } from "../../features/courses/courseSlice";
+import {useState} from 'react'
+import UpdatePopup from "../Popups/UpdatePopup/UpdatePopup";
 
 function CourseCard({ course }) {
+  
+  const [updateButtonPop, setUpdateButtonPopup] = useState(false);
+
   const dispatch = useDispatch();
+  
   return (
     <div className="border-black border-[2px] m-5 px-2 py-3 rounded-xl">
       <div className="flex flex-col">
@@ -73,8 +79,8 @@ function CourseCard({ course }) {
           <button className="border-[1px] border-blue-500  hover:text-blue-500 hover:bg-white w-20 px-2 py-1 text-white uppercase bg-blue-500 rounded-lg">
             view
           </button>
-          <button className="border-[1px] border-yellow-500  hover:text-yellow-500 hover:bg-white w-20 px-2 py-1 text-white uppercase bg-yellow-500 rounded-lg">
-            edit
+          <button onClick={() => {setUpdateButtonPopup(true)}} className="border-[1px] border-yellow-500  hover:text-yellow-500 hover:bg-white w-20 px-2 py-1 text-white uppercase bg-yellow-500 rounded-lg">
+            update
           </button>
           <button
             onClick={() => {dispatch(deleteCourse(course._id))}}
@@ -84,6 +90,11 @@ function CourseCard({ course }) {
           </button>
         </div>
       </div>
+
+      <UpdatePopup
+      updateTrigger = {updateButtonPop}
+      setUpdateTrigger = {setUpdateButtonPopup}
+      ></UpdatePopup>
     </div>
   );
 }
