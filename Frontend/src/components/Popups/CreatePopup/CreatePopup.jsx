@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createCourse } from "../../../features/courses/courseSlice";
-
+import Spinner from "../../Spinner/Spinner";
 
 function CreatePopup(props) {
   const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     courseID: "",
     category: "",
@@ -30,7 +31,7 @@ function CreatePopup(props) {
     if (!courseID || !category || !subject || !courseTitle || !fee || !desc) {
       toast.warn("All fields are mandetory");
     } else {
-      const courseDate = {
+      const courseData = {
         courseID,
         category,
         subject,
@@ -39,9 +40,32 @@ function CreatePopup(props) {
         desc,
       };
 
-      dispatch(createCourse(courseDate));
+      dispatch(createCourse(courseData));
     }
   };
+
+  const onCancelClick = () => {
+    props.setCreateTrigger(false);
+  };
+
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.courses
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (isSuccess) {
+      toast.success("Course is Successfully created");
+    }
+  }, [isError, message, isSuccess]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
 
   return props.createTrigger ? (
     <div className="">
@@ -51,7 +75,7 @@ function CreatePopup(props) {
             create a course
           </h1>
 
-          <form className="mt-5" action="">
+          <form className="mt-5" action="" onSubmit={onClick}>
             <label className="pr-16 tracking-wide text-white" htmlFor="">
               Course ID
             </label>
@@ -150,7 +174,7 @@ function CreatePopup(props) {
 
             <div className="flex justify-center">
               <button
-                onClick={onClick}
+                type="submit"
                 className="
                     mx-5
                     font-bold
@@ -184,9 +208,7 @@ function CreatePopup(props) {
                     hover:bg-white
                     hover:text-[#40908b]
                     "
-                onClick={() => {
-                  props.setCreateTrigger(false);
-                }}
+                onClick={onCancelClick}
               >
                 cancel
               </button>

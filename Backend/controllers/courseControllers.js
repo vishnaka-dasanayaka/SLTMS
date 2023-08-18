@@ -43,7 +43,7 @@ const setCourse = asyncHandler(async(req,res)=>{
 const getCourses = asyncHandler(async(req,res)=>{
     try {
         const allCourses = await Course.find({teacher:req.teacher.id});
-        res.send({status:"ok", data:allCourses});
+        res.status(200).json(allCourses)
     } catch (error) {
         console.log(error);
     }

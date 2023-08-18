@@ -11,7 +11,7 @@ const createCourse = async(courseData,token) => {
     }
 
     const response = await axios.post(API_URL, courseData, config)
-
+    
     return response.data
 }
 
@@ -28,7 +28,7 @@ const getCourses = async(token) => {
 }
 
 const courseService = {
-    createCourse,getCourses
+    createCourse,getCourses,
 }
 
 export default courseService

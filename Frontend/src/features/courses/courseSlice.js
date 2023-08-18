@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import courseService from './courseService'
 
 const initialState = {
@@ -6,8 +6,8 @@ const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: ''
-}
+    message: '',
+};
 
 //create course
 export const createCourse = createAsyncThunk('courses/create', async (courseData, thunkAPI) => {
@@ -56,6 +56,7 @@ export const courseSlice = createSlice({
                 state.isLoading = false
                 state.isSuccess = true
                 state.courses.push(action.payload)
+                //state.courses = action.payload 
             })
             .addCase(createCourse.rejected, (state,action) => {
                 state.isLoading = false
@@ -80,4 +81,4 @@ export const courseSlice = createSlice({
 
 export const { reset } = courseSlice.actions
 
-export default courseSlice.reducer
+export default courseSlice.reducer;
