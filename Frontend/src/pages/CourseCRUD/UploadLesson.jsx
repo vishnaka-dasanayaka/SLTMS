@@ -5,12 +5,75 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
-import {useParams} from 'react-router-dom'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { createLesson } from "../../features/lessons/lessonSlice";
+import Spinner from "../../components/Spinner/Spinner";
 
 function UploadLesson() {
-
-  const params = useParams()
+  const dispatch = useDispatch();
+  const params = useParams();
   const courseID = params.id;
+
+  const [formData, setFormData] = useState({
+    month: "",
+    lessonTitle: "",
+    duration: "",
+    description: "",
+    file: "",
+    course: courseID
+  });
+
+  const { month, lessonTitle, duration, description, file,course } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+  
+
+    if (!month || !lessonTitle || !duration || !description || !file) {
+      toast.error("All fields are mandetory");
+    } else {
+      const lessonData = {
+        month,
+        lessonTitle,
+        duration,
+        description,
+        file,
+        course
+      };
+
+      console.log(lessonData);
+
+      dispatch(createLesson(lessonData));
+    }
+  };
+
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.lessons
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (isSuccess) {
+    }
+  }, [isError, isSuccess, message]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div>
       <Navbar />
@@ -50,108 +113,133 @@ function UploadLesson() {
         </div>
 
         <div className="flex flex-col w-11/12 mt-10">
-          <div className="flex flex-col justify-center mb-5">
-            <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
-              <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
-                <label htmlFor="year" className="mb-[1vh] sm:mb-[0]">
-                  MONTH
-                </label>
+          <form action="" onSubmit={onSubmit}>
+            <div className="flex flex-col justify-center mb-5">
+              <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
+                <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
+                  <label htmlFor="year" className="mb-[1vh] sm:mb-[0]">
+                    MONTH
+                  </label>
+                </div>
+                <div className="flex justify-center w-full sm:justify-start">
+                  <select
+                    value={month}
+                    name="month"
+                    id="month"
+                    onChange={onChange}
+                    className="p-2 min-w-[200px] border-solid border-4 bg-slate-200"
+                  >
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                  </select>
+                </div>
               </div>
-              <div className="flex justify-center w-full sm:justify-start">
-                <select
-                  name="cars"
-                  id="cars"
-                  className="min-w-[200px] border-solid border-4 bg-slate-200"
-                >
-                  <option value="a">January</option>
-                  <option value="b">February</option>
-                  <option value="c">March</option>
-                  <option value="d">April</option>
-                  <option value="a">May</option>
-                  <option value="b">June</option>
-                  <option value="c">July</option>
-                  <option value="d">August</option>
-                  <option value="a">September</option>
-                  <option value="b">October</option>
-                  <option value="c">November</option>
-                  <option value="d">December</option>
-                </select>
-              </div>
-            </div>
 
-            <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
-              <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
-                <label htmlFor="year" className="mb-[1vh] sm:mb-[0] uppercase">
-                  lesson TITLE
-                </label>
+              <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
+                <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
+                  <label
+                    htmlFor="year"
+                    className="mb-[1vh] sm:mb-[0] uppercase"
+                  >
+                    lesson TITLE
+                  </label>
+                </div>
+                <div className="flex justify-center w-full sm:justify-start">
+                  <input
+                    type="text"
+                    id="lessonTitle"
+                    name="lessonTitle"
+                    value={lessonTitle}
+                    placeholder="Approprate title for ypur lesson"
+                    onChange={onChange}
+                    className="p-2 min-w-[200px] border-solid border-4 bg-slate-200"
+                  />
+                </div>
               </div>
-              <div className="flex justify-center w-full sm:justify-start">
-                <input
-                  name="cars"
-                  id="cars"
-                  className="min-w-[200px] border-solid border-4 bg-slate-200"
-                />
-              </div>
-            </div>
 
-            <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
-              <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
-                <label htmlFor="year" className="uppercase mb-[1vh] sm:mb-[0]">
-                  Duration
-                </label>
+              <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
+                <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
+                  <label
+                    htmlFor="year"
+                    className="uppercase mb-[1vh] sm:mb-[0]"
+                  >
+                    Duration
+                  </label>
+                </div>
+                <div className="flex justify-center w-full sm:justify-start">
+                  <input
+                    type="text"
+                    id="duration"
+                    name="duration"
+                    value={duration}
+                    placeholder="Avarage duration for ypur lesson"
+                    onChange={onChange}
+                    className="p-2 min-w-[200px] border-solid border-4 bg-slate-200"
+                  />
+                </div>
               </div>
-              <div className="flex justify-center w-full sm:justify-start">
-                <input
-                  name="cars"
-                  id="cars"
-                  className="min-w-[200px] border-solid border-4 bg-slate-200"
-                />
-              </div>
-            </div>
 
-            <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
-              <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
-                <label htmlFor="year" className="mb-[1vh] uppercase sm:mb-[0]">
-                  Description
-                </label>
+              <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
+                <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
+                  <label
+                    htmlFor="year"
+                    className="mb-[1vh] uppercase sm:mb-[0]"
+                  >
+                    Description
+                  </label>
+                </div>
+                <div className="flex justify-center w-full sm:justify-start ">
+                  <textarea
+                    type="text"
+                    id="description"
+                    name="description"
+                    value={description}
+                    placeholder="Brieflt describe your lesson"
+                    onChange={onChange}
+                    className="p-2 min-w-[200px] border-solid border-4 bg-slate-200"
+                  />
+                </div>
               </div>
-              <div className="flex justify-center w-full sm:justify-start ">
-                <textarea
-                  name="about"
-                  id="about"
-                  cols="50"
-                  rows="3"
-                  className="bg-slate-200"
-                ></textarea>
-              </div>
-            </div>
 
-            <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
-              <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
-                <label htmlFor="year" className="uppercase mb-[1vh] sm:mb-[0]">
-                  Add Files
-                </label>
+              <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
+                <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
+                  <label
+                    htmlFor="year"
+                    className="uppercase mb-[1vh] sm:mb-[0]"
+                  >
+                    Add Files
+                  </label>
+                </div>
+                <div className="flex justify-center p-5 w-fit sm:justify-start bg-slate-200">
+                  <input
+                    type="text"
+                    id="file"
+                    name="file"
+                    value={file}
+                    placeholder="add files"
+                    onChange={onChange}
+                    className="min-w-[200px] border-solid border-4 bg-slate-200"
+                  />
+                </div>
               </div>
-              <div className="flex justify-center p-5 w-fit sm:justify-start bg-slate-200">
-                <input
-                  type="file"
-                  name="about"
-                  id="about"
-                  cols="50"
-                  rows="5"
-                  className="bg-slate-200"
-                />
-              </div>
-            </div>
 
-            <div className="flex justify-center">
-              <input
-                type="submit"
-                value="Submit"
-                className="px-5 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl uppercase"
-              />
+              <div className="flex justify-center">
+                <button className="px-5 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl uppercase">
+                  submit
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
 
           {/* uploaded lessons */}
 
@@ -199,52 +287,39 @@ function UploadLesson() {
                 </div>
               </div>
             </div>
-
-
-
-
-
-
-
-          
-              <div className="flex items-center justify-center w-full mt-10">
-                <div className="w-1/2 mx-20 border-black border-[1px] rounded-xl h-60">
-                  <div className="flex items-center justify-center h-full">
-                    <div className="w-1/3 h-full mx-5">
-                      <div className="w-full h-full py-5">
-                        <img
-                          className="w-full h-full"
-                          src="../img/book.png"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-start justify-center w-2/3 h-full pl-5 font-mono leading-tight">
-                      <h3 className="text-sm">2023-05-06</h3>
-                      <br />
-                      <h2 className="font-bold text-l">Physical Chemistry</h2>
-                      <h2 className="font-bold text-l">Part I</h2>
-                      <h2 className="font-bold text-l">2 Hrs 30 Min</h2>
-                      <br />
-                      <h3 className="text-sm">2023 JUL</h3>
-                      <br />
-                      <div className="flex">
-                        <button className="px-3 py-1 border-btn_color border-[1px] rounded-xl text-white hover:bg-white hover:text-btn_color bg-btn_color">
-                          Attend
-                        </button>
-                        <button className="px-3 ml-10 py-1 border-primary border-[1px] rounded-xl text-white hover:bg-white hover:text-primary bg-primary">
-                          View
-                        </button>
-                      </div>
+            <div className="grid items-center justify-center w-full grid-cols-2 mt-10">
+              <div className=" mx-20 border-black border-[1px] rounded-xl h-60">
+                <div className="flex items-center justify-center h-full">
+                  <div className="w-1/3 h-full mx-5">
+                    <div className="w-full h-full py-5">
+                      <img
+                        className="w-full h-full"
+                        src="../img/book.png"
+                        alt=""
+                      />
                     </div>
                   </div>
-                </div>   
+                  <div className="flex flex-col items-start justify-center w-2/3 h-full pl-5 font-mono leading-tight">
+                    <h3 className="text-sm">2023-05-06</h3>
+                    <br />
+                    <h2 className="font-bold text-l">Physical Chemistry</h2>
+                    <h2 className="font-bold text-l">Part I</h2>
+                    <h2 className="font-bold text-l">2 Hrs 30 Min</h2>
+                    <br />
+                    <h3 className="text-sm">2023 JUL</h3>
+                    <br />
+                    <div className="flex">
+                      <button className="px-3 py-1 border-btn_color border-[1px] rounded-xl text-white hover:bg-white hover:text-btn_color bg-btn_color">
+                        Attend
+                      </button>
+                      <button className="px-3 ml-10 py-1 border-primary border-[1px] rounded-xl text-white hover:bg-white hover:text-primary bg-primary">
+                        View
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
-
-
-
-
-              
+            </div>
           </div>
         </div>
       </div>
