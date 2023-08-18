@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import courseService from './courseService'
 
 const initialState = {
@@ -6,8 +6,8 @@ const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
-    message: ''
-}
+    message: '',
+};
 
 //create course
 export const createCourse = createAsyncThunk('courses/create', async (courseData, thunkAPI) => {
@@ -30,6 +30,23 @@ export const getCourses = createAsyncThunk('courses/getAll', async(_,thunkAPI) =
     try {
         const token = thunkAPI.getState().auth.user.token
         return await courseService.getCourses(token)
+    } catch (error) {
+        const message =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
+//delete a course
+
+export const deleteCourse = createAsyncThunk('courses/delete', async (id,thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await courseService.deleteCourse(id, token)
     } catch (error) {
         const message =
             (error.response &&
@@ -75,9 +92,24 @@ export const courseSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
+            .addCase(deleteCourse.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deleteCourse.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.courses = state.courses.filter(
+                    (course) => course._id !== action.payload._id  
+                    )
+            })
+            .addCase(deleteCourse.rejected, (state,action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
     }
 })
 
 export const { reset } = courseSlice.actions
 
-export default courseSlice.reducer
+export default courseSlice.reducer;

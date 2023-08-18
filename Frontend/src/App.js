@@ -28,25 +28,27 @@ function App() {
   return (
     <div>
     <BrowserRouter >
+    <Provider store={store}>
       <Routes>
-        <Route exact path="/" element={<Provider store={store}><Home /></Provider>} />
-        <Route path="/about" element={<Provider store={store}><About /></Provider>} />
-        <Route path="/signup" element={<Provider store={store}><SignUp /></Provider>} />
-        <Route path="/signin" element={<Provider store={store}><SignIn /></Provider>} />
-        <Route path="/teachersignup" element={<Provider store={store}><TeacherSignUp /></Provider> } />
-        <Route path="/studentsignup" element={<Provider store={store}><StudentSignUp /></Provider>} />
-        <Route path="/teacherDashboard" element={<Provider store={store}><TeacherDashboard /></Provider>}/>
-        <Route path="/studentDashboard" element={<Provider store={store}><StudentDashboard /></Provider>}/>
-        <Route path="/courseCRUD" element={<Provider store={store}><CourseCRUD /></Provider>} />
-        <Route path="/teacherHelp" element={<Provider store={store}><TeacherHelp /></Provider>} />
-        <Route path="/teacherPay" element={<Provider store={store}><TeacherPay /></Provider>} />
-        <Route path="/teacherProfile" element={<Provider store={store}><TeacherProfile /></Provider>} />
-        <Route path="/studentCourses" element={<Provider store={store}><StudentCourses /></Provider>} />
-        <Route path="/studentProfile" element={<Provider store={store}><StudentProfile /></Provider>} />
-        <Route path="/specificTeacher" element={<Provider store={store}><SpecificTeacher /></Provider>} />
-        <Route path="/specificCourse" element={<Provider store={store}><SpecificCourse /></Provider>} />
-        <Route path="/uploadLesson" element={<Provider store={store}><UploadLesson /></Provider>} />
+        <Route exact path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/teachersignup" element={<TeacherSignUp /> } />
+        <Route path="/studentsignup" element={<StudentSignUp />} />
+        <Route path="/teacherDashboard" element={<TeacherDashboard />}/>
+        <Route path="/studentDashboard" element={<StudentDashboard />}/>
+        <Route path="/courseCRUD" element={<CourseCRUD />} />
+        <Route path="/teacherHelp" element={<TeacherHelp />} />
+        <Route path="/teacherPay" element={<TeacherPay />} />
+        <Route path="/teacherProfile" element={<TeacherProfile />} />
+        <Route path="/studentCourses" element={<StudentCourses />} />
+        <Route path="/studentProfile" element={<StudentProfile />} />
+        <Route path="/specificTeacher" element={<SpecificTeacher />} />
+        <Route path="/specificCourse" element={<SpecificCourse />} />
+        <Route path="/uploadLesson" element={<UploadLesson />} />
       </Routes>
+      </Provider>
     </BrowserRouter>
     <ToastContainer />
     </div>

@@ -32,6 +32,9 @@ const courseSchema = mongoose.Schema( {
         type:String,
         required:[true,'Please add a desc']
     }
+},
+{
+    timestamps:true
 })
 
 const Course = mongoose.model("Course",courseSchema);

@@ -5,7 +5,7 @@ function Courses() {
     <div>
       
       <div>
-        <h1 className='ml-[20px] text-5xl'>Courses on Edu.com</h1>
+        <h1 className='ml-[20px] text-5xl '>Courses on Edu.com</h1>
       </div>
       <div className='grid grid-cols-4 h-[400px]'>
 

@@ -11,6 +11,7 @@ import {
 } from "../../features/auth/authSlice";
 import Spinner from "../../components/Spinner/Spinner";
 
+
 function SignIn() {
   const [formData, setFormData] = useState({
     email: "",
@@ -141,7 +142,7 @@ function SignIn() {
                   Do not have an account?
                   <Link to={"/signup"}>
                     <span className="ml-1 text-blue-700 underline cursor-pointer">
-                      Sign Up
+                     Sign Up
                     </span>
                   </Link>
                 </h4>

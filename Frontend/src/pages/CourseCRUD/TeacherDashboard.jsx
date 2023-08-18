@@ -6,6 +6,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
 import SchoolIcon from "@mui/icons-material/School";
+import FaceIcon from '@mui/icons-material/Face';
 
 function TeacherDashboard() {
   return (
@@ -51,7 +52,7 @@ function TeacherDashboard() {
             <div className="flex text-left justify-self-end">
               <div className="pl-5 pt-7">
                 <label className="text-xl font-extrabold " htmlFor="">
-                  Enrolled Students
+                  Number of Courses
                 </label>
                 <br />
                 <p className="mt-5 text-2xl font-extrabold text-center">25</p>
@@ -74,7 +75,7 @@ function TeacherDashboard() {
               </div>
 
               <div className="scale-[4] mt-[70px] ml-16">
-                <SchoolIcon />
+                <FaceIcon />
               </div>
             </div>
           </div>

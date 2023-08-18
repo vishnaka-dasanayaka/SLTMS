@@ -7,10 +7,11 @@ import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { useEffect, useState } from "react";
 import CreatePopup from "../../components/Popups/CreatePopup/CreatePopup";
 import { useDispatch, useSelector } from "react-redux";
-import Spinner from "../../components/Spinner/Spinner"; 
+import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import Owner from "../../components/Owner/Owner";
 import { getCourses, reset } from "../../features/courses/courseSlice";
+import CourseCard from "../../components/Courses/CourseCard";
 
 export default function CourseCRUD(props) {
   const [createButtonPop, setCreateButtonPopup] = useState(false);
@@ -21,24 +22,20 @@ export default function CourseCRUD(props) {
   );
 
   useEffect(() => {
-    if(isError){
-      console.log(message)
+    if (isError) {
+      console.log(message);
     }
 
-
-    dispatch(getCourses())
+    dispatch(getCourses());
 
     return () => {
-      dispatch(reset())
-    }
+      dispatch(reset());
+    };
+  }, [isError, message, dispatch]);
 
-  },[isError,message,dispatch])
-
-
-
-    if(isLoading){
-      return <Spinner/>
-    }
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div>
       <Navbar />
@@ -101,76 +98,15 @@ export default function CourseCRUD(props) {
             </div>
 
             <div className="mt-10 ml-10">
-              
-                {courses.length > 0 ? (<div className="grid justify-center grid-cols-3">
-                <div className="flex flex-col items-center justify-center">
-                  <div className="flex items-start justify-center">
-                    <div className="pr-5">
-                      <h1>Course ID</h1>
-                    </div>
-                    <div>
-                      <h2>02</h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start justify-center">
-                    <div className="pr-5">
-                      <h1>Category</h1>
-                    </div>
-                    <div>
-                      <h2>02</h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start justify-center">
-                    <div className="pr-5">
-                      <h1>subject</h1>
-                    </div>
-                    <div>
-                      <h2>02</h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start justify-center">
-                    <div className="pr-5">
-                      <h1>course titke</h1>
-                    </div>
-                    <div>
-                      <h2>02</h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start justify-center">
-                    <div className="pr-5">
-                      <h1>fee</h1>
-                    </div>
-                    <div>
-                      <h2>02</h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start justify-center">
-                    <div className="pr-5">
-                      <h1>desc</h1>
-                    </div>
-                    <div>
-                      <h2>02</h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start justify-center">
-                    <button className="px-3 bg-red-300 ">view</button>
-                    <button className="px-3 bg-yellow-300 ">edit</button>
-                    <button className="px-3 bg-blue-300 ">delete</button>
-                  </div>
+              {(courses.length > 0) ? (
+                <div className="grid justify-center grid-cols-1 md:grid-cols-3 ">
+                  {courses.map((course) => (
+                    <CourseCard key={course._id} course={course} />
+                  ))}
                 </div>
-                </div>) : (<h3>No courses{courses.length}</h3>)}
-                
-
-
-
-
-              
+              ) : (
+                <div className="ml-32 w-fit"><h1 className="px-3 py-2 text-2xl font-extrabold tracking-widest text-center text-white uppercase bg-yellow-300">No courses added yet</h1></div>
+              )}
             </div>
           </div>
         </div>
