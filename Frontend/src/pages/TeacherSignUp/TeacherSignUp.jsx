@@ -129,7 +129,7 @@ function TeacherSignUp() {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="email"
                   className="min-w-[15vw] h-7 pl-3"
                   id="email"
                   name="email"
@@ -183,7 +183,7 @@ function TeacherSignUp() {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="password"
                   className="min-w-[15vw] h-7 pl-3"
                   id="password"
                   name="password"
@@ -200,7 +200,7 @@ function TeacherSignUp() {
               </div>
               <div>
                 <input
-                  type="text"
+                  type="password"
                   className="min-w-[15vw] h-7 pl-3"
                   id="rePassword"
                   name="rePassword"

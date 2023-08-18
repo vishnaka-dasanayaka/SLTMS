@@ -31,6 +31,9 @@ app.use("/teachers", require('./route/teacherRoute'));
 // Routs for Students
 app.use("/students", require('./route/studentRoute'));
 
+// Routs for Lessons
+app.use("/lessons", require('./route/lessonRoute'));
+
 // errorHandler
 app.use(errorHandler);
 
