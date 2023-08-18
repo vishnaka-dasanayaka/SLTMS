@@ -17,6 +17,7 @@ import SpecificTeacher from "./pages/StudentPage/SpecificTeacher";
 import SpecificCourse from "./pages/StudentPage/SpecificCourse";
 import SignIn from "./pages/SignIn/SignIn";
 import UploadLesson from "./pages/CourseCRUD/UploadLesson";
+import StudentPay from "./pages/StudentPage/StudentPay";
 import {ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
@@ -47,6 +48,7 @@ function App() {
         <Route path="/specificTeacher" element={<SpecificTeacher />} />
         <Route path="/specificCourse" element={<SpecificCourse />} />
         <Route path="/uploadLesson" element={<UploadLesson />} />
+        <Route path="/studentPay" element={<StudentPay />} />
       </Routes>
       </Provider>
     </BrowserRouter>
