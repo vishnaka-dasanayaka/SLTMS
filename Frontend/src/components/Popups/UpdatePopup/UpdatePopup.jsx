@@ -12,7 +12,6 @@ function UpdatePopup(props) {
   const { courseID, category, subject, courseTitle, fee, desc } = formData;
 
   const onChange = (e) => {
-    const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,

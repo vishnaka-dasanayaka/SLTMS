@@ -46,7 +46,7 @@ function App() {
         <Route path="/studentProfile" element={<StudentProfile />} />
         <Route path="/specificTeacher" element={<SpecificTeacher />} />
         <Route path="/specificCourse" element={<SpecificCourse />} />
-        <Route path="/uploadLesson" element={<UploadLesson />} />
+        <Route path="/uploadLesson/:id" element={<UploadLesson />} />
       </Routes>
       </Provider>
     </BrowserRouter>

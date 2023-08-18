@@ -112,7 +112,7 @@ function StudentSignUp() {
             </div>
             <div>
               <input
-                type="text"
+                type="email"
                 className="text-black pl-2 w-[18vw] h-[4vh] min-w-[250px]"
                 id="email"
                 name="email"
@@ -129,7 +129,7 @@ function StudentSignUp() {
             </div>
             <div>
               <input
-                type="text"
+                type="password"
                 className="text-black pl-2 w-[18vw] h-[4vh] min-w-[250px]"
                 id="password"
                 name="password"
@@ -146,7 +146,7 @@ function StudentSignUp() {
             </div>
             <div>
               <input
-                type="text"
+                type="password"
                 className="text-black pl-2 w-[18vw] h-[4vh] min-w-[250px]"
                 id="rePassword"
                 name="rePassword"

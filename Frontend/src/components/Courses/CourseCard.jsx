@@ -2,12 +2,14 @@ import { useDispatch } from "react-redux";
 import { deleteCourse } from "../../features/courses/courseSlice";
 import {useState} from 'react'
 import UpdatePopup from "../Popups/UpdatePopup/UpdatePopup";
+import {useNavigate} from 'react-router-dom'
 
 function CourseCard({ course }) {
   
   const [updateButtonPop, setUpdateButtonPopup] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   return (
     <div className="border-black border-[2px] m-5 px-2 py-3 rounded-xl">
@@ -76,7 +78,7 @@ function CourseCard({ course }) {
         </div>
 
         <div className="flex items-center justify-between mx-10">
-          <button className="border-[1px] border-blue-500  hover:text-blue-500 hover:bg-white w-20 px-2 py-1 text-white uppercase bg-blue-500 rounded-lg">
+          <button onClick={() => {navigate(`/uploadLesson/${course._id}`)}} className="border-[1px] border-blue-500  hover:text-blue-500 hover:bg-white w-20 px-2 py-1 text-white uppercase bg-blue-500 rounded-lg">
             view
           </button>
           <button onClick={() => {setUpdateButtonPopup(true)}} className="border-[1px] border-yellow-500  hover:text-yellow-500 hover:bg-white w-20 px-2 py-1 text-white uppercase bg-yellow-500 rounded-lg">

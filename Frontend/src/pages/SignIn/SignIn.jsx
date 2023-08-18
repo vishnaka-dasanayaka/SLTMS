@@ -112,7 +112,7 @@ function SignIn() {
                   password :
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   className="px-5 ml-3 bg-gray-200 rounded-md"
                   id="password"
                   name="password"
