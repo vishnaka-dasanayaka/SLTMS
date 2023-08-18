@@ -10,6 +10,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function SpecificTeacher() {
+
   return (
     <div>
     <Navbar />

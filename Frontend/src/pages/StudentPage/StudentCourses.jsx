@@ -13,6 +13,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {url} from '../../config';
 
 function StudentCourses() {
+  
   const [data, setData] = useState([]);
 
   useEffect(() => {

@@ -1,5 +1,3 @@
-import React from "react";
-import { useState, useEffect } from "react";
 import Navbar from "../../components/Navigation/Navbar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -10,25 +8,24 @@ import { Link } from "react-router-dom";
 //import StarIcon from "@mui/icons-material/Star";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import {url} from '../../config';
 
 function StudentDashboard() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  useEffect(() => {
-    getAllCourses();
-  }, []);
+  // useEffect(() => {
+  //   getAllCourses();
+  // }, []);
 
-  const getAllCourses = () => {
-    fetch(`${url}courses`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data, "courses");
-        setData(data.data);
-      });
-  };
+  // const getAllCourses = () => {
+  //   fetch(`${url}courses`, {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data, "courses");
+  //       setData(data.data);
+  //     });
+  // };
 
   return (
     <div>
