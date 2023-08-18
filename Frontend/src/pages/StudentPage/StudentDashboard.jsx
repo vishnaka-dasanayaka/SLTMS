@@ -1,4 +1,3 @@
-import {useEffect } from "react";
 import Navbar from "../../components/Navigation/Navbar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -9,22 +8,8 @@ import { Link } from "react-router-dom";
 //import StarIcon from "@mui/icons-material/Star";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-//import { url } from "../../config";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import {toast} from 'react-toastify'
 
 function StudentDashboard() {
-  const navigate = useNavigate();
-
-  const { user } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (!user) {
-      toast.warning('First, you should login to the system')
-      navigate("/signin");
-    }
-  }, [user, navigate]);
   // const [data, setData] = useState([]);
 
   // useEffect(() => {

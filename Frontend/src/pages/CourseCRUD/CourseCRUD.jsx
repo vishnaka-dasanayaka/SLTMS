@@ -1,75 +1,44 @@
-import React from "react";
 import Navbar from "../../components/Navigation/Navbar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import CreatePopup from "../../components/Popups/CreatePopup/CreatePopup";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { Link } from 'react-router-dom'
-import {url} from '../../config';
-import { useNavigate } from "react-router-dom";
-import {toast} from 'react-toastify'
-import { useSelector } from "react-redux";
-export default function CourseCRUD(props) {
-  const navigate = useNavigate();
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../../components/Spinner/Spinner"; 
+import { Link } from "react-router-dom";
+import Owner from "../../components/Owner/Owner";
+import { getCourses, reset } from "../../features/courses/courseSlice";
 
-  const { user } = useSelector((state) => state.auth);
+export default function CourseCRUD(props) {
+  const [createButtonPop, setCreateButtonPopup] = useState(false);
+  const dispatch = useDispatch();
+
+  const { courses, isLoading, isError, message } = useSelector(
+    (state) => state.courses
+  );
 
   useEffect(() => {
-    if (!user) {
-      toast.warning('First, you should login to the system')
-      navigate("/signin");
+    if(isError){
+      console.log(message)
     }
-  }, [user, navigate]);
 
 
-  const [createButtonPop, setCreateButtonPopup] = useState(false);
-  const [data,setData] = useState([]);
+    dispatch(getCourses())
 
-  useEffect(()=>{
-    getAllCourses();
-  },[]);  
-
-  const getAllCourses = () => {
-    fetch(`${url}courses`,{
-    method:"GET"
-  })
-  .then((res)=>res.json())
-  .then((data)=>{
-    console.log(data,"courses");  
-    setData(data.data);
-  });
-
-}
-  const deleteCourse = (id,name) => {
-    if (window.confirm(`Sure ${name}`)) {
-      fetch(`${url}deleteCourse`,{
-    method:"POST",
-    crossDomain:true,
-    headers:{
-      "Content-Type":"application/json",
-      Accept:"application/json",
-      "Access-Control-Allow-Drigin":"*"
-    },
-    body:JSON.stringify({
-    courseID:id
-  }),
-  })
-  .then((res)=>res.json())
-  .then((data)=>{
-    getAllCourses();
-    alert(data.data);
-  });
+    return () => {
+      dispatch(reset())
     }
-    else{}
-  }
 
-  function editCourse(){}
+  },[isError,message,dispatch])
 
+
+
+    if(isLoading){
+      return <Spinner/>
+    }
   return (
     <div>
       <Navbar />
@@ -77,50 +46,47 @@ export default function CourseCRUD(props) {
       <div className="flex justify-center">
         <div className="w-1/12 bg-[#d9d9d9] opacity-50 h-[100vh]">
           <ol className="text-center scale-[2] mt-32">
-          <li className="py-2 ">
-            <Link to={"/teacherDashboard"}>
-            <DashboardIcon />
-              </Link>  
-              
+            <li className="py-2 ">
+              <Link to={"/teacherDashboard"}>
+                <DashboardIcon />
+              </Link>
             </li>
 
-            
             <li className="py-2 active">
-            <Link to={"/courseCRUD"}>
-            <LibraryBooksIcon />
-              </Link>  
-              
+              <Link to={"/courseCRUD"}>
+                <LibraryBooksIcon />
+              </Link>
             </li>
 
             <li className="py-2 ">
-            <Link to={"/teacherProfile"}>
-            <AccountBoxIcon />
-              </Link>  
-              
+              <Link to={"/teacherProfile"}>
+                <AccountBoxIcon />
+              </Link>
             </li>
 
             <li className="py-2 ">
-            <Link to={"/teacherPay"}>
-            <PaidIcon />
-              </Link>  
-              
+              <Link to={"/teacherPay"}>
+                <PaidIcon />
+              </Link>
             </li>
 
             <li className="py-2 ">
-            <Link to={"/teacherHelp"}>
-            <HelpCenterIcon />
-              </Link>  
-              
+              <Link to={"/teacherHelp"}>
+                <HelpCenterIcon />
+              </Link>
             </li>
           </ol>
         </div>
 
         <div className="flex flex-col w-11/12">
           <div>
+            <div className="mt-5 ml-10 ">
+              <Owner />
+            </div>
             <div className="flex justify-between">
               <div>
-                <h1 className="mt-10 ml-32 text-2xl font-extrabold tracking-widest uppercase">
-                  my courses
+                <h1 className="mt-10 ml-32 text-2xl font-extrabold tracking-widest uppercase ">
+                  your courses
                 </h1>
               </div>
 
@@ -133,36 +99,78 @@ export default function CourseCRUD(props) {
                 </button>
               </div>
             </div>
-            
-            <div>
-              <table className="mt-10 ml-10">
-                <thead>
-                  <tr className="text-center">
-                    <td className="pl-5 pr-5 border-2 border-collapse border-black w-autoto">Course ID</td>
-                    <td className="pl-5 pr-5 border-2 border-collapse border-black w-autoto">Category</td>
-                    <td className="w-auto pl-5 pr-5 border-2 border-collapse border-black">Subject</td>
-                    <td className="w-auto pl-5 pr-5 border-2 border-collapse border-black">Course Title</td>
-                    <td className="w-auto pl-5 pr-5 border-2 border-collapse border-black">Fee</td>
-                    <td className="pl-5 pr-5 border-2 border-collapse border-black w-[500px]">Description</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map(i=>{
-                    return(
-                        <tr className="text-center">
-                          <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.courseID}</td>
-                          <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.category}</td>
-                          <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.subject}</td>
-                          <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.courseTitle}</td>
-                          <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.fee}</td>
-                          <td className="pl-5 pr-5 border-2 border-collapse border-black ">{i.desc}</td>
-                          <Link to={'/uploadLesson'}><td className="text-green-500 cursor-pointer hover:scale-110"><EditIcon onClick={editCourse}/></td></Link>
-                          <td className="text-red-500 cursor-pointer hover:scale-110"><DeleteIcon onClick={()=>deleteCourse(i._id,i.courseTitle)}/></td>
-                        </tr>
-                      )
-                  })}
-                </tbody>
-              </table>
+
+            <div className="mt-10 ml-10">
+              
+                {courses.length > 0 ? (<div className="grid justify-center grid-cols-3">
+                <div className="flex flex-col items-center justify-center">
+                  <div className="flex items-start justify-center">
+                    <div className="pr-5">
+                      <h1>Course ID</h1>
+                    </div>
+                    <div>
+                      <h2>02</h2>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start justify-center">
+                    <div className="pr-5">
+                      <h1>Category</h1>
+                    </div>
+                    <div>
+                      <h2>02</h2>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start justify-center">
+                    <div className="pr-5">
+                      <h1>subject</h1>
+                    </div>
+                    <div>
+                      <h2>02</h2>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start justify-center">
+                    <div className="pr-5">
+                      <h1>course titke</h1>
+                    </div>
+                    <div>
+                      <h2>02</h2>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start justify-center">
+                    <div className="pr-5">
+                      <h1>fee</h1>
+                    </div>
+                    <div>
+                      <h2>02</h2>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start justify-center">
+                    <div className="pr-5">
+                      <h1>desc</h1>
+                    </div>
+                    <div>
+                      <h2>02</h2>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start justify-center">
+                    <button className="px-3 bg-red-300 ">view</button>
+                    <button className="px-3 bg-yellow-300 ">edit</button>
+                    <button className="px-3 bg-blue-300 ">delete</button>
+                  </div>
+                </div>
+                </div>) : (<h3>No courses{courses.length}</h3>)}
+                
+
+
+
+
+              
             </div>
           </div>
         </div>

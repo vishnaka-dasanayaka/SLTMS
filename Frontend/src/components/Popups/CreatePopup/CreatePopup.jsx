@@ -1,89 +1,157 @@
-import React, {useState} from 'react';
-import axios from "axios";
-import {url} from '../../../config';
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { createCourse } from "../../../features/courses/courseSlice";
+
 
 function CreatePopup(props) {
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    courseID: "",
+    category: "",
+    subject: "",
+    courseTitle: "",
+    fee: "",
+    desc: "",
+  });
 
-    const [input, setInput] = useState({
-        courseID: '',
-        category: '',
-        subject: '',
-        courseTitle: '',
-        fee: '',
-        desc: ''
-    });
+  const { courseID, category, subject, courseTitle, fee, desc } = formData;
 
-    function handleChange(event){
-        const {name,value} = event.target;
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-        setInput(prevInput => {
-            return {
-                ...prevInput,
-                [name]:value
-            }
-        })
+  const onClick = (e) => {
+    e.preventDefault();
+
+    if (!courseID || !category || !subject || !courseTitle || !fee || !desc) {
+      toast.warn("All fields are mandetory");
+    } else {
+      const courseDate = {
+        courseID,
+        category,
+        subject,
+        courseTitle,
+        fee,
+        desc,
+      };
+
+      dispatch(createCourse(courseDate));
     }
+  };
 
-    function handleClick(event){
-        event.preventDefault();
-        const newResult = {
-            courseID: input.courseID,
-            category: input.category,
-            subject: input.subject,
-            courseTitle: input.courseTitle,
-            fee: input.fee,
-            desc: input.desc
-        }
+  return props.createTrigger ? (
+    <div className="">
+      <div className="z-1 fixed top-0 left-0 w-full h-[100vh] bg-black/20 flex justify-center items-center">
+        <div className="top-0 px-10 left-0 w-[400px] bg-[#0e2d2b] h-[550px] rounded-2xl">
+          <h1 className="mt-5 text-2xl font-extrabold tracking-widest text-center text-white uppercase">
+            create a course
+          </h1>
 
-        axios.post(`${url}courses`, newResult);
-        alert("Succesfully added to the database");
-        window.location.reload();
-    } 
+          <form className="mt-5" action="">
+            <label className="pr-16 tracking-wide text-white" htmlFor="">
+              Course ID
+            </label>
+            <br />
+            <input
+              className="w-full pl-2 mb-2 rounded-lg opacity-70"
+              type="text"
+              name="courseID"
+              value={courseID}
+              autoComplete="off"
+              placeholder="course number"
+              id="courseID"
+              onChange={onChange}
+            />
+            <br />
 
-    return (props.createTrigger)?(
-    <div className=''>
-      <div className='z-1 fixed top-0 left-0 w-full h-[100vh] bg-black/20 flex justify-center items-center'>
-        <div className='top-0 px-10 left-0 w-[400px] bg-[#0e2d2b] h-[550px] rounded-2xl'>
-            
-            <h1 className='mt-5 text-2xl font-extrabold tracking-widest text-center text-white uppercase'>create a course</h1>
+            <label className="pr-16 tracking-wide text-white" htmlFor="">
+              Category
+            </label>
+            <br />
+            <input
+              type="text"
+              name="category"
+              value={category}
+              autoComplete="off"
+              placeholder="Category of the course"
+              id="category"
+              onChange={onChange}
+              className="w-full pl-2 mb-2 rounded-lg opacity-70"
+            />
+            <br />
 
-            <form className='mt-5' action="">
-            <label className='pr-16 tracking-wide text-white' htmlFor="">Course ID</label>
-                <br />
-                <input onChange={handleChange} className='w-full mb-2 rounded-lg opacity-70' type="text" name="courseID" value={input.courseID} autoComplete='off' placeholder='course number' />
-                <br />
-                
-                <label className='pr-16 tracking-wide text-white' htmlFor="">Category</label>
-                <br />
-                <input onChange={handleChange} name="category" value={input.category} autoComplete='off' placeholder='select category' className='w-full mb-2 rounded-lg opacity-70' type="text" />
-                <br />
+            <label className="pr-16 tracking-wide text-white" htmlFor="">
+              Subject
+            </label>
+            <br />
+            <input
+              type="text"
+              name="subject"
+              value={subject}
+              autoComplete="off"
+              placeholder="Corresponding subject"
+              id="subject"
+              onChange={onChange}
+              className="w-full pl-2 mb-2 rounded-lg opacity-70"
+            />
+            <br />
 
-                <label className='pr-16 tracking-wide text-white' htmlFor="">Subject</label>
-                <br />
-                <input onChange={handleChange} name="subject" value={input.subject} autoComplete='off' placeholder='subject' className='w-full mb-2 rounded-lg opacity-70' type="text" />
-                <br />
+            <label className="pr-16 tracking-wide text-white" htmlFor="">
+              Course Title
+            </label>
+            <br />
+            <input
+              type="text"
+              name="courseTitle"
+              value={courseTitle}
+              autoComplete="off"
+              placeholder="Course Topic"
+              id="courseTitle"
+              onChange={onChange}
+              className="w-full pl-2 mb-2 rounded-lg opacity-70"
+            />
+            <br />
 
-                <label className='pr-16 tracking-wide text-white' htmlFor="">Course Title</label>
-                <br />
-                <input onChange={handleChange} name="courseTitle" value={input.courseTitle} autoComplete='off' placeholder='course title' className='w-full mb-2 rounded-lg opacity-70' type="text"/>
-                <br />
+            <label className="pr-16 tracking-wide text-white" htmlFor="">
+              Fee
+            </label>
+            <br />
+            <input
+              type="text"
+              name="fee"
+              value={fee}
+              autoComplete="off"
+              placeholder="Enter monthly fee"
+              id="fee"
+              onChange={onChange}
+              className="w-full pl-2 mb-2 rounded-lg opacity-70"
+            />
+            <br />
 
-                <label className='pr-16 tracking-wide text-white' htmlFor="">Fee</label>
-                <br />
-                <input onChange={handleChange} name="fee" value={input.fee} autoComplete='off' placeholder='course fee' className='w-full mb-2 rounded-lg opacity-70' type="text"/>
-                <br />
+            <label className="pr-16 tracking-wide text-white" htmlFor="">
+              Description
+            </label>
+            <br />
+            <input
+              type="text"
+              name="desc"
+              value={desc}
+              autoComplete="off"
+              placeholder="Briefly describe youre course"
+              id="desc"
+              onChange={onChange}
+              className="w-full pl-2 mb-2 rounded-lg opacity-70"
+            />
+            <br />
 
-                <label className='pr-16 tracking-wide text-white' htmlFor="">Description</label>
-                <br />
-                <input onChange={handleChange} name="desc" value={input.desc} autoComplete='off' placeholder='course description' className='w-full h-24 mb-2 rounded-lg opacity-70' type="text"/>
-                <br />
-
-                <div
-                 className='flex justify-center'>
-
-                    <button
-                    onClick={handleClick} 
-                    className='
+            <div className="flex justify-center">
+              <button
+                onClick={onClick}
+                className="
                     mx-5
                     font-bold
                     tracking-wider
@@ -96,11 +164,13 @@ function CreatePopup(props) {
                     rounded-xl
                     hover:bg-white
                     hover:text-[#40908b]
-                    '
-                    >submit</button>
+                    "
+              >
+                add course
+              </button>
 
-<button
-                    className='
+              <button
+                className="
                     mx-5
                     font-bold
                     tracking-wider
@@ -113,17 +183,21 @@ function CreatePopup(props) {
                     rounded-xl
                     hover:bg-white
                     hover:text-[#40908b]
-                    '
-                    onClick={() => {props.setCreateTrigger(false)}}
-                    >cancel</button>
-
-                </div>
-            </form>
-
+                    "
+                onClick={() => {
+                  props.setCreateTrigger(false);
+                }}
+              >
+                cancel
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  ):""
+  ) : (
+    ""
+  );
 }
 
-export default CreatePopup
+export default CreatePopup;

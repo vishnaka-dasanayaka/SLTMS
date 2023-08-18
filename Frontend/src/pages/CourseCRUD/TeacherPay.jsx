@@ -1,4 +1,3 @@
-import {useEffect} from 'react'
 import Navbar from '../../components/Navigation/Navbar'
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -6,21 +5,10 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+
 
 function TeacherPay() {
-  const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (!user) {
-      toast.warning("First, you should login to the system");
-      navigate("/signin");
-    }
-  }, [user, navigate]);
 
 
   return (

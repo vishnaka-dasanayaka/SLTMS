@@ -22,7 +22,7 @@ const port = process.env.PORT || 3003;
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
-// GET and POST courses
+// Routes for courses
 app.use("/courses", require('./route/courseRoute'));
 
 // Routes for Teacher
