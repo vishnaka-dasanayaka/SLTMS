@@ -27,8 +27,20 @@ const getCourses = async(token) => {
     return response.data
 }
 
+//delete a courses
+const deleteCourse = async(goalId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.delete(`${API_URL}${goalId}`, config)
+    return response.data
+}
+
 const courseService = {
-    createCourse,getCourses,
+    createCourse,getCourses,deleteCourse
 }
 
 export default courseService

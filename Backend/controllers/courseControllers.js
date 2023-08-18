@@ -110,6 +110,7 @@ const deleteCourse = asyncHandler(async(req,res)=>{
 
     const deletedCourse = await Course.findByIdAndRemove(req.params.id)
 
+
     res.status(200).json(deletedCourse)
 })
 

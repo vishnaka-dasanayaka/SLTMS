@@ -58,7 +58,7 @@ function CreatePopup(props) {
     }
 
     if (isSuccess) {
-      toast.success("Course is Successfully created");
+      
     }
   }, [isError, message, isSuccess]);
 
