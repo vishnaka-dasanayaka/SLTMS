@@ -102,7 +102,7 @@ function TeacherProfile() {
 
                     <div className="flex items-center mb-5">
                       <div className="w-36">
-                        <h3>Category :</h3>
+                        <h3>Email :</h3>
                       </div>
                       <div className="w-56 px-3 py-1 ml-5 bg-white">
                         <p>Vishnaka Dasanayaka</p>
@@ -114,7 +114,7 @@ function TeacherProfile() {
 
                     <div className="flex items-center mb-5">
                       <div className="w-36">
-                        <h3>NIC :</h3>
+                        <h3>Teaching Area :</h3>
                       </div>
                       <div className="w-56 px-3 py-1 ml-5 bg-white">
                         <p>Vishnaka Dasanayaka</p>
@@ -126,44 +126,7 @@ function TeacherProfile() {
 
                     <div className="flex items-center mb-5">
                       <div className="w-36">
-                        <h3>E-mail :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>DoB :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>Contact Info :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>Subject :</h3>
+                        <h3>About :</h3>
                       </div>
                       <div className="w-56 px-3 py-1 ml-5 bg-white">
                         <p>Vishnaka Dasanayaka</p>

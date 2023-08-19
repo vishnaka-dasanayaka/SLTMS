@@ -54,8 +54,27 @@ export const loginTeacher = createAsyncThunk(
   }
 );
 
+// get a teacher
+export const getTeacher = createAsyncThunk(
+  "auth/getTeacher",
+  async (user, thunkAPI) => {
+    try {
+      return await authService.getTeacher(user);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
-// ************ for teachers register, login and logout ****************
+
+
+// ************ for student register, login and logout ****************
 
 //Register the user
 export const registerStudent = createAsyncThunk(
