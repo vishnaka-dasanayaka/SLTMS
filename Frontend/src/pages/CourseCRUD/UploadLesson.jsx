@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createLesson, deleteLesson } from "../../features/lessons/lessonSlice";
 import Spinner from "../../components/Spinner/Spinner";
-import {getLessons,reset} from '../../features/lessons/lessonSlice'
+import {getLessons} from '../../features/lessons/lessonSlice'
 
 function UploadLesson() {
   const dispatch = useDispatch();

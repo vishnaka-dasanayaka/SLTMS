@@ -14,6 +14,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
+  teacher:""
 };
 
 // ************ for teachers register, login and logout ****************
@@ -54,23 +55,6 @@ export const loginTeacher = createAsyncThunk(
   }
 );
 
-// get a teacher
-export const getTeacher = createAsyncThunk(
-  "auth/getTeacher",
-  async (user, thunkAPI) => {
-    try {
-      return await authService.getTeacher(user);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
 
 
 
@@ -139,7 +123,7 @@ export const authSlice = createSlice({
       .addCase(registerTeacher.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.user = action.payload
+        state.user = (action.payload)
       })
       .addCase(registerTeacher.rejected, (state, action) => {
         state.isLoading = false

@@ -1,4 +1,3 @@
-
 import Navbar from "../../components/Navigation/Navbar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -6,11 +5,9 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
-import EditIcon from "@mui/icons-material/Edit";
 
 
 function TeacherProfile() {
-
   return (
     <div>
       <Navbar />
@@ -49,95 +46,100 @@ function TeacherProfile() {
           </ol>
         </div>
 
-        <div className="flex flex-col w-11/12 mt-10">
-          
-
-          <div className="flex">
-            <div className="w-1/4">
-              <div className="flex flex-col w-56 mt-10 ml-16">
-                <img
-                  className="w-full h-56 rounded-2xl"
-                  src="../grp8/img/teacher.jpg"
-                  alt=""
-                />
-                <label className="mt-5 text-center" htmlFor="">
-                  Vishnaka Dasanayaka
-                </label>
-                <button className="text-xs text-blue-800 underline cursor-pointer">
-                  Edit profile photo
-                </button>
+        <div className="flex items-start justify-center w-11/12">
+          <div className="w-1/4 p-5 m-5 bg-teal-400 rounded-lg">
+            <div className="flex flex-col items-center justify-center">
+              <div className="w-56 h-56 my-3"><img className="w-full h-full" src="../img/teacher.png" alt="" /></div>
+              <div className="mt-3">
+                <h3 className="text-xl font-bold tracking-wide uppercase">firstName lastName</h3>
+              </div>
+              <div>
+                <h4 className="text-xs text-blue-500 underline cursor-pointer hover:text-black">Edit Profile Picture</h4>
               </div>
             </div>
-            <div className="w-3/4 mr-5">
-              <div className="font-mono rounded-2xl pt-5 pl-5 w-full h-auto mt-10 bg-[#FFF3F3]">
-                <h2 className="text-xl font-bold uppercase">Profile Details</h2>
+          </div>
 
-                <br />
-
-                <div className="flex">
-                  <div className="flex flex-col w-1/2">
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>First Name :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>Last Name :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>Email :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>Teaching Area :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-
-                    <div className="flex items-center mb-5">
-                      <div className="w-36">
-                        <h3>About :</h3>
-                      </div>
-                      <div className="w-56 px-3 py-1 ml-5 bg-white">
-                        <p>Vishnaka Dasanayaka</p>
-                      </div>
-                      <section className="pr-10 scale-75 cursor-pointer hover:text-red-800">
-                        <EditIcon />
-                      </section>
-                    </div>
-                  </div>
-                </div>
+          <div className="flex flex-col w-3/4 p-5 m-5 bg-teal-600 rounded-lg h-fit">
+            <div className="flex items-center justify-start my-2">
+              <div className="w-56">
+                <h2 className="text-lg font-bold tracking-wider text-gray-200 uppercase">
+                  First Name
+                </h2>
               </div>
+
+              <div className="w-full px-3 bg-white">
+                <h3 className="text-lg font-bold tracking-wide">firstName</h3>
+              </div>
+              
+            </div>
+
+            <div className="flex items-center justify-start my-2">
+              <div className="w-56">
+                <h2 className="text-lg font-bold tracking-wider text-gray-200 uppercase">
+                  last Name
+                </h2>
+              </div>
+
+              <div className="w-full px-3 bg-white">
+                <h3 className="text-lg font-bold tracking-wide">firstName</h3>
+              </div>
+              
+            </div>
+
+            <div className="flex items-center justify-start my-2">
+              <div className="w-56">
+                <h2 className="text-lg font-bold tracking-wider text-gray-200 uppercase">
+                  email
+                </h2>
+              </div>
+
+              <div className="w-full px-3 bg-white">
+                <h3 className="text-lg font-bold tracking-wide">firstName</h3>
+              </div>
+              
+            </div>
+
+            <div className="flex items-center justify-start my-2">
+              <div className="w-56">
+                <h2 className="text-lg font-bold tracking-wider text-gray-200 uppercase">
+                  teaching area
+                </h2>
+              </div>
+
+              <div className="w-full px-3 bg-white">
+                <h3 className="text-lg font-bold tracking-wide">firstName</h3>
+              </div>
+              
+            </div>
+
+            <div className="flex items-center justify-start my-2">
+              <div className="w-56">
+                <h2 className="text-lg font-bold tracking-wider text-gray-200 uppercase">
+                  about
+                </h2>
+              </div>
+
+              <div className="w-full px-3 bg-white">
+                <h3 className="text-lg font-bold tracking-wide">firstName</h3>
+              </div>
+              
+            </div>
+
+            <div className="flex items-center justify-start my-2">
+              <div className="w-56">
+                <h2 className="text-lg font-bold tracking-wider text-gray-200 uppercase">
+                  password
+                </h2>
+              </div>
+
+              <div className="w-full px-3 bg-white">
+                <h3 className="text-lg font-bold tracking-wide">firstName</h3>
+              </div>
+              
+            </div>
+            
+            <div className="flex justify-center w-full my-10">
+                <button className="px-3 py-2 bg-yellow-400 rounded-md border-yellow-400 border-[1px] hover:bg-black hover:text-yellow-400 uppercase font-bold">edit profile</button>
             </div>
           </div>
         </div>
