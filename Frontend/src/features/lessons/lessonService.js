@@ -15,8 +15,20 @@ const createLesson = async (lessonData,token) => {
     return response.data
 }
 
+//get all lessons
+const getLessons = async(courseID,token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.get(`${API_URL}${courseID}`,config)
+    return response.data
+}
+
 const lessonService = {
-    createLesson
+    createLesson,getLessons
 }
 
 export default lessonService

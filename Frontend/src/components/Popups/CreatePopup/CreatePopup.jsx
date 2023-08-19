@@ -96,16 +96,24 @@ function CreatePopup(props) {
               Category
             </label>
             <br />
-            <input
-              type="text"
-              name="category"
-              value={category}
-              autoComplete="off"
-              placeholder="Category of the course"
-              id="category"
-              onChange={onChange}
-              className="w-full pl-2 mb-2 rounded-lg opacity-70"
-            />
+            
+
+<select
+                  value={category}
+                  name="category"
+                  id="category"
+                  onChange={onChange}
+                  className="w-full pl-2 mb-2 rounded-lg opacity-70"
+                >
+                  <option value="">Select the category</option>
+                  <option value="University Level">University Level</option>
+                  <option value="Advanced Level">Advanced Level</option>
+                  <option value="Ordinary Level">Ordinary Level</option>
+                  <option value="Schorlarship Level">Schorlarship Level</option>
+                </select>
+
+
+
             <br />
 
             <label className="pr-16 tracking-wide text-white" htmlFor="">

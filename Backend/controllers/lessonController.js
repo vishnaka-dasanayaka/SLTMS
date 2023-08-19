@@ -44,7 +44,7 @@ const setLesson = asyncHandler(async(req,res) => {
 
 const getLessons = asyncHandler(async(req,res) => {
     try {
-        const allLessons = await Lesson.find({teacher:req.teacher.id});
+        const allLessons = await Lesson.find({teacher:req.teacher.id,course:req.params.id});
         res.status(200).json(allLessons)
     } catch (error) {
        console.log(error); 

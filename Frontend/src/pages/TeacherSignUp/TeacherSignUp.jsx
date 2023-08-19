@@ -7,7 +7,6 @@ import { registerTeacher, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 
-
 function TeacherSignUp() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -37,18 +36,17 @@ function TeacherSignUp() {
   );
 
   useEffect(() => {
-    if(isError){
-      toast.error(message)
+    if (isError) {
+      toast.error(message);
     }
 
-    if(isSuccess || user){
-      navigate('/teacherDashboard')
-      toast.success('Successfull registered as a teacher')
+    if (isSuccess || user) {
+      navigate("/teacherDashboard");
+      toast.success("Successfull registered as a teacher");
     }
 
-    dispatch(reset())
-
-  },[user,isError,isSuccess,message,navigate,dispatch])
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -76,8 +74,8 @@ function TeacherSignUp() {
     }
   };
 
-  if(isLoading){
-    return <Spinner/>
+  if (isLoading) {
+    return <Spinner />;
   }
 
   return (
@@ -146,15 +144,20 @@ function TeacherSignUp() {
               </div>
               <div className="min-w-[15vw]">
                 {/* <input type="text" className='min-w-[15vw] h-7'/> */}
-                <input
-                  type="text"
-                  className="min-w-[15vw] h-7 pl-3"
-                  id="teachingArea"
-                  name="teachingArea"
+
+                <select
                   value={teachingArea}
-                  placeholder="eg: Advanced Level"
+                  name="teachingArea"
+                  id="teachingArea"
                   onChange={onChange}
-                />
+                  className="min-w-[15vw] h-7 pl-3"
+                >
+                  <option value="">Select the teaching area</option>
+                  <option value="University Level">University Level</option>
+                  <option value="Advanced Level">Advanced Level</option>
+                  <option value="Ordinary Level">Ordinary Level</option>
+                  <option value="Schorlarship Level">Schorlarship Level</option>
+                </select>
               </div>
             </div>
           </div>
@@ -224,7 +227,7 @@ function TeacherSignUp() {
               <p>
                 Already Have an Account ?{" "}
                 <span className="tracking-widest text-orange-500 underline">
-                  <Link to={'/signin'}>Sign In</Link>
+                  <Link to={"/signin"}>Sign In</Link>
                 </span>
               </p>
             </div>
