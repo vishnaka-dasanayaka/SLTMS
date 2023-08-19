@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { createLesson } from "../../features/lessons/lessonSlice";
+import { createLesson, deleteLesson } from "../../features/lessons/lessonSlice";
 import Spinner from "../../components/Spinner/Spinner";
 import {getLessons,reset} from '../../features/lessons/lessonSlice'
 
@@ -345,7 +345,7 @@ function UploadLesson() {
                   edit
                 </button>
 
-                <button className="mr-5 px-3 py-1 border-[1px] border-red-500  hover:text-red-500 hover:bg-white  text-white uppercase bg-red-500 rounded-lg">
+                <button onClick={()=>{dispatch(deleteLesson(lesson._id))}} className="mr-5 px-3 py-1 border-[1px] border-red-500  hover:text-red-500 hover:bg-white  text-white uppercase bg-red-500 rounded-lg">
                   delete
                 </button>
                 

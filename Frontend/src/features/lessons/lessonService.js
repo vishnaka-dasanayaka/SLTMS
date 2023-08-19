@@ -27,8 +27,20 @@ const getLessons = async(courseID,token) => {
     return response.data
 }
 
+//delete a lesspn
+const deleteLesson = async(id,token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.delete(`${API_URL}${id}`, config)
+    return response.data
+}
+
 const lessonService = {
-    createLesson,getLessons
+    createLesson,getLessons,deleteLesson
 }
 
 export default lessonService
