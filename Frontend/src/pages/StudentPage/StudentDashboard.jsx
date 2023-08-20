@@ -5,28 +5,12 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
-//import StarIcon from "@mui/icons-material/Star";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import TeacherCard from "../../components/Student/TeacherCard";
+import CourseCard from "../../components/Student/CourseCard";
 
 function StudentDashboard() {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   getAllCourses();
-  // }, []);
-
-  // const getAllCourses = () => {
-  //   fetch(`${url}courses`, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data, "courses");
-  //       setData(data.data);
-  //     });
-  // };
-
   return (
     <div>
       <Navbar />
@@ -52,7 +36,7 @@ function StudentDashboard() {
             </li>
 
             <li className="py-2 ">
-              <Link to={"/studentProfile"}>
+              <Link to={"/studentPay"}>
                 <PaidIcon />
               </Link>
             </li>
@@ -80,87 +64,31 @@ function StudentDashboard() {
             </div>
           </div>
           <div>
-            <h2 className="text-2xl font-extrabold tracking-wide">Teachers</h2>
-            <div className="grid justify-center grid-cols-3">
-              {/* {data.map((i) => {
-                return (
-                  <Link to={"/specificCourse"}>
-                    <div className="mx-5 mt-10">
-                      <div className="flex w-full flex-col bg-gradient-to-bl from-[#9bd8d3] h-80">
-                        <div className="w-full h-2/3">
-                          <img
-                            className="w-full h-full"
-                            src="../img/teacher.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div>
-                          <section className="bg-primary">
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-white" />
-                          </section>
-
-                          <section className="w-11/12 h-[1px] mt-5 m-auto bg-black"></section>
-
-                          <section className="text-center">
-                            <h3 className="m-1 font-bold">
-                              Dr. Rajitha Udawalpola
-                            </h3>
-                            <h4>{i.category}</h4>
-                          </section>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })} */}
+            <h2 className="text-3xl font-extrabold tracking-wider text-center uppercase">
+              courses
+            </h2>
+            <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
+              <CourseCard />
+              <CourseCard />
+              <CourseCard />
+              <CourseCard />
+              <CourseCard />
             </div>
           </div>
           <br />
           <div>
-            <h2 className="text-2xl font-extrabold tracking-wide">
-              Top Courses
+          <h2 className="text-3xl font-extrabold tracking-wider text-center uppercase">
+              teachers
             </h2>
 
-            <div className="grid justify-center grid-cols-3">
-              {/* {data.map((i) => {
-                return (
-                  <Link to={"/specificCourse"}>
-                    <div className="mx-5 mt-10">
-                      <div className="flex w-full flex-col bg-gradient-to-bl from-[#9bd8d3] h-80">
-                        <div className="w-full h-2/3">
-                          <img
-                            className="w-full h-full"
-                            src="../img/math.jpg"
-                            alt=""
-                          />
-                        </div>
-                        <div>
-                          <section className="bg-primary">
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-yellow-300" />
-                            <StarIcon className="text-white" />
-                          </section>
-
-                          <section className="w-11/12 h-[1px] mt-5 m-auto bg-black"></section>
-
-                          <section className="text-center">
-                            <h3 className="m-1 font-bold">
-                              Dr. Rajitha Udawalpola
-                            </h3>
-                            <h4>{i.courseTitle}</h4>
-                          </section>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })} */}
+            <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
+              <TeacherCard />
+              <TeacherCard />
+              <TeacherCard />
+              <TeacherCard />
+              <TeacherCard />
+              <TeacherCard />
+              <TeacherCard />
             </div>
           </div>
         </div>

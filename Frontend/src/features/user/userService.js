@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL_TEACHER = '/teachers/'
 const API_URL_STUDENT = '/students/'
 
-const getUser = async(token) => {
+const getTeacher = async(token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -14,8 +14,19 @@ const getUser = async(token) => {
     return response.data
 }
 
+const getStudent = async(token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.get(`${API_URL_STUDENT}me`, config)
+    return response.data
+}
+
 const userService = {
-    getUser
+    getTeacher,getStudent
 }
 
 export default userService

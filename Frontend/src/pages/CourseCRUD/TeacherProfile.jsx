@@ -6,7 +6,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, reset } from "../../features/user/userSlice";
+import { getUser_teacher, reset } from "../../features/user/userSlice";
 import { useEffect } from "react";
 
 
@@ -23,7 +23,7 @@ function TeacherProfile() {
 
     if(isSuccess){}
 
-    dispatch(getUser())
+    dispatch(getUser_teacher())
 
     return () => {reset()}
   },[isError, isSuccess, message, dispatch])

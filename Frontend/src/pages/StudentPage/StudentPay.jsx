@@ -27,13 +27,13 @@ function StudentPay() {
                   </Link>
                 </li>
     
-                <li className="py-2 active">
+                <li className="py-2 ">
                   <Link to={"/teacherProfile"}>
                     <AccountBoxIcon />
                   </Link>
                 </li>
     
-                <li className="py-2 ">
+                <li className="py-2 active">
                   <Link to={"/teacherPay"}>
                     <PaidIcon />
                   </Link>

@@ -131,7 +131,7 @@ function UploadLesson() {
                   </label>
                 </div>
                 <div className="flex w-full sm:justify-start">
-                  <h2 className="px-4 py-2 text-lg text-white bg-black hover:text-black hover:bg-white hover:border-[1px] border-black h-fit">{lessons.length}</h2>
+                  <h2 className="px-4 py-2 text-lg text-white bg-black hover:text-black hover:bg-white hover:border-[1px] rounded-full border-black h-fit">{lessons.length}</h2>
                 </div>
               </div>
 
@@ -334,7 +334,7 @@ function UploadLesson() {
               {/* <h2 className="font-bold text-l">Part I</h2> */}
               <h2 className="mt-2 font-bold text-l">{lesson.duration} Hrs</h2>
               <br />
-              <h3 className="text-sm">{lesson.month}</h3>
+              <h3 className="text-sm tracking-widest uppercase">{lesson.month}</h3>
               <br />
               <div className="flex justify-between w-full">
                 <button className="px-3 py-1 border-[1px] border-blue-500  hover:text-blue-500 hover:bg-white text-white uppercase bg-blue-500 rounded-lg">

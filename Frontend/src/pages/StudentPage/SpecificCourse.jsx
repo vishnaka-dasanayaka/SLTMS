@@ -35,7 +35,7 @@ function SpecificCourse() {
           </li>
 
           <li className="py-2 ">
-            <Link to={"/studentProfile"}>
+            <Link to={"/studentPay"}>
               <PaidIcon />
             </Link>
           </li>

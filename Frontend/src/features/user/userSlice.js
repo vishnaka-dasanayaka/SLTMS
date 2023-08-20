@@ -10,10 +10,25 @@ const initialState = {
 }
 
 //get a user
-export const getUser = createAsyncThunk('user/getUser', async(_,thunkAPI) => {
+export const getUser_teacher = createAsyncThunk('user/getUser_teacher', async(_,thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
-        return await userService.getUser(token)
+        return await userService.getTeacher(token)
+    } catch (error) {
+        const message =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
+export const getUser_student = createAsyncThunk('user/getUser_student', async(_,thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token
+        return await userService.getStudent(token)
     } catch (error) {
         const message =
             (error.response &&
@@ -33,15 +48,28 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getUser.pending, (state) => {
+            .addCase(getUser_teacher.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getUser.fulfilled, (state,action) => {
+            .addCase(getUser_teacher.fulfilled, (state,action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.user = action.payload
             })
-            .addCase(getUser.rejected, (state,action) => {
+            .addCase(getUser_teacher.rejected, (state,action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(getUser_student.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getUser_student.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.user = action.payload
+            })
+            .addCase(getUser_student.rejected, (state,action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

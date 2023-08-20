@@ -21,12 +21,17 @@ export default function CourseCRUD(props) {
     (state) => state.courses
   );
 
+  
+
   useEffect(() => {
+
+
     if (isError) {
       console.log(message);
     }
 
     dispatch(getCourses());
+
 
     return () => {
       dispatch(reset());
