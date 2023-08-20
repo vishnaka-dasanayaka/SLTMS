@@ -130,8 +130,8 @@ function UploadLesson() {
                     Number of lessons
                   </label>
                 </div>
-                <div className="flex justify-center w-full sm:justify-start">
-                  <h2>{lessons.length}</h2>
+                <div className="flex w-full sm:justify-start">
+                  <h2 className="px-4 py-2 text-lg text-white bg-black hover:text-black hover:bg-white hover:border-[1px] border-black h-fit">{lessons.length}</h2>
                 </div>
               </div>
 
