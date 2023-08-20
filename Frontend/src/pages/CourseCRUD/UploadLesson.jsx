@@ -9,8 +9,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { createLesson } from "../../features/lessons/lessonSlice";
+import { createLesson, deleteLesson } from "../../features/lessons/lessonSlice";
 import Spinner from "../../components/Spinner/Spinner";
+import {getLessons} from '../../features/lessons/lessonSlice'
 
 function UploadLesson() {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ function UploadLesson() {
     }
   };
 
-  const { isLoading, isError, isSuccess, message } = useSelector(
+  const {lessons,isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.lessons
   );
 
@@ -69,7 +70,11 @@ function UploadLesson() {
 
     if (isSuccess) {
     }
-  }, [isError, isSuccess, message]);
+
+    dispatch(getLessons(courseID))
+
+    
+  }, [isError, isSuccess, message,courseID,dispatch]);
 
   if (isLoading) {
     return <Spinner />;
@@ -115,6 +120,21 @@ function UploadLesson() {
         <div className="flex flex-col w-11/12 mt-10">
           <form action="" onSubmit={onSubmit}>
             <div className="flex flex-col justify-center mb-5">
+
+            <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
+                <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
+                  <label
+                    htmlFor="year"
+                    className="mb-[1vh] sm:mb-[0] uppercase"
+                  >
+                    Number of lessons
+                  </label>
+                </div>
+                <div className="flex w-full sm:justify-start">
+                  <h2 className="px-4 py-2 text-lg text-white bg-black hover:text-black hover:bg-white hover:border-[1px] border-black h-fit">{lessons.length}</h2>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
                 <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
                   <label htmlFor="year" className="mb-[1vh] sm:mb-[0]">
@@ -129,6 +149,7 @@ function UploadLesson() {
                     onChange={onChange}
                     className="p-2 min-w-[200px] border-solid border-4 bg-slate-200"
                   >
+                    <option value="">Select a  Month</option>
                     <option value="january">January</option>
                     <option value="february">February</option>
                     <option value="march">March</option>
@@ -176,7 +197,7 @@ function UploadLesson() {
                     Duration
                   </label>
                 </div>
-                <div className="flex justify-center w-full sm:justify-start">
+                <div className="flex items-center justify-center w-full sm:justify-start">
                   <input
                     type="text"
                     id="duration"
@@ -185,8 +206,9 @@ function UploadLesson() {
                     placeholder="Avarage duration for ypur lesson"
                     onChange={onChange}
                     className="p-2 min-w-[200px] border-solid border-4 bg-slate-200"
-                  />
+                  /><div className="ml-5 font-semibold text-md">Hrs</div>
                 </div>
+                
               </div>
 
               <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
@@ -235,7 +257,7 @@ function UploadLesson() {
 
               <div className="flex justify-center">
                 <button className="px-5 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl uppercase">
-                  submit
+                  add lesson
                 </button>
               </div>
             </div>
@@ -244,7 +266,7 @@ function UploadLesson() {
           {/* uploaded lessons */}
 
           <div className="flex flex-col">
-            <div className="flex items-center justify-center m-5">
+            {/*<div className="flex items-center justify-center m-5">
               <div className="flex items-center justify-center w-2/12 h-10 border-black border-[1px] border-b-2 rounded-xl">
                 <h2 className="font-mono text-xl ">2023</h2>
               </div>
@@ -286,40 +308,61 @@ function UploadLesson() {
                   DEC
                 </div>
               </div>
-            </div>
-            <div className="grid items-center justify-center w-full grid-cols-2 mt-10">
-              <div className=" mx-20 border-black border-[1px] rounded-xl h-60">
-                <div className="flex items-center justify-center h-full">
-                  <div className="w-1/3 h-full mx-5">
-                    <div className="w-full h-full py-5">
-                      <img
-                        className="w-full h-full"
-                        src="../img/book.png"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-start justify-center w-2/3 h-full pl-5 font-mono leading-tight">
-                    <h3 className="text-sm">2023-05-06</h3>
-                    <br />
-                    <h2 className="font-bold text-l">Physical Chemistry</h2>
-                    <h2 className="font-bold text-l">Part I</h2>
-                    <h2 className="font-bold text-l">2 Hrs 30 Min</h2>
-                    <br />
-                    <h3 className="text-sm">2023 JUL</h3>
-                    <br />
-                    <div className="flex">
-                      <button className="px-3 py-1 border-btn_color border-[1px] rounded-xl text-white hover:bg-white hover:text-btn_color bg-btn_color">
-                        Attend
-                      </button>
-                      <button className="px-3 ml-10 py-1 border-primary border-[1px] rounded-xl text-white hover:bg-white hover:text-primary bg-primary">
-                        View
-                      </button>
-                    </div>
-                  </div>
-                </div>
+            </div>*/}
+
+      {lessons.length >0 ? (<div className="grid items-center justify-center w-full grid-cols-1 mt-10 lg:grid-cols-2">
+        
+        {lessons.map((lesson) => 
+        
+        <div className=" mx-20 border-black border-[1px] rounded-xl h-60 mb-5">
+          <div className="flex items-center justify-center h-full">
+            <div className="w-1/3 h-full mx-5">
+              <div className="w-full h-full py-5">
+                <img
+                  className="w-full h-full"
+                  src="../img/book.png"
+                  alt=""
+                />
               </div>
             </div>
+
+            
+            <div className="flex flex-col items-start justify-center w-2/3 h-full pl-5 font-mono leading-tight">
+              <h3 className="text-sm">{new Date(lesson.createdAt).toLocaleString("en-us")}</h3>
+              <br />
+              <h2 className="font-bold text-l">{lesson.lessonTitle}</h2>
+              {/* <h2 className="font-bold text-l">Part I</h2> */}
+              <h2 className="mt-2 font-bold text-l">{lesson.duration} Hrs</h2>
+              <br />
+              <h3 className="text-sm">{lesson.month}</h3>
+              <br />
+              <div className="flex justify-between w-full">
+                <button className="px-3 py-1 border-[1px] border-blue-500  hover:text-blue-500 hover:bg-white text-white uppercase bg-blue-500 rounded-lg">
+                  view
+                </button>
+
+                <button className="px-3 py-1 border-[1px] border-yellow-500  hover:text-yellow-500 hover:bg-white  text-white uppercase bg-yellow-500 rounded-lg">
+                  edit
+                </button>
+
+                <button onClick={()=>{dispatch(deleteLesson(lesson._id))}} className="mr-5 px-3 py-1 border-[1px] border-red-500  hover:text-red-500 hover:bg-white  text-white uppercase bg-red-500 rounded-lg">
+                  delete
+                </button>
+                
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      
+
+        )}
+        
+
+        </div>):(
+                          <div className="ml-32 w-fit"><h1 className="px-3 py-2 text-2xl font-extrabold tracking-widest text-center text-white uppercase bg-yellow-300">No courses added yet</h1></div>
+        )}
+            
           </div>
         </div>
       </div>

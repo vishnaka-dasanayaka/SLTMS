@@ -27,7 +27,9 @@ const loginTeacher = async (userData) => {
 }
 
 
-// **************** for teachers 
+
+
+// **************** for students 
 //register a user
 const registerStudent = async (userData) => {
     const response =  await axios.post(API_URL_STUDENT,userData)

@@ -14,6 +14,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
+  teacher:""
 };
 
 // ************ for teachers register, login and logout ****************
@@ -55,7 +56,9 @@ export const loginTeacher = createAsyncThunk(
 );
 
 
-// ************ for teachers register, login and logout ****************
+
+
+// ************ for student register, login and logout ****************
 
 //Register the user
 export const registerStudent = createAsyncThunk(
@@ -120,7 +123,7 @@ export const authSlice = createSlice({
       .addCase(registerTeacher.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.user = action.payload
+        state.user = (action.payload)
       })
       .addCase(registerTeacher.rejected, (state, action) => {
         state.isLoading = false

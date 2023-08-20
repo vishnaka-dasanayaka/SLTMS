@@ -7,8 +7,32 @@ import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
 import SchoolIcon from "@mui/icons-material/School";
 import FaceIcon from '@mui/icons-material/Face';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCourses } from "../../features/courses/courseSlice";
+import { reset } from "../../features/auth/authSlice";
+import Spinner from "../../components/Spinner/Spinner";
 
 function TeacherDashboard() {
+
+  const dispatch = useDispatch()
+
+  const {courses, isLoading, isError, message} = useSelector(
+    (state) => state.courses
+    )
+
+  useEffect(() => {
+    if(isError){
+      console.log(message);
+    }
+
+    dispatch(getCourses())
+
+    return () =>{dispatch(reset())}
+
+  },[isError,message,dispatch])
+
+  if(isLoading) return <Spinner/>
   return (
     <div>
       <Navbar />
@@ -55,7 +79,7 @@ function TeacherDashboard() {
                   Number of Courses
                 </label>
                 <br />
-                <p className="mt-5 text-2xl font-extrabold text-center">25</p>
+                <p className="mt-5 text-2xl font-extrabold text-center">{courses.length}</p>
               </div>
 
               <div className="scale-[4] mt-[70px] ml-16">
@@ -71,7 +95,7 @@ function TeacherDashboard() {
                   Enrolled Students
                 </label>
                 <br />
-                <p className="mt-5 text-2xl font-extrabold text-center">25</p>
+                <p className="mt-5 text-2xl font-extrabold text-center">dummy value</p>
               </div>
 
               <div className="scale-[4] mt-[70px] ml-16">

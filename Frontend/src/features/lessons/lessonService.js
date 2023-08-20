@@ -15,8 +15,32 @@ const createLesson = async (lessonData,token) => {
     return response.data
 }
 
+//get all lessons
+const getLessons = async(courseID,token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.get(`${API_URL}${courseID}`,config)
+    return response.data
+}
+
+//delete a lesspn
+const deleteLesson = async(id,token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.delete(`${API_URL}${id}`, config)
+    return response.data
+}
+
 const lessonService = {
-    createLesson
+    createLesson,getLessons,deleteLesson
 }
 
 export default lessonService
