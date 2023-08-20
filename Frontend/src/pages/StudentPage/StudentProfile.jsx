@@ -36,8 +36,8 @@ function StudentProfile() {
       <Navbar />
       <div className="flex justify-center">
         <div className="w-1/12 bg-[#d9d9d9] opacity-50 h-[100vh]">
-          <ol className="text-center scale-[2] mt-32">
-            <li className="py-2">
+        <ol className="text-center scale-[2] mt-32">
+            <li className="py-2 ">
               <Link to={"/studentDashboard"}>
                 <DashboardIcon />
               </Link>

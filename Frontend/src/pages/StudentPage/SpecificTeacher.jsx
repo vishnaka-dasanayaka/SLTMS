@@ -8,6 +8,7 @@ import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CourseCard from "../../components/Student/CourseCard";
 
 function SpecificTeacher() {
 
@@ -66,78 +67,25 @@ function SpecificTeacher() {
 
         <div className="flex flex-col">
           <div className="flex items-center justify-center">
-            <div className="flex items-center justify-center w-1/3 h-10 mx-5 bg-gray-400">
-              <h1 className="">Dr. Rajitha Udawalpola</h1>
+            <div className="m-5 w-2/5 rounded-lg border-[2px] border-black h-fit">
+              <img className="h-auto p-5 w-fit" src="../img/teacher.jpg" alt="" />
             </div>
-            <div className="flex items-center justify-center w-1/3 h-10 mx-5 bg-gray-400">
-              {/* drop-down  */}
-              <h2>All Subjects</h2>
-            </div>
-            <div className="flex items-center justify-center w-1/3 mx-5">
-              <div className="flex items-center justify-center w-1/3 h-10 mx-5 bg-gray-400"><h3>2023</h3></div>
-              <div className="flex items-center justify-center w-1/3 h-10 mx-5 bg-gray-400"><h3>2023</h3></div>
-              <div className="flex items-center justify-center w-1/3 h-10 mx-5 bg-gray-400"><h3>2023</h3></div>
+            <div className="flex flex-col w-3/5 p-5 m-2 bg-blue-100 rounded-xl h-fit">
+              <div className="mt-5"><h1 className="text-2xl font-extrabold tracking-wider uppercase">fName lname</h1></div>
+              <div className="mt-3"><h2 className="text-xl font-semibold tracking-wide uppercase">teaching area</h2></div>
+              <div className="mt-3"><h3 className="text-lg font-bold"><a className="text-blue-500 underline hover:text-lime-600 hover:no-underline" href="">email</a></h3></div>
+              <div className="mt-3 mb-5"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, deleniti illum quia est incidunt pariatur. Commodi, obcaecati perferendis maiores, numquam quam ratione ex esse cumque iusto debitis nesciunt, inventore minus?</p></div>
             </div>
           </div>
-          <div className="flex flex-col">
-            <div className="flex items-center justify-start">
-              <div className="w-1/4 m-5 rounded-xl bg-[#F9EBD7] h-72 flex flex-col items-center">
-                <div className="rounded-xl w-11/12 m-3 bg-[#028D83] h-2/3 flex justify-center items-center">
-                  <img className="w-11/12 h-auto border-black border-[3px]" src="../img/chemistry.jpg" alt="" />
-                </div>
 
-                <div className="flex flex-col items-center justify-center w-full font-mono h-1/3">
-                  <h3>2024 Theory | Chemistry</h3>
-                  <h4>Physical Chemistry</h4>
-                </div>
-              </div>
-
-              <div className="w-1/4 m-5 rounded-xl bg-[#F9EBD7] h-72 flex flex-col items-center">
-                <div className="rounded-xl w-11/12 m-3 bg-[#028D83] h-2/3 flex justify-center items-center">
-                  <img className="w-11/12 h-auto border-black border-[3px]" src="../img/chemistry.jpg" alt="" />
-                </div>
-
-                <div className="flex flex-col items-center justify-center w-full font-mono h-1/3">
-                  <h3>2024 Theory | Chemistry</h3>
-                  <h4>Physical Chemistry</h4>
-                </div>
-              </div>
-
-              <div className="w-1/4 m-5 rounded-xl bg-[#F9EBD7] h-72 flex flex-col items-center">
-                <div className="rounded-xl w-11/12 m-3 bg-[#028D83] h-2/3 flex justify-center items-center">
-                  <img className="w-11/12 h-auto border-black border-[3px]" src="../img/chemistry.jpg" alt="" />
-                </div>
-
-                <div className="flex flex-col items-center justify-center w-full font-mono h-1/3">
-                  <h3>2024 Theory | Chemistry</h3>
-                  <h4>Physical Chemistry</h4>
-                </div>
-              </div>
-
-              <div className="w-1/4 m-5 rounded-xl bg-[#F9EBD7] h-72 flex flex-col items-center">
-                <div className="rounded-xl w-11/12 m-3 bg-[#028D83] h-2/3 flex justify-center items-center">
-                  <img className="w-11/12 h-auto border-black border-[3px]" src="../img/chemistry.jpg" alt="" />
-                </div>
-
-                <div className="flex flex-col items-center justify-center w-full font-mono h-1/3">
-                  <h3>2024 Theory | Chemistry</h3>
-                  <h4>Physical Chemistry</h4>
-                </div>
-              </div>
+          <h1 className="w-full px-5 py-1 mt-10 text-3xl font-extrabold tracking-widest text-center text-white uppercase rounded-full bg-primary">available courses</h1>
+          <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
+              <CourseCard />
+              <CourseCard />
+              <CourseCard />
+              <CourseCard />
+              <CourseCard />
             </div>
-            <div className="flex items-center justify-start">
-            <div className="w-1/4 m-5 rounded-xl bg-[#F9EBD7] h-72 flex flex-col items-center">
-                <div className="rounded-xl w-11/12 m-3 bg-[#028D83] h-2/3 flex justify-center items-center">
-                  <img className="w-11/12 h-auto border-black border-[3px]" src="../img/chemistry.jpg" alt="" />
-                </div>
-
-                <div className="flex flex-col items-center justify-center w-full font-mono h-1/3">
-                  <h3>2024 Theory | Chemistry</h3>
-                  <h4>Physical Chemistry</h4>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         
       </div>
