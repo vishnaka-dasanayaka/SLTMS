@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import courseService from './courseService'
 
 const initialState = {
+    allCourses: [],
     courses: [],
     isError: false,
     isSuccess: false,
@@ -26,7 +27,7 @@ export const createCourse = createAsyncThunk('courses/create', async (courseData
 })
 
 // Get all courses
-export const getCourses = createAsyncThunk('courses/getAll', async(_,thunkAPI) => {
+export const getCourses = createAsyncThunk('courses/getAll', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await courseService.getCourses(token)
@@ -43,7 +44,7 @@ export const getCourses = createAsyncThunk('courses/getAll', async(_,thunkAPI) =
 
 //delete a course
 
-export const deleteCourse = createAsyncThunk('courses/delete', async (id,thunkAPI) => {
+export const deleteCourse = createAsyncThunk('courses/delete', async (id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
         return await courseService.deleteCourse(id, token)
@@ -58,6 +59,21 @@ export const deleteCourse = createAsyncThunk('courses/delete', async (id,thunkAP
     }
 })
 
+
+// ********************************************* //
+//                getall courses                 //
+// ********************************************* //
+
+export const getAllCourses = createAsyncThunk('courses/getAllCourses', async () => {
+    try {
+        return await courseService.getAllCourses()
+    } catch (error) {
+        return error
+    }
+})
+
+
+
 export const courseSlice = createSlice({
     name: 'course',
     initialState,
@@ -69,12 +85,12 @@ export const courseSlice = createSlice({
             .addCase(createCourse.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(createCourse.fulfilled, (state,action) => {
+            .addCase(createCourse.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.courses.push(action.payload)
             })
-            .addCase(createCourse.rejected, (state,action) => {
+            .addCase(createCourse.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
@@ -82,12 +98,12 @@ export const courseSlice = createSlice({
             .addCase(getCourses.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(getCourses.fulfilled, (state,action) => {
+            .addCase(getCourses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.courses = action.payload
             })
-            .addCase(getCourses.rejected, (state,action) => {
+            .addCase(getCourses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
@@ -95,14 +111,27 @@ export const courseSlice = createSlice({
             .addCase(deleteCourse.pending, (state) => {
                 state.isLoading = true
             })
-            .addCase(deleteCourse.fulfilled, (state,action) => {
+            .addCase(deleteCourse.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.courses = state.courses.filter(
-                    (course) => course._id !== action.payload._id  
-                    )
+                    (course) => course._id !== action.payload._id
+                )
             })
-            .addCase(deleteCourse.rejected, (state,action) => {
+            .addCase(deleteCourse.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(getAllCourses.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getAllCourses.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.allCourses = action.payload
+            })
+            .addCase(getAllCourses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

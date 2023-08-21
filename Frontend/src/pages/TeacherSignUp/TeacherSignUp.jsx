@@ -167,13 +167,13 @@ function TeacherSignUp() {
               <label htmlFor="">About:</label>
             </div>
             <div>
-              <input
+              <textarea
                 type="text"
-                className="w-full h-32 pl-3"
+                className="w-full h-32 pt-3 pl-3 "
                 id="about"
                 name="about"
                 value={about}
-                placeholder="Brief description about you (eg: qualifications)"
+                placeholder="introduce more ... Attract more ..."
                 onChange={onChange}
               />
             </div>

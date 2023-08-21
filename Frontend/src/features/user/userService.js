@@ -25,8 +25,14 @@ const getStudent = async(token) => {
     return response.data
 }
 
+// get all teachers with no jwt
+const getAllTeachers = async () => {
+    const response = await axios.get('/getAllTeachers')
+    return response.data
+}
+
 const userService = {
-    getTeacher,getStudent
+    getTeacher,getStudent,getAllTeachers
 }
 
 export default userService

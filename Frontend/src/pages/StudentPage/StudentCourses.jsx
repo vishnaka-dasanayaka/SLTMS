@@ -7,7 +7,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
-import CourseCard from '../../components/Student/CourseCard'
+import StudentCourseCard from '../../components/Student/StudentCourseCard'
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
@@ -51,7 +51,7 @@ function StudentCourses() {
         </div>
 
         <div className="flex flex-col w-11/12 p-10">
-        <div className="flex mb-10">
+        {/* <div className="flex mb-10">
             <div className="w-1/2">
               <SearchBar />
             </div>
@@ -63,15 +63,15 @@ function StudentCourses() {
                 <AccountCircleIcon />
               </div>
             </div>
-          </div>
+          </div> */}
           <div>
           <h1 className="w-full px-5 py-1 mt-10 text-3xl font-extrabold tracking-widest text-center text-white uppercase rounded-full bg-primary">enrolled Courses</h1>
             
             <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
-              <CourseCard/>
-              <CourseCard/>
-              <CourseCard/>
-              <CourseCard/>
+              <StudentCourseCard/>
+              <StudentCourseCard/>
+              <StudentCourseCard/>
+              <StudentCourseCard/>
             </div>
 
           </div>
