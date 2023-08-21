@@ -39,22 +39,14 @@ const deleteCourse = async (goalId, token) => {
     return response.data
 }
 
-
-
-// ********************************************* //
-//                getall courses                 //
-// ********************************************* //
-
+//get all courses for the student dashboard
 const getAllCourses = async () => {
-    const response = await axios.get('/getAllCourses')
+    const response = await axios.get(`${API_URL}allCourses`)
     return response.data
 }
 
-
-
-
 const courseService = {
-    createCourse, getCourses, deleteCourse, getAllCourses
+    createCourse, getCourses, deleteCourse,getAllCourses
 }
 
 export default courseService

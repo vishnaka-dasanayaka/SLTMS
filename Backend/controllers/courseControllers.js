@@ -115,10 +115,24 @@ const deleteCourse = asyncHandler(async(req,res)=>{
 })
 
 
+//get all courses for the dashboard
+const getAllCourses = asyncHandler(async (req,res) => {
+    try {
+        const allCourses = await Course.find();
+        res.status(200).json(allCourses) 
+        
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+})
+
+
 module.exports = {
     setCourse,
     getCourses,
     updateCourse,
-    deleteCourse
+    deleteCourse,
+    getAllCourses
 }
 

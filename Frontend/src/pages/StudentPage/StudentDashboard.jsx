@@ -6,15 +6,13 @@ import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
 // import SearchBar from "../../components/SearchBar/SearchBar";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+//import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import TeacherCard from "../../components/Student/TeacherCard";
 import StudentCourseCard from "../../components/Student/StudentCourseCard";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCourses, reset } from "../../features/courses/courseSlice";
-import { getAllTeachers } from "../../features/user/userSlice";
 import Spinner from "../../components/Spinner/Spinner";
+import { useEffect } from "react";
 
 function StudentDashboard() {
   const dispatch = useDispatch();
@@ -23,17 +21,15 @@ function StudentDashboard() {
     (state) => state.courses
   );
 
-  const {teachers} = useSelector(
-    (state)=>state.users
-    )
+    useEffect(() => {
 
-  useEffect(() => {
+
     if (isError) {
       console.log(message);
     }
 
     dispatch(getAllCourses());
-    dispatch(getAllTeachers());
+
 
     return () => {
       dispatch(reset());
@@ -43,7 +39,6 @@ function StudentDashboard() {
   if (isLoading) {
     return <Spinner />;
   }
-
   return (
     <div>
       <Navbar />
@@ -113,7 +108,7 @@ function StudentDashboard() {
                   oops ..! there are no any courses in our site by now
                 </h1>
               </div>
-            )}
+            )} 
           </div>
           <br />
           <div>
@@ -121,7 +116,16 @@ function StudentDashboard() {
               teachers
             </h2>
 
-            {teachers.length > 0 ? (
+            <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
+              <TeacherCard/>
+              <TeacherCard/>
+              <TeacherCard/>
+              <TeacherCard/>
+              <TeacherCard/>
+              <TeacherCard/>
+            </div>
+
+            {/* {teachers.length > 0 ? (
             <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
             {teachers.map((teacher) => (
                   <TeacherCard key={teacher._id} teacher={teacher} />
@@ -133,7 +137,7 @@ function StudentDashboard() {
                   oops ..! there are no any teachers in our site by now
                 </h1>
               </div>
-            )}
+            )} */}
             
           </div>
         </div>

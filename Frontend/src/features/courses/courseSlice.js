@@ -59,18 +59,21 @@ export const deleteCourse = createAsyncThunk('courses/delete', async (id, thunkA
     }
 })
 
-
-// ********************************************* //
-//                getall courses                 //
-// ********************************************* //
-
-export const getAllCourses = createAsyncThunk('courses/getAllCourses', async () => {
+// get all courses for the student dashboard
+export const getAllCourses = createAsyncThunk('courses/getAllCourses', async(_,thunkAPI) => {
     try {
         return await courseService.getAllCourses()
     } catch (error) {
-        return error
+        const message =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
+        return thunkAPI.rejectWithValue(message);
     }
 })
+
 
 
 

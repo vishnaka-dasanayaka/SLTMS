@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const Student = require('../models/studentModel');
+const Course = require('../models/courseModel');
 
 // @desc   Register a Student
 // @route  POST/student
@@ -83,6 +84,7 @@ const getStudent = asyncHandler(async (req,res) => {
     res.status(200).json(req.student)
 
 })
+
 
 //Generate JWT
 const generateJWT = (id) => {

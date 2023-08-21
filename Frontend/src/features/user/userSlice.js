@@ -41,18 +41,6 @@ export const getUser_student = createAsyncThunk('user/getUser_student', async(_,
     }
 })
 
-//*********************************************************//
-//********************** get all teachers *****************//
-//*********************************************************//
-
-export const getAllTeachers = createAsyncThunk('user/getAllTeachers', async() => {
-    try {
-        return await userService.getAllTeachers()
-    } catch (error) {
-        return error
-    }
-})
-
 
 export const userSlice = createSlice({
     name:'user',
@@ -84,19 +72,6 @@ export const userSlice = createSlice({
                 state.user = action.payload
             })
             .addCase(getUser_student.rejected, (state,action) => {
-                state.isLoading = false
-                state.isError = true
-                state.message = action.payload
-            })
-            .addCase(getAllTeachers.pending, (state) => {
-                state.isLoading = true
-            })
-            .addCase(getAllTeachers.fulfilled, (state,action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.teachers = action.payload
-            })
-            .addCase(getAllTeachers.rejected, (state,action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Navbar from "../../components/Navigation/Navbar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -6,41 +5,11 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { Link } from "react-router-dom";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+//import SearchBar from "../../components/SearchBar/SearchBar";
+//import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import StudentCourseCard from "../../components/Student/StudentCourseCard";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCourses, reset } from "../../features/courses/courseSlice";
-import Spinner from "../../components/Spinner/Spinner";
 
 function SpecificTeacher() {
-
-  const storedTeacher = JSON.parse(localStorage.getItem("teacher"));
-
-  const dispatch = useDispatch();
-
-  const { allCourses, isLoading, isError, message } = useSelector(
-    (state) => state.courses
-  );
-
-
-  useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
-
-    dispatch(getAllCourses());
-
-
-    return () => {
-      dispatch(reset());
-    };
-  }, [isError, message, dispatch]);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
-
 
   return (
     <div>
@@ -101,15 +70,24 @@ function SpecificTeacher() {
               <img className="h-auto p-5 w-fit" src="../img/teacher.jpg" alt="" />
             </div>
             <div className="flex flex-col w-3/5 p-5 m-2 bg-blue-100 rounded-xl h-fit">
-              <div className="mt-5"><h1 className="text-2xl font-extrabold tracking-wider uppercase">{storedTeacher.firstName} {storedTeacher.lastName}</h1></div>
-              <div className="mt-3"><h2 className="text-xl font-semibold tracking-wide uppercase">{storedTeacher.teachingArea}</h2></div>
-              <div className="mt-3"><h3 className="text-lg font-bold"><a className="text-blue-500 underline hover:text-lime-600 hover:no-underline" href="">{storedTeacher.email}</a></h3></div>
-              <div className="mt-3 mb-5"><p>{storedTeacher.about}</p></div>
+              <div className="mt-5"><h1 className="text-2xl font-extrabold tracking-wider uppercase">firstName lastName</h1></div>
+              <div className="mt-3"><h2 className="text-xl font-semibold tracking-wide uppercase">teachingArea</h2></div>
+              <div className="mt-3"><h3 className="text-lg font-bold"><a className="text-blue-500 underline hover:text-lime-600 hover:no-underline" href="./">email</a></h3></div>
+              <div className="mt-3 mb-5"><p>about</p></div>
             </div>
           </div>
 
           <h1 className="w-full px-5 py-1 mt-10 text-3xl font-extrabold tracking-widest text-center text-white uppercase rounded-full bg-primary">available courses</h1>
-          {allCourses.length > 0 ? (
+          
+          <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
+            <StudentCourseCard/>
+            <StudentCourseCard/>
+            <StudentCourseCard/>
+            <StudentCourseCard/>
+          </div>
+
+
+          {/* {allCourses.length > 0 ? (
               <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
                 {allCourses.map((course) => (
                   <StudentCourseCard key={course._id} course={course} />
@@ -121,7 +99,7 @@ function SpecificTeacher() {
                   oops ..! there are no any courses in our site by now
                 </h1>
               </div>
-            )}
+            )} */}
         </div>
         
       </div>
