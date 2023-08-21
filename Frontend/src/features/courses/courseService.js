@@ -45,8 +45,15 @@ const getAllCourses = async () => {
     return response.data
 }
 
+//get courses of single teacher
+const getTeachersCourse = async(id) => {
+    const response = await axios.get(`${API_URL}teachersCourses/${id}`)
+    console.log(response);
+    return response.data
+}
+
 const courseService = {
-    createCourse, getCourses, deleteCourse,getAllCourses
+    createCourse, getCourses, deleteCourse,getAllCourses, getTeachersCourse
 }
 
 export default courseService

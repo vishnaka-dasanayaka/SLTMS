@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import courseService from './courseService'
 
 const initialState = {
+    teachersCourses : [],
     allCourses: [],
     courses: [],
     isError: false,
@@ -75,6 +76,22 @@ export const getAllCourses = createAsyncThunk('courses/getAllCourses', async(_,t
 })
 
 
+//get courses of single teacher
+export const getTeachersCourse = createAsyncThunk('courses/getTeachersCourse', async (id,thunkAPI) => {
+    try {
+        return await courseService.getTeachersCourse(id)
+    } catch (error) {
+        const message =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
+
 
 
 export const courseSlice = createSlice({
@@ -135,6 +152,19 @@ export const courseSlice = createSlice({
                 state.allCourses = action.payload
             })
             .addCase(getAllCourses.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(getTeachersCourse.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getTeachersCourse.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.teachersCourses = action.payload
+            })
+            .addCase(getTeachersCourse.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

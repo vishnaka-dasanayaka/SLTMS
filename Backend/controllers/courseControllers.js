@@ -127,12 +127,25 @@ const getAllCourses = asyncHandler(async (req,res) => {
     }
 })
 
+//get courses of single teacher
+
+const getTeachersCourse = asyncHandler(async (req,res) => {
+    try {
+       const courses = await Course.find({teacher:req.params.id})
+       res.status(200).json(courses)
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+})
+
 
 module.exports = {
     setCourse,
     getCourses,
     updateCourse,
     deleteCourse,
-    getAllCourses
+    getAllCourses,
+    getTeachersCourse
 }
 
