@@ -25,8 +25,18 @@ const getStudent = async(token) => {
     return response.data
 }
 
+const getAllTeachers = async() => {
+    const response = await axios.get(`${API_URL_TEACHER}allTeachers`)
+    return response.data
+}
+
+const getOneTeacher = async(id) => {
+    const response = await axios.get(`${API_URL_TEACHER}getOne/${id}`)
+    return response.data
+}
+
 const userService = {
-    getTeacher,getStudent
+    getTeacher,getStudent,getAllTeachers,getOneTeacher
 }
 
 export default userService

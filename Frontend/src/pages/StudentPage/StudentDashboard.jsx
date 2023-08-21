@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCourses, reset } from "../../features/courses/courseSlice";
 import Spinner from "../../components/Spinner/Spinner";
 import { useEffect } from "react";
+import { getAllTeachers } from "../../features/user/userSlice";
 
 function StudentDashboard() {
   const dispatch = useDispatch();
@@ -20,6 +21,11 @@ function StudentDashboard() {
   const { allCourses, isLoading, isError, message } = useSelector(
     (state) => state.courses
   );
+  
+  const { allTeachers } = useSelector(
+    (state) => state.users
+  );
+
 
     useEffect(() => {
 
@@ -29,7 +35,7 @@ function StudentDashboard() {
     }
 
     dispatch(getAllCourses());
-
+    dispatch(getAllTeachers())
 
     return () => {
       dispatch(reset());
@@ -116,18 +122,9 @@ function StudentDashboard() {
               teachers
             </h2>
 
+            {allTeachers.length > 0 ? (
             <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
-              <TeacherCard/>
-              <TeacherCard/>
-              <TeacherCard/>
-              <TeacherCard/>
-              <TeacherCard/>
-              <TeacherCard/>
-            </div>
-
-            {/* {teachers.length > 0 ? (
-            <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
-            {teachers.map((teacher) => (
+            {allTeachers.map((teacher) => (
                   <TeacherCard key={teacher._id} teacher={teacher} />
                 ))}
               </div>
@@ -137,7 +134,7 @@ function StudentDashboard() {
                   oops ..! there are no any teachers in our site by now
                 </h1>
               </div>
-            )} */}
+            )} 
             
           </div>
         </div>

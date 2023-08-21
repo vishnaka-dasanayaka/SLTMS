@@ -85,6 +85,28 @@ const getMe = asyncHandler(async (req,res) => {
 
 })
 
+//get all teachers from DB
+const getAllTeachers = asyncHandler(async (req,res) => {
+    try {
+        const allTeachers = await Teacher.find();
+        res.status(200).json(allTeachers) 
+        
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+})
+
+//get one teacher
+const getOne = asyncHandler(async(req,res) => {
+    try {
+        const teacher = await Teacher.findById(req.params.id)
+        res.status(200).json(teacher)
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+})
 
 // Generate JWT
 const generateJWT = (id) => {
@@ -96,5 +118,7 @@ const generateJWT = (id) => {
 module.exports = {
     registerTeacher,
     loginTeacher,
-    getMe
+    getMe,
+    getAllTeachers,
+    getOne
 }
