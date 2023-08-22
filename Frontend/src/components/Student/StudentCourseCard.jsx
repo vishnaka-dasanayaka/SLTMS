@@ -1,4 +1,10 @@
+import { useState } from "react";
+import CourseDetailPopup from "../Popups/CourseDetailPopup/CourseDetailPopup";
+
 function StudentCourseCard({ course }) {
+  const [courseDetailPop, setCourseDetailPop] = useState(false);
+
+
   return (
     <div>
       <div className="flex flex-col items-center justify-center m-5 text-white uppercase bg-gray-600 rounded-lg h-fit">
@@ -19,11 +25,18 @@ function StudentCourseCard({ course }) {
           <h3 className="text-lg font-bold">{course.courseTitle}</h3>
         </div>
         <div className="my-3">
-          <button className="px-3 py-1 hover:cursor-pointer hover:text-btn_color rounded-lg  hover:bg-white uppercase bg-btn_color border-[1px] border-btn_color text-white font-extrabold">
+          <button onClick={() => setCourseDetailPop(true)} className="px-3 py-1 hover:cursor-pointer hover:text-btn_color rounded-lg  hover:bg-white uppercase bg-btn_color border-[1px] border-btn_color text-white font-extrabold">
             show
           </button>
         </div>
       </div>
+
+      <CourseDetailPopup
+      key={course._id} course={course}
+        detailTrigger = {courseDetailPop}
+        setDetailTrigger = {setCourseDetailPop}
+      ></CourseDetailPopup>
+
     </div>
   );
 }

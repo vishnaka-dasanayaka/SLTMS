@@ -36,7 +36,7 @@ function SpecificTeacher() {
     return () => {
       dispatch(reset());
     };
-  }, [isError, message, dispatch]);
+  }, [isError, message, dispatch, teacherID] );
 
   if (isLoading) {
     return <Spinner />;
