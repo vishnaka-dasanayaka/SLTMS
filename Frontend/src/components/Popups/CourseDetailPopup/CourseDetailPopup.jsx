@@ -1,9 +1,16 @@
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 function CourseDetailPopup(props) {
+  const navigate = useNavigate()
+
   const onCloseClick = () => {
     props.setDetailTrigger(false);
   };
+
+  const onClick = () =>{
+    navigate(`/payForCourse/${props.course._id}`)
+  }
 
 
   return props.detailTrigger ? (
@@ -48,7 +55,7 @@ function CourseDetailPopup(props) {
                 <h3>{props.course.fee}</h3>
               </div>
               <div className="my-5">
-                <button className="p-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black">
+                <button onClick={onClick} className="p-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black">
                   enroll me
                 </button>
               </div>

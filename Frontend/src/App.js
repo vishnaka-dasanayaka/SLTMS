@@ -22,6 +22,7 @@ import {ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from './app/store';
+import PayForCourse from './pages/StudentPage/PayForCourse'
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/specificCourse" element={<SpecificCourse />} />
         <Route path="/uploadLesson/:id" element={<UploadLesson />} />
         <Route path="/studentPay" element={<StudentPay />} />
+        <Route path="/payForCourse/:id" element={<PayForCourse />} />
       </Routes>
       </Provider>
     </BrowserRouter>

@@ -35,8 +35,14 @@ const getOneTeacher = async(id) => {
     return response.data
 }
 
+const enrollCourse = async(reqData) =>{
+
+    const response = await axios.put(`${API_URL_STUDENT}enrollCourse/${reqData.studentId}/${reqData.courseId}`)
+    return response.data
+}
+
 const userService = {
-    getTeacher,getStudent,getAllTeachers,getOneTeacher
+    getTeacher,getStudent,getAllTeachers,getOneTeacher,enrollCourse
 }
 
 export default userService
