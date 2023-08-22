@@ -1,12 +1,10 @@
 import CloseIcon from "@mui/icons-material/Close";
 
 function CourseDetailPopup(props) {
-  console.log(props.course);
   const onCloseClick = () => {
     props.setDetailTrigger(false);
   };
 
-  const courseID = props.course._id
 
   return props.detailTrigger ? (
     <div>
@@ -39,7 +37,7 @@ function CourseDetailPopup(props) {
                 </h3>
               </div>
               <div className="mt-5">
-                <h3>techer</h3>
+                <h3>teacher.firstName</h3>
               </div>
               <div className="mt-5">
                 <p>

@@ -108,6 +108,7 @@ const getOne = asyncHandler(async(req,res) => {
     }
 })
 
+
 // Generate JWT
 const generateJWT = (id) => {
     return jwt.sign({id},process.env.JWT_SECRET,{

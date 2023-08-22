@@ -32,7 +32,7 @@ function StudentCourseCard({ course }) {
       </div>
 
       <CourseDetailPopup
-      key={course._id} course={course}
+       key={course._id} course={course}
         detailTrigger = {courseDetailPop}
         setDetailTrigger = {setCourseDetailPop}
       ></CourseDetailPopup>

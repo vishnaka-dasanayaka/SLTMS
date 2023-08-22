@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {registerTeacher,loginTeacher,getMe,getAllTeachers, getOne} = require('../controllers/teacherController');
+const {registerTeacher,loginTeacher,getMe,getAllTeachers, getOne, getFromCourse} = require('../controllers/teacherController');
 const {protect} = require('../middleware/authMiddleware')
 
 router.post('/', registerTeacher)
@@ -10,5 +10,6 @@ router.get('/me', protect, getMe)
 router.get('/allTeachers',getAllTeachers);
 //get one teacher
 router.get('/getOne/:id',getOne)
+
 
 module.exports = router
