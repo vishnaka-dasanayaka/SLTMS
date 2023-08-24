@@ -105,9 +105,19 @@ const deleteLesson = asyncHandler(async (req, res) => {
     res.status(200).json(deletedLesson)
 })
 
+const getLessonByCourse = asyncHandler(async (req, res) => {
+    try {
+        const allLessons = await Lesson.find({ course: req.params.id });
+        res.status(200).json(allLessons)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 module.exports = {
     setLesson,
     getLessons,
     deleteLesson,
-    updateLesson
+    updateLesson,
+    getLessonByCourse
 }
