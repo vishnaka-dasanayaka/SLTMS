@@ -1,19 +1,49 @@
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import Spinner from "../../Spinner/Spinner";
 
 function CourseDetailPopup(props) {
-  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false); // State to track loading status
+
+  const { user } = useSelector((state) => state.auth);
+
+  const studentId = user._id;
+  //console.log(studentId);
+
+  const courseId = props.course._id;
+  //console.log(courseId);
+
+  const unEnroll = async () => {
+    try {
+      setIsLoading(true); // Set loading state to true
+      await axios.put(`/students/unenrollCourse/${studentId}/${courseId}`);
+      toast.success("Unenrolled from the course");
+      setIsLoading(false); // Set loading state back to false when done
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false); // Ensure loading state is reset in case of an error
+    }
+  };
+  const navigate = useNavigate();
 
   const onCloseClick = () => {
     props.setDetailTrigger(false);
   };
 
   // here is a vulnerability,,,, better to have separate axios to get course id
-  const onClick = () =>{
-    navigate(`/payForCourse/${props.course._id}`)
-  }
+  const onClick = () => {
+    if (props.butt) {
+      unEnroll();
+    } else {
+      navigate(`/payForCourse/${props.course._id}`);
+    }
+  };
 
-
+  //console.log(props.butt);
   return props.detailTrigger ? (
     <div>
       <div className="">
@@ -36,28 +66,35 @@ function CourseDetailPopup(props) {
               </div>
               <div className="mt-5">
                 <h2 className="text-2xl font-bold tracking-wider uppercase">
-                {props.course.category}
+                  {props.course.category}
                 </h2>
               </div>
               <div className="mt-5">
                 <h3 className="text-2xl font-semibold tracking-wide uppercase">
-                {props.course.subject}
+                  {props.course.subject}
                 </h3>
               </div>
               <div className="mt-5">
                 <h3>teacher.firstName</h3>
               </div>
               <div className="mt-5">
-                <p>
-                {props.course.desc}
-                </p>
+                <p>{props.course.desc}</p>
               </div>
               <div className="mt-5">
                 <h3>{props.course.fee}</h3>
               </div>
               <div className="my-5">
-                <button onClick={onClick} className="p-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black">
-                  enroll me
+                <button
+                  onClick={onClick}
+                  className="p-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black"
+                >
+                  {isLoading ? (
+                    <>pendind</>
+                  ) : props.butt ? (
+                    <>unenroll me</>
+                  ) : (
+                    <>enroll me</>
+                  )}
                 </button>
               </div>
             </div>

@@ -2,12 +2,9 @@ const mongoose = require('mongoose')
 
 const studentSchema = mongoose.Schema({
 
-    enrolledCourses: [{
-        
-            type: Object,
-            ref: 'Course'
-          
-    }],
+    enrolledCourses: {    
+            type: Array    
+        },
 
     firstName:{
         type:String,

@@ -25,7 +25,7 @@ function PayForCourse() {
 
   useEffect(() => {
     if (isSuccess) toast.success("Enrollment Successfull");
-    if (isError) toast.error(message);
+    if (isError) toast.error("Error Occured");
 
     return () => {
       dispatch(reset());
@@ -37,6 +37,7 @@ function PayForCourse() {
   };
 
   if (isLoading) return <Spinner />;
+
   return (
     <div>
       <Navbar />

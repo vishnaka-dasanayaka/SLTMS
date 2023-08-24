@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CourseDetailPopup from "../Popups/CourseDetailPopup/CourseDetailPopup";
 
-function StudentCourseCard({ course }) {
+function StudentCourseCard({ course, butt }) {
   const [courseDetailPop, setCourseDetailPop] = useState(false);
 
 
@@ -32,7 +32,7 @@ function StudentCourseCard({ course }) {
       </div>
 
       <CourseDetailPopup
-       key={course._id} course={course}
+       key={course._id} course={course} butt = {butt}
         detailTrigger = {courseDetailPop}
         setDetailTrigger = {setCourseDetailPop}
       ></CourseDetailPopup>

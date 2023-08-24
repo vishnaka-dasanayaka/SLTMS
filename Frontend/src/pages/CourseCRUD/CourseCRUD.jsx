@@ -21,6 +21,8 @@ export default function CourseCRUD(props) {
     (state) => state.courses
   );
 
+  console.log(courses);
+
   
 
   useEffect(() => {
