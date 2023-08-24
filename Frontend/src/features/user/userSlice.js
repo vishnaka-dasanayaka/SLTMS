@@ -156,7 +156,7 @@ export const userSlice = createSlice({
             .addCase(enrollCourse.fulfilled, (state,action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.enrolledCourses.push(action.payload)
+                state.messagec = 'Enrollment successfull'
             })
             .addCase(enrollCourse.rejected, (state,action) => {
                 state.isLoading = false

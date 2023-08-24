@@ -88,31 +88,42 @@ const getStudent = asyncHandler(async (req, res) => {
 
 // Enroll to courses
 const enrollCourse = asyncHandler(async (req, res) => {
-    
-        // Find the student by ID
-        
-        const student = await Student.findById(req.params.sId);
-
-        if (!student) {
-            res.status(404)
-            throw new Error('Student not found')
-        }
-
-        const idToUpdate = req.params.cId;
-
-        if (student.enrolledCourses.includes(idToUpdate)) {
-            res.status(400)
-            throw new Error('Already Exists')
-        }
-
-        // Push the course ID to the enrolledCourses array
-        student.enrolledCourses.push(idToUpdate);
-        
-        const updatedStudent = await student.save();
-
-        res.status(200).json(idToUpdate);
-    
-});
+    try {
+      const student = await Student.findById(req.params.sId);
+  
+      if (!student) {
+        res.status(404);
+        throw new Error('Student not found');
+      }
+  
+      const course = await Course.findById(req.params.cId);
+  
+      if (!course) {
+        res.status(404);
+        throw new Error('Course not found');
+      }
+  
+      // Check if the course is already enrolled
+      const isCourseEnrolled = student.enrolledCourses.some(enrolledCourse =>
+        enrolledCourse.course.equals(course._id)
+      );
+  
+      if (isCourseEnrolled) {
+        res.status(400);
+        throw new Error('Course is already enrolled');
+      }
+  
+      // Push the course object to the enrolledCourses array
+      student.enrolledCourses.push({ course });
+  
+      const updatedStudent = await student.save();
+  
+      res.status(200).json(updatedStudent);
+    } catch (error) {
+      res.status(error.status || 500).json({ error: error.message });
+    }
+  });
+  
 
 // unenroll a course
 const unenrollCourse = asyncHandler(async (req, res) => {

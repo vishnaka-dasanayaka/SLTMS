@@ -8,6 +8,7 @@ function CourseDetailPopup(props) {
     props.setDetailTrigger(false);
   };
 
+  // here is a vulnerability,,,, better to have separate axios to get course id
   const onClick = () =>{
     navigate(`/payForCourse/${props.course._id}`)
   }

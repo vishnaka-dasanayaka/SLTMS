@@ -68,10 +68,7 @@ function StudentCourses() {
           <h1 className="w-full px-5 py-1 mt-10 text-3xl font-extrabold tracking-widest text-center text-white uppercase rounded-full bg-primary">enrolled Courses</h1>
             
             <div className="grid justify-center grid-cols-1 lg:grid-cols-3">
-              <StudentCourseCard/>
-              <StudentCourseCard/>
-              <StudentCourseCard/>
-              <StudentCourseCard/>
+              dummy
             </div>
 
           </div>
