@@ -17,7 +17,6 @@ connectDB();
 
 const port = process.env.PORT || 3003;
 
-
 // middle ware
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

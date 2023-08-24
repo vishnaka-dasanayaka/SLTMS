@@ -17,8 +17,6 @@ function Navbar() {
 
   return (
     <div className="flex items-center justify-between bg-white shadow-lg shadow-gray-600 px-[5vw] max-h-[20vh]">
-      
-
       <div>
         <Link to={"/"}>
           <img

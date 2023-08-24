@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../../Spinner/Spinner";
 
 function CourseDetailPopup(props) {
@@ -12,10 +12,27 @@ function CourseDetailPopup(props) {
   const { user } = useSelector((state) => state.auth);
 
   const studentId = user._id;
-  //console.log(studentId);
 
   const courseId = props.course._id;
-  //console.log(courseId);
+
+  const teacherId = props.course.teacher;
+
+  const [teacher, setTeacher] = useState();
+
+  const getTeacher = async () => {
+    try {
+      const teacher = await axios.get(`/teachers/getOne/${teacherId}/`);
+      setTeacher(teacher.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTeacher();
+  }, [teacherId]);
+
+  console.log(teacher);
 
   const unEnroll = async () => {
     try {
@@ -42,6 +59,12 @@ function CourseDetailPopup(props) {
       navigate(`/payForCourse/${props.course._id}`);
     }
   };
+
+  const onClickShowLesson = () => {
+    navigate(`/courselessons/${teacher._id}/${props.course._id}`);
+  };
+
+  if (!teacher) return <Spinner />;
 
   //console.log(props.butt);
   return props.detailTrigger ? (
@@ -75,7 +98,9 @@ function CourseDetailPopup(props) {
                 </h3>
               </div>
               <div className="mt-5">
-                <h3>teacher.firstName</h3>
+                <h3>
+                  {teacher.firstName} {teacher.lastName}
+                </h3>
               </div>
               <div className="mt-5">
                 <p>{props.course.desc}</p>
@@ -83,19 +108,38 @@ function CourseDetailPopup(props) {
               <div className="mt-5">
                 <h3>{props.course.fee}</h3>
               </div>
-              <div className="my-5">
-                <button
-                  onClick={onClick}
-                  className="p-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black"
-                >
-                  {isLoading ? (
-                    <>pendind</>
-                  ) : props.butt ? (
-                    <>unenroll me</>
-                  ) : (
-                    <>enroll me</>
-                  )}
-                </button>
+              <div className="w-full my-5">
+                {props.butt ? (
+                  <div className="flex items-center justify-between mx-5 ">
+                    <div>
+                      {" "}
+                      <button
+                        onClick={onClickShowLesson}
+                        className="px-3 py-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black"
+                      >
+                        show lessons
+                      </button>
+                    </div>
+                    <div>
+                      {" "}
+                      <button
+                        onClick={onClick}
+                        className="px-3 py-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black"
+                      >
+                        {isLoading ? <>pending</> : <>unenrol me</>}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex justify-center">
+                    <button
+                      onClick={onClick}
+                      className="px-3 py-1 text-white uppercase bg-black border-2 border-black rounded-lg hover:bg-white hover:text-black"
+                    >
+                      enroll me
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
