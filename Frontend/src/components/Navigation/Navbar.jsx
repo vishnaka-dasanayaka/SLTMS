@@ -27,19 +27,19 @@ function Navbar() {
         </Link>
       </div>
 
-      <div className="hidden text-2xl md:block">
+      <div className="hidden text-3xl md:block">
         <Link to={"/"}>
           <h1>Edu.com</h1>
         </Link>
       </div>
 
-      <div className="hidden md:block">
+      <div className="hidden text-xl font-medium md:block">
         <Link to={"/teachersignup"}>
           <h2>Teach on Edu.com</h2>
         </Link>
       </div>
 
-      <div className="hidden md:block">
+      <div className="hidden text-xl font-medium md:block">
         <Link to={"/studentsignup"}>
           <h2>Learn on Edu.com</h2>
         </Link>
