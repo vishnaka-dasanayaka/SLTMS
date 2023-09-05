@@ -3,6 +3,7 @@ const router = express.Router()
 const { setLesson, getLessons, updateLesson, deleteLesson, getLessonByCourse } = require('../controllers/lessonController')
 const { protect } = require('../middleware/authMiddleware');
 
+
 router.route('/').post(protect, setLesson);
 router.route('/:id').get(protect, getLessons).put(protect, updateLesson).delete(protect, deleteLesson);
 

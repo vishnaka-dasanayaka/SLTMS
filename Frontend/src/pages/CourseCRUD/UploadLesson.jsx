@@ -14,6 +14,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { getLessons } from "../../features/lessons/lessonSlice";
 
 function UploadLesson() {
+  const [file, setFile] = useState();
   const dispatch = useDispatch();
   const params = useParams();
   const courseID = params.id;
@@ -23,12 +24,10 @@ function UploadLesson() {
     lessonTitle: "",
     duration: "",
     description: "",
-    file: "",
     course: courseID,
   });
 
-  const { month, lessonTitle, duration, description, file, course } = formData;
-
+  const { month, lessonTitle, duration, description, course } = formData;
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -39,7 +38,7 @@ function UploadLesson() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!month || !lessonTitle || !duration || !description || !file) {
+    if (!month || !lessonTitle || !duration || !description) {
       toast.error("All fields are mandetory");
     } else {
       const lessonData = {
@@ -47,11 +46,9 @@ function UploadLesson() {
         lessonTitle,
         duration,
         description,
-        file,
         course,
+        file,
       };
-
-      console.log(lessonData);
 
       dispatch(createLesson(lessonData));
     }
@@ -75,6 +72,7 @@ function UploadLesson() {
   if (isLoading) {
     return <Spinner />;
   }
+
   return (
     <div>
       <Navbar />
@@ -241,12 +239,9 @@ function UploadLesson() {
                 </div>
                 <div className="flex justify-center p-5 w-fit sm:justify-start bg-slate-200">
                   <input
-                    type="text"
-                    id="file"
-                    name="file"
-                    value={file}
+                    type="file"
                     placeholder="add files"
-                    onChange={onChange}
+                    onChange={(e) => setFile(e.target.files[0])}
                     className="min-w-[200px] border-solid border-4 bg-slate-200"
                   />
                 </div>

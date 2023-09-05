@@ -7,7 +7,7 @@ const asyncHandler = require('express-async-handler');
 // @access  Private
 
 const setLesson = asyncHandler(async (req, res) => {
-    if (!req.body.month || !req.body.lessonTitle || !req.body.duration || !req.body.description || !req.body.file || !req.body.course) {
+    if (!req.body.month || !req.body.lessonTitle || !req.body.duration || !req.body.description || !req.body.course) {
         res.status(400)
         throw new Error('All Fields are mandetory')
     }
@@ -16,7 +16,6 @@ const setLesson = asyncHandler(async (req, res) => {
     const lessonTitle = req.body.lessonTitle;
     const duration = req.body.duration;
     const description = req.body.description;
-    const file = req.body.file;
     const teacher = req.teacher.id;
     const course = req.body.course
 
@@ -25,7 +24,6 @@ const setLesson = asyncHandler(async (req, res) => {
         lessonTitle,
         duration,
         description,
-        file,
         teacher,
         course
     })

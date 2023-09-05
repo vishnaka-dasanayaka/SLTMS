@@ -27,12 +27,12 @@ export const createLesson = createAsyncThunk('lessons/create', async (lessonData
 
 // get all lessons
 
-export const getLessons = createAsyncThunk('lessons/getAll', async (courseID,thunkAPI) => {
+export const getLessons = createAsyncThunk('lessons/getAll', async (courseID, thunkAPI) => {
     try {
-        
+
         const token = thunkAPI.getState().auth.user.token
 
-        return await lessonService.getLessons(courseID,token)
+        return await lessonService.getLessons(courseID, token)
     } catch (error) {
         const message =
             (error.response &&
@@ -45,10 +45,10 @@ export const getLessons = createAsyncThunk('lessons/getAll', async (courseID,thu
 })
 
 //delete a lesson
-export const deleteLesson = createAsyncThunk('lessons/delete', async (id,thunkAPI) => {
+export const deleteLesson = createAsyncThunk('lessons/delete', async (id, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
-        return await lessonService.deleteLesson(id,token)
+        return await lessonService.deleteLesson(id, token)
     } catch (error) {
         const message =
             (error.response &&
@@ -101,8 +101,8 @@ export const lessonSlice = createSlice({
                 state.isLoading = false
                 state.isSuccess = true
                 state.lessons = state.lessons.filter(
-                    (lesson) => lesson._id !== action.payload._id  
-                    )
+                    (lesson) => lesson._id !== action.payload._id
+                )
             })
             .addCase(deleteLesson.rejected, (state, action) => {
                 state.isLoading = false

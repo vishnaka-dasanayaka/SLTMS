@@ -1,44 +1,44 @@
 const mongoose = require('mongoose')
 
-const lessonSchema = mongoose.Schema( {
+const lessonSchema = mongoose.Schema({
 
-    teacher:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:'Teacher'
-    },
-
-    course:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:'Course'
+    teacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Teacher'
     },
 
-    month:{
-        type:String,
-        required:[true,'Please add an ID']
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Course'
     },
-    lessonTitle:{
-        type:String,
-        required:[true,'Please add a category']
+
+    month: {
+        type: String,
+        required: [true, 'Please add an ID']
     },
-    duration:{
-        type:String,
-        required:[true,'Please add a Subject']
+    lessonTitle: {
+        type: String,
+        required: [true, 'Please add a category']
     },
-    description:{
-        type:String,
-        required:[true,'Please add a course title']
+    duration: {
+        type: String,
+        required: [true, 'Please add a Subject']
     },
-    file:{
-        type:String,
-        required:[true,'Please add a fee']
+    description: {
+        type: String,
+        required: [true, 'Please add a course title']
+    },
+    file: {
+        type: String,
+        //required:[true,'Please add a fee']
     }
 },
-{
-    timestamps:true
-})
+    {
+        timestamps: true
+    })
 
-const Lesson = mongoose.model("Lesson",lessonSchema);
+const Lesson = mongoose.model("Lesson", lessonSchema);
 
 module.exports = Lesson;
