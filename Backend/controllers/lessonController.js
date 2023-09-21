@@ -1,6 +1,8 @@
 const Teacher = require('../models/teacherModel');
 const Lesson = require('../models/lessonModel');
 const asyncHandler = require('express-async-handler');
+const multer = require('multer');
+const upload = multer();
 
 // @desc    Set a lesson
 // @route   POST/lessons
@@ -18,6 +20,9 @@ const setLesson = asyncHandler(async (req, res) => {
     const description = req.body.description;
     const teacher = req.teacher.id;
     const course = req.body.course
+
+    console.log(req.file);
+
 
     const newLesson = new Lesson({
         month,

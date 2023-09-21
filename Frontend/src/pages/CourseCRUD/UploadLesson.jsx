@@ -35,22 +35,37 @@ function UploadLesson() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (!month || !lessonTitle || !duration || !description) {
-      toast.error("All fields are mandetory");
+    if (!month || !lessonTitle || !duration || !description || !file) {
+      toast.error("All fields are mandatory");
     } else {
-      const lessonData = {
-        month,
-        lessonTitle,
-        duration,
-        description,
-        course,
-        file,
-      };
+      const formData = new FormData(); // Create a FormData object
 
-      dispatch(createLesson(lessonData));
+      // Append form fields to the FormData object
+      formData.append("month", month);
+      formData.append("lessonTitle", lessonTitle);
+      formData.append("duration", duration);
+      formData.append("description", description);
+      formData.append("course", course);
+      formData.append("file", file); // Append the file
+
+      try {
+        const formDataObject = {};
+        formData.forEach((value, key) => {
+          formDataObject[key] = value;
+        });
+
+        // Log the formDataObject to the console
+        console.log(formDataObject);
+        dispatch(createLesson(formDataObject));
+
+        // Handle the response as needed
+      } catch (error) {
+        // Handle any errors
+        console.log(error);
+      }
     }
   };
 
@@ -112,7 +127,12 @@ function UploadLesson() {
         </div>
 
         <div className="flex flex-col w-11/12 mt-10">
-          <form action="" onSubmit={onSubmit}>
+          <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+            onSubmit={onSubmit}
+          >
             <div className="flex flex-col justify-center mb-5">
               <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
                 <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
@@ -240,6 +260,7 @@ function UploadLesson() {
                 <div className="flex justify-center p-5 w-fit sm:justify-start bg-slate-200">
                   <input
                     type="file"
+                    name="file"
                     placeholder="add files"
                     onChange={(e) => setFile(e.target.files[0])}
                     className="min-w-[200px] border-solid border-4 bg-slate-200"
