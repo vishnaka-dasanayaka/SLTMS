@@ -14,7 +14,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
-  teacher:""
+  teacher: ""
 };
 
 // ************ for teachers register, login and logout ****************

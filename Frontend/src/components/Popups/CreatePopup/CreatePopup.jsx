@@ -58,14 +58,12 @@ function CreatePopup(props) {
     }
 
     if (isSuccess) {
-      
     }
   }, [isError, message, isSuccess]);
 
   if (isLoading) {
     return <Spinner />;
   }
-
 
   return props.createTrigger ? (
     <div className="">
@@ -96,23 +94,20 @@ function CreatePopup(props) {
               Category
             </label>
             <br />
-            
 
-<select
-                  value={category}
-                  name="category"
-                  id="category"
-                  onChange={onChange}
-                  className="w-full pl-2 mb-2 rounded-lg opacity-70"
-                >
-                  <option value="">Select the category</option>
-                  <option value="University Level">University Level</option>
-                  <option value="Advanced Level">Advanced Level</option>
-                  <option value="Ordinary Level">Ordinary Level</option>
-                  <option value="Schorlarship Level">Schorlarship Level</option>
-                </select>
-
-
+            <select
+              value={category}
+              name="category"
+              id="category"
+              onChange={onChange}
+              className="w-full pl-2 mb-2 rounded-lg opacity-70"
+            >
+              <option value="">Select the category</option>
+              <option value="University Level">University Level</option>
+              <option value="Advanced Level">Advanced Level</option>
+              <option value="Ordinary Level">Ordinary Level</option>
+              <option value="Schorlarship Level">Schorlarship Level</option>
+            </select>
 
             <br />
 

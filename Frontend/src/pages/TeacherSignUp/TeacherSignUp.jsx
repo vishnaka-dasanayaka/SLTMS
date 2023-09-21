@@ -42,7 +42,7 @@ function TeacherSignUp() {
 
     if (isSuccess || user) {
       navigate("/teacherDashboard");
-      toast.success("Successfull registered as a teacher");
+      toast.success("Successfully registered as a teacher");
     }
 
     dispatch(reset());

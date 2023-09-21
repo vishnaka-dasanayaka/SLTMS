@@ -6,10 +6,10 @@ const API_URL_STUDENT = '/students/'
 // **************** for teachers 
 //register a user
 const registerTeacher = async (userData) => {
-    const response =  await axios.post(API_URL_TEACHER,userData)
+    const response = await axios.post(API_URL_TEACHER, userData)
 
-    if(response.data){
-        localStorage.setItem('user',JSON.stringify(response.data))
+    if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
     }
 
     return response.data
@@ -17,10 +17,10 @@ const registerTeacher = async (userData) => {
 
 //login a user
 const loginTeacher = async (userData) => {
-    const response =  await axios.post(`${API_URL_TEACHER}login`,userData)
+    const response = await axios.post(`${API_URL_TEACHER}login`, userData)
 
-    if(response.data){
-        localStorage.setItem('user',JSON.stringify(response.data))
+    if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
     }
 
     return response.data
@@ -32,10 +32,10 @@ const loginTeacher = async (userData) => {
 // **************** for students 
 //register a user
 const registerStudent = async (userData) => {
-    const response =  await axios.post(API_URL_STUDENT,userData)
+    const response = await axios.post(API_URL_STUDENT, userData)
 
-    if(response.data){
-        localStorage.setItem('user',JSON.stringify(response.data))
+    if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data))
     }
 
     return response.data
@@ -43,12 +43,12 @@ const registerStudent = async (userData) => {
 
 //login a user
 const loginStudent = async (userData) => {
-    const response =  await axios.post(`${API_URL_STUDENT}login`,userData)
+    const response = await axios.post(`${API_URL_STUDENT}login`, userData)
 
-    if(response.data){
+    if (response.data) {
         response.data.role = true
         console.log(response.data);
-        localStorage.setItem('user',JSON.stringify(response.data))
+        localStorage.setItem('user', JSON.stringify(response.data))
     }
 
     return response.data
@@ -61,8 +61,8 @@ const logout = () => {
     localStorage.removeItem('user')
 }
 
-const authService = { 
-    registerTeacher,loginTeacher,logout,registerStudent,loginStudent
+const authService = {
+    registerTeacher, loginTeacher, logout, registerStudent, loginStudent
 }
 
 export default authService

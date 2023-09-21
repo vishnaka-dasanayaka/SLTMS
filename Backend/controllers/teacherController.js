@@ -7,26 +7,26 @@ const Teacher = require('../models/teacherModel');
 // @desc   Register new Teacher
 // @route  POST/teacher
 // @access Public
-const registerTeacher = asyncHandler(async (req,res) => {
+const registerTeacher = asyncHandler(async (req, res) => {
 
-    const{firstName, lastName, email, teachingArea, about, password} = req.body
+    const { firstName, lastName, email, teachingArea, about, password } = req.body
 
-    if(!firstName || !lastName || !email || !teachingArea || !about || !password){
+    if (!firstName || !lastName || !email || !teachingArea || !about || !password) {
         res.status(400)
         throw new Error('Please add all fields')
     }
 
     //Check teacher existance
-    const teacherExists = await Teacher.findOne({email})
+    const teacherExists = await Teacher.findOne({ email })
 
-    if(teacherExists){
+    if (teacherExists) {
         res.status(400)
         throw new Error('User already exists !! Try with another email.')
     }
 
     // hash the password
     const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password,salt)
+    const hashedPassword = await bcrypt.hash(password, salt)
 
     //Create teacher
     const teacher = await Teacher.create({
@@ -35,18 +35,19 @@ const registerTeacher = asyncHandler(async (req,res) => {
         email,
         teachingArea,
         about,
-        password:hashedPassword
+        password: hashedPassword,
+        image: ""
     })
 
-    if(teacher){
+    if (teacher) {
         res.status(201).json({
-            _id:teacher.id,
-            firstName:teacher.firstName,
-            lastName:teacher.lastName,
-            email:teacher.email,
+            _id: teacher.id,
+            firstName: teacher.firstName,
+            lastName: teacher.lastName,
+            email: teacher.email,
             token: generateJWT(teacher._id)
         })
-    }else{
+    } else {
         res.status(400)
         throw new Error('Invalid Data')
     }
@@ -55,22 +56,22 @@ const registerTeacher = asyncHandler(async (req,res) => {
 // @desc   Authenticate a teacher
 // @route  POST/teacher/login
 // @access Public
-const loginTeacher = asyncHandler(async (req,res) => {
+const loginTeacher = asyncHandler(async (req, res) => {
 
-    const {email,password} = req.body
+    const { email, password } = req.body
 
     //checking email
-    const teacher = await Teacher.findOne({email})
+    const teacher = await Teacher.findOne({ email })
 
-    if(teacher && (await bcrypt.compare(password,teacher.password))){
+    if (teacher && (await bcrypt.compare(password, teacher.password))) {
         res.json({
-            _id:teacher.id,
-            firstName:teacher.firstName,
-            lastName:teacher.lastName,
-            email:teacher.email,
+            _id: teacher.id,
+            firstName: teacher.firstName,
+            lastName: teacher.lastName,
+            email: teacher.email,
             token: generateJWT(teacher._id)
         })
-    } else{
+    } else {
         res.status(400)
         throw new Error('Invalid email or password !!! Try again')
     }
@@ -79,18 +80,18 @@ const loginTeacher = asyncHandler(async (req,res) => {
 // @desc   Get teacher data 
 // @route  GET/teacher/me
 // @access Private
-const getMe = asyncHandler(async (req,res) => {
+const getMe = asyncHandler(async (req, res) => {
 
     res.status(200).json(req.teacher)
 
 })
 
 //get all teachers from DB
-const getAllTeachers = asyncHandler(async (req,res) => {
+const getAllTeachers = asyncHandler(async (req, res) => {
     try {
         const allTeachers = await Teacher.find();
-        res.status(200).json(allTeachers) 
-        
+        res.status(200).json(allTeachers)
+
     } catch (error) {
         res.status(400)
         throw new Error(error)
@@ -98,7 +99,7 @@ const getAllTeachers = asyncHandler(async (req,res) => {
 })
 
 //get one teacher
-const getOne = asyncHandler(async(req,res) => {
+const getOne = asyncHandler(async (req, res) => {
     try {
         const teacher = await Teacher.findById(req.params.id)
         res.status(200).json(teacher)
@@ -108,10 +109,23 @@ const getOne = asyncHandler(async(req,res) => {
     }
 })
 
+// upload profile photo
+
+const uploadPhoto = asyncHandler(async (req, res) => {
+    try {
+        const teacher = await Teacher.findByIdAndUpdate(req.params.id, { image: req.file.filename })
+        res.status(200).json(teacher)
+
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+})
+
 
 // Generate JWT
 const generateJWT = (id) => {
-    return jwt.sign({id},process.env.JWT_SECRET,{
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d'
     })
 }
@@ -121,5 +135,6 @@ module.exports = {
     loginTeacher,
     getMe,
     getAllTeachers,
-    getOne
+    getOne,
+    uploadPhoto
 }
