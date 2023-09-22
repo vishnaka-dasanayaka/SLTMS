@@ -36,7 +36,7 @@ function SpecificTeacher() {
     return () => {
       dispatch(reset());
     };
-  }, [isError, message, dispatch, teacherID] );
+  }, [isError, message, dispatch, teacherID]);
 
   if (isLoading) {
     return <Spinner />;
@@ -99,8 +99,8 @@ function SpecificTeacher() {
             <div className="flex items-center justify-center">
               <div className="m-5 w-2/5 rounded-lg border-[2px] border-black h-fit">
                 <img
-                  className="h-auto p-5 w-fit"
-                  src="../img/teacher.jpg"
+                  className="w-full p-5 h-[60vh]"
+                  src={`/TeacherPhoto/${teacher.image}`}
                   alt=""
                 />
               </div>
@@ -147,7 +147,7 @@ function SpecificTeacher() {
                   oops ..! there are no any courses in our site by now
                 </h1>
               </div>
-            )} 
+            )}
           </div>
         </div>
       </div>

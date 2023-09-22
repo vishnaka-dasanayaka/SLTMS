@@ -122,6 +122,17 @@ const uploadPhoto = asyncHandler(async (req, res) => {
     }
 })
 
+//get profile picture
+const getProfilePicture = asyncHandler(async (req, res) => {
+    try {
+        const teacher = await Teacher.findById(req.params.id)
+        res.status(200).json(teacher.image)
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+})
+
 
 // Generate JWT
 const generateJWT = (id) => {
@@ -136,5 +147,6 @@ module.exports = {
     getMe,
     getAllTeachers,
     getOne,
-    uploadPhoto
+    uploadPhoto,
+    getProfilePicture
 }

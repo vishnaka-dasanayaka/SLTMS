@@ -7,7 +7,6 @@ function ProfilePicture(props) {
   const [file, setFile] = useState();
   const { user } = useSelector((state) => state.auth);
   const id = user._id;
-  console.log(id);
   const onCancelClick = () => {
     props.setPictureTrigger(false);
   };
@@ -61,8 +60,16 @@ function ProfilePicture(props) {
                   />
                 </div>
 
-                <div className="flex m-5 w-full  rounded-lg border-[2px] border-white items-center justify-center">
-                  <img className="h-[50vh] p-5 w-fit" id="imagePreview" />
+                <div
+                  id="imgDiv"
+                  className="flex m-5 w-full  rounded-lg border-[2px] border-white items-center justify-center"
+                >
+                  <img
+                    className="h-[50vh] p-5 w-fit text-white"
+                    src={`/TeacherPhoto/${props.pic}`}
+                    id="imagePreview"
+                    alt="No photo is selected"
+                  />
                 </div>
               </div>
               <div className="flex justify-center">

@@ -9,8 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser_teacher, reset } from "../../features/user/userSlice";
 import { useEffect, useState } from "react";
 import ProfilePicture from "../../components/Popups/ProfilePicture/ProfilePicture";
+import axios from "axios";
 
 function TeacherProfile(props) {
+  const [profilePicture, setProfilePicture] = useState("teacher.png");
+
   const [pictureButtonPopup, setPictureButtonPopup] = useState(false);
   const dispatch = useDispatch();
 
@@ -18,20 +21,25 @@ function TeacherProfile(props) {
     (state) => state.users
   );
 
+  const id = user._id;
   useEffect(() => {
     if (isError) {
       console.log(message);
     }
 
-    if (isSuccess) {
-    }
-
+    axios
+      .get(`/teachers/getProfilePicture/${id}`)
+      .then((res) => {
+        setProfilePicture(res.data);
+      })
+      .catch((res) => console.log(res));
     dispatch(getUser_teacher());
-
     return () => {
       reset();
     };
-  }, [isError, isSuccess, message, dispatch]);
+  }, [isError, isSuccess, message, dispatch, profilePicture]);
+
+  //if (!user) return <Spinner />;
 
   return (
     <div>
@@ -79,7 +87,7 @@ function TeacherProfile(props) {
                   <div className="w-56 h-56 my-3">
                     <img
                       className="w-full h-full"
-                      src="../img/teacher.png"
+                      src={`/TeacherPhoto/${profilePicture}`}
                       alt=""
                     />
                   </div>
@@ -321,6 +329,7 @@ function TeacherProfile(props) {
       </div>
 
       <ProfilePicture
+        pic={profilePicture}
         pictureTrigger={pictureButtonPopup}
         setPictureTrigger={setPictureButtonPopup}
       ></ProfilePicture>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerTeacher, loginTeacher, getMe, getAllTeachers, getOne, uploadPhoto, getFromCourse } = require('../controllers/teacherController');
+const { registerTeacher, loginTeacher, getMe, getAllTeachers, getOne, uploadPhoto, getProfilePicture } = require('../controllers/teacherController');
 const { protect } = require('../middleware/authMiddleware')
 const multer = require('multer')
 const path = require('path')
@@ -29,6 +29,9 @@ router.get('/getOne/:id', getOne)
 
 //upload profile picture
 router.put('/upload/:id', upload.single('file'), uploadPhoto);
+
+//get profile picture
+router.get('/getProfilePicture/:id', getProfilePicture);
 
 
 module.exports = router
