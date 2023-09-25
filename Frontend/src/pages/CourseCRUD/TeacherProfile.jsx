@@ -13,8 +13,26 @@ import axios from "axios";
 
 function TeacherProfile(props) {
   const [profilePicture, setProfilePicture] = useState("teacher.png");
-
   const [pictureButtonPopup, setPictureButtonPopup] = useState(false);
+
+  const refreshData = () => {
+    axios
+      .get(`/teachers/getProfilePicture/${id}`)
+      .then((res) => {
+        setProfilePicture(res.data);
+      })
+      .catch((res) => console.log(res));
+    dispatch(getUser_teacher());
+    return () => {
+      reset();
+    };
+  };
+
+  const setPic = (img) => {
+    setPictureButtonPopup(img);
+    refreshData();
+  };
+
   const dispatch = useDispatch();
 
   const { user, isSuccess, isError, message } = useSelector(
@@ -27,17 +45,8 @@ function TeacherProfile(props) {
       console.log(message);
     }
 
-    axios
-      .get(`/teachers/getProfilePicture/${id}`)
-      .then((res) => {
-        setProfilePicture(res.data);
-      })
-      .catch((res) => console.log(res));
-    dispatch(getUser_teacher());
-    return () => {
-      reset();
-    };
-  }, [isError, isSuccess, message, dispatch, profilePicture]);
+    refreshData();
+  }, [isError, isSuccess, message, dispatch, pictureButtonPopup]);
 
   //if (!user) return <Spinner />;
 
@@ -331,7 +340,7 @@ function TeacherProfile(props) {
       <ProfilePicture
         pic={profilePicture}
         pictureTrigger={pictureButtonPopup}
-        setPictureTrigger={setPictureButtonPopup}
+        setPictureTrigger={setPic}
       ></ProfilePicture>
     </div>
   );
