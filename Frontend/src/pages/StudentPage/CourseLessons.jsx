@@ -117,6 +117,22 @@ function CourseLessons() {
                         {lesson.month}
                       </h3>
                       <br />
+
+                      <div className="flex flex-row items-center justify-between w-11/12">
+                        <div>
+                          <Link to={`/lessondetails/${lesson._id}`}>
+                            <button className="hover:bg-white hover:text-btn_color px-3 py-1 text-white uppercase border-[1px] border-btn_color rounded-lg bg-btn_color">
+                              view
+                            </button>
+                          </Link>
+                        </div>
+
+                        <div>
+                          <button className="hover:bg-white hover:text-blue-400 px-3 py-1 text-white uppercase border-[1px] border-blue-400 rounded-lg bg-blue-400">
+                            attempt quiz
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

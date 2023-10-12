@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser_student, reset } from "../../features/user/userSlice";
 import { useEffect } from "react";
 
-function StudentProfile() {
+function StudentProfile(props) {
   const dispatch = useDispatch();
 
   const { user, isSuccess, isError, message } = useSelector(
@@ -36,7 +36,7 @@ function StudentProfile() {
       <Navbar />
       <div className="flex justify-center">
         <div className="w-1/12 bg-[#d9d9d9] opacity-50 h-[100vh]">
-        <ol className="text-center scale-[2] mt-32">
+          <ol className="text-center scale-[2] mt-32">
             <li className="py-2 ">
               <Link to={"/studentDashboard"}>
                 <DashboardIcon />
@@ -75,11 +75,7 @@ function StudentProfile() {
               <div className="w-1/4 p-5 m-5 bg-teal-400 rounded-lg">
                 <div className="flex flex-col items-center justify-center">
                   <div className="w-56 h-56 my-3">
-                    <img
-                      className="w-full h-full"
-                      src="../img/teacher.png"
-                      alt=""
-                    />
+                    <img className="w-full h-full" src={``} alt="" />
                   </div>
                   <div className="mt-3">
                     <h3 className="text-xl font-bold tracking-wide uppercase">

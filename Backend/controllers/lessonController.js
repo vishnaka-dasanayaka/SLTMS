@@ -2,6 +2,7 @@ const Teacher = require('../models/teacherModel');
 const Lesson = require('../models/lessonModel');
 const asyncHandler = require('express-async-handler');
 const multer = require('multer');
+const { param } = require('../route/courseRoute');
 const upload = multer();
 
 // @desc    Set a lesson
@@ -117,10 +118,22 @@ const getLessonByCourse = asyncHandler(async (req, res) => {
     }
 })
 
+const getSingleLesson = asyncHandler(async (req, res) => {
+    try {
+        const lesson = await Lesson.findById(req.params.id)
+        res.status(200).json(lesson)
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
 module.exports = {
     setLesson,
     getLessons,
     deleteLesson,
     updateLesson,
-    getLessonByCourse
+    getLessonByCourse,
+    getSingleLesson
 }

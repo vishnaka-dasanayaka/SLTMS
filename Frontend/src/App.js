@@ -24,6 +24,7 @@ import { Provider } from "react-redux";
 import store from './app/store';
 import PayForCourse from './pages/StudentPage/PayForCourse'
 import CourseLessons from "./pages/StudentPage/CourseLessons";
+import LessonDetails from "./pages/Lesson/LessonDetails";
 
 function App() {
 
@@ -53,6 +54,8 @@ function App() {
             <Route path="/studentPay" element={<StudentPay />} />
             <Route path="/payForCourse/:id" element={<PayForCourse />} />
             <Route path="/courselessons/:tId/:cId" element={<CourseLessons />} />
+            <Route path="/lessondetails/:id" element={<LessonDetails />} />
+
           </Routes>
         </Provider>
       </BrowserRouter>

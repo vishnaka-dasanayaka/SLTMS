@@ -15,13 +15,14 @@ function TeacherProfile(props) {
   const [profilePicture, setProfilePicture] = useState("teacher.png");
   const [pictureButtonPopup, setPictureButtonPopup] = useState(false);
 
-  const refreshData = () => {
-    axios
-      .get(`/teachers/getProfilePicture/${id}`)
-      .then((res) => {
-        setProfilePicture(res.data);
-      })
-      .catch((res) => console.log(res));
+  const refreshData = async () => {
+    try {
+      const res = await axios.get(`/teachers/getProfilePicture/${id}`);
+      setProfilePicture(res.data);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
     dispatch(getUser_teacher());
     return () => {
       reset();
