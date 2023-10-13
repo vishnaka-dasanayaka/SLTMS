@@ -10,6 +10,7 @@ import axios from "axios";
 import Spinner from "../../components/Spinner/Spinner";
 
 function CourseLessons() {
+  const role = "student";
   const params = useParams();
   const navigate = useNavigate();
 
@@ -118,19 +119,13 @@ function CourseLessons() {
                       </h3>
                       <br />
 
-                      <div className="flex flex-row items-center justify-between w-11/12">
+                      <div className="flex flex-row items-center justify-center w-11/12">
                         <div>
-                          <Link to={`/lessondetails/${lesson._id}`}>
-                            <button className="hover:bg-white hover:text-btn_color px-3 py-1 text-white uppercase border-[1px] border-btn_color rounded-lg bg-btn_color">
+                          <Link to={`/lessondetails/${role}/${lesson._id}`}>
+                            <button className="hover:bg-white hover:text-primary px-3 py-1 text-white uppercase border-[1px] border-primary rounded-lg bg-primary">
                               view
                             </button>
                           </Link>
-                        </div>
-
-                        <div>
-                          <button className="hover:bg-white hover:text-blue-400 px-3 py-1 text-white uppercase border-[1px] border-blue-400 rounded-lg bg-blue-400">
-                            attempt quiz
-                          </button>
                         </div>
                       </div>
                     </div>

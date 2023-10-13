@@ -23,17 +23,12 @@ export default function CourseCRUD(props) {
 
   console.log(courses);
 
-  
-
   useEffect(() => {
-
-
     if (isError) {
       console.log(message);
     }
 
     dispatch(getCourses());
-
 
     return () => {
       dispatch(reset());
@@ -105,14 +100,18 @@ export default function CourseCRUD(props) {
             </div>
 
             <div className="mt-10 ml-10">
-              {(courses.length > 0) ? (
+              {courses.length > 0 ? (
                 <div className="grid justify-center grid-cols-1 md:grid-cols-3 ">
                   {courses.map((course) => (
                     <CourseCard key={course._id} course={course} />
                   ))}
                 </div>
               ) : (
-                <div className="ml-32 w-fit"><h1 className="px-3 py-2 text-2xl font-extrabold tracking-widest text-center text-white uppercase bg-yellow-300">No courses added yet</h1></div>
+                <div className="ml-32 w-fit">
+                  <h1 className="px-3 py-2 text-2xl font-extrabold tracking-widest text-center text-white uppercase bg-yellow-300">
+                    No courses added yet
+                  </h1>
+                </div>
               )}
             </div>
           </div>

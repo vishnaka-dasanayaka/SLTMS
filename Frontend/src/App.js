@@ -25,6 +25,7 @@ import store from './app/store';
 import PayForCourse from './pages/StudentPage/PayForCourse'
 import CourseLessons from "./pages/StudentPage/CourseLessons";
 import LessonDetails from "./pages/Lesson/LessonDetails";
+import AttemptQuiz from "./pages/Lesson/AttemptQuiz";
 
 function App() {
 
@@ -54,7 +55,8 @@ function App() {
             <Route path="/studentPay" element={<StudentPay />} />
             <Route path="/payForCourse/:id" element={<PayForCourse />} />
             <Route path="/courselessons/:tId/:cId" element={<CourseLessons />} />
-            <Route path="/lessondetails/:id" element={<LessonDetails />} />
+            <Route path="/lessondetails/:role/:id" element={<LessonDetails />} />
+            <Route path="/attemptquiz/:id" element={<AttemptQuiz />} />
 
           </Routes>
         </Provider>

@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 
 const lessonSchema = mongoose.Schema({
 
+    quiz: {
+        type: Array
+    },
+
     teacher: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

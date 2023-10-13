@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getSingleLesson, setLesson, getLessons, updateLesson, deleteLesson, getLessonByCourse } = require('../controllers/lessonController')
+const { setQuiz, getSingleLesson, setLesson, getLessons, updateLesson, deleteLesson, getLessonByCourse } = require('../controllers/lessonController')
 const { protect } = require('../middleware/authMiddleware');
 
 router.route('/').post(protect, setLesson);
@@ -9,5 +9,6 @@ router.route('/:id').get(protect, getLessons).put(protect, updateLesson).delete(
 //get lessons by course ID
 router.get('/getlessonsbycourse/:id', getLessonByCourse)
 router.get('/getsinglelesson/:id', getSingleLesson);
+router.post('/setquiz/:id', setQuiz);
 
 module.exports = router;

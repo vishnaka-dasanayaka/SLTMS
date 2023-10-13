@@ -14,6 +14,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { getLessons } from "../../features/lessons/lessonSlice";
 
 function UploadLesson() {
+  const role = "teacher";
   const [file, setFile] = useState();
   const dispatch = useDispatch();
   const params = useParams();
@@ -356,9 +357,11 @@ function UploadLesson() {
                         </h3>
                         <br />
                         <div className="flex justify-between w-full">
-                          <button className="px-3 py-1 border-[1px] border-blue-500  hover:text-blue-500 hover:bg-white text-white uppercase bg-blue-500 rounded-lg">
-                            view
-                          </button>
+                          <Link to={`/lessondetails/${role}/${lesson._id}`}>
+                            <button className="px-3 py-1 border-[1px] border-blue-500  hover:text-blue-500 hover:bg-white text-white uppercase bg-blue-500 rounded-lg">
+                              view
+                            </button>
+                          </Link>
 
                           <button className="px-3 py-1 border-[1px] border-yellow-500  hover:text-yellow-500 hover:bg-white  text-white uppercase bg-yellow-500 rounded-lg">
                             edit
