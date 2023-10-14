@@ -42,6 +42,8 @@ function SpecificTeacher() {
     return <Spinner />;
   }
 
+  console.log(teacher);
+
   return (
     <div>
       <Navbar />

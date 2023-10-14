@@ -128,24 +128,7 @@ const getSingleLesson = asyncHandler(async (req, res) => {
     }
 })
 
-const setQuiz = asyncHandler(async (req, res) => {
-    try {
-        const lesson = await Lesson.findById(req.params.id);
 
-        if (!lesson) { res.status(400).json('lesson not found') }
-
-        for (let index = 0; index < req.body.length; index++) {
-            lesson.quiz.push(req.body[index])
-
-            const updatedLesson = await lesson.save();
-
-        }
-
-        res.status(200).json(updateLesson);
-    } catch (error) {
-        console.log(error);
-    }
-})
 
 
 module.exports = {
@@ -155,5 +138,6 @@ module.exports = {
     updateLesson,
     getLessonByCourse,
     getSingleLesson,
-    setQuiz
+    setQuiz,
+    markQuiz
 }

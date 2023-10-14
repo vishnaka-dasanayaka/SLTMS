@@ -6,11 +6,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary:'#1F5F5B',
-        btn_color:'#FF8500'
-        ,}
-      },
+        primary: '#1F5F5B',
+        btn_color: '#FF8500'
+        ,
+      }
+    },
   },
-  plugins: [],
+  plugins: [{
+    'postcss-import': {},
+    'tailwindcss/nesting': {},
+    tailwindcss: {},
+    autoprefixer: {},
+  }],
 }
 
