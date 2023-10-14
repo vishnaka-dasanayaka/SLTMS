@@ -12,8 +12,10 @@ import { toast } from "react-toastify";
 import { createLesson, deleteLesson } from "../../features/lessons/lessonSlice";
 import Spinner from "../../components/Spinner/Spinner";
 import { getLessons } from "../../features/lessons/lessonSlice";
+import axios from "axios";
 
 function UploadLesson() {
+  const [lesson, setLesson] = useState();
   const role = "teacher";
   const [file, setFile] = useState();
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ function UploadLesson() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (!month || !lessonTitle || !duration || !description || !file) {
+    if (!month || !lessonTitle || !duration || !description) {
       toast.error("All fields are mandatory");
     } else {
       const formData = new FormData(); // Create a FormData object
@@ -50,7 +52,7 @@ function UploadLesson() {
       formData.append("duration", duration);
       formData.append("description", description);
       formData.append("course", course);
-      formData.append("file", file); // Append the file
+      //formData.append("file", file); // Append the file
 
       try {
         const formDataObject = {};
@@ -59,12 +61,13 @@ function UploadLesson() {
         });
 
         // Log the formDataObject to the console
-        console.log(formDataObject);
+        //console.log(formDataObject);
         dispatch(createLesson(formDataObject));
+
+        //axios.post(`/lessons/setlessonfile/${}`)
 
         // Handle the response as needed
       } catch (error) {
-        // Handle any errors
         console.log(error);
       }
     }
@@ -84,6 +87,11 @@ function UploadLesson() {
 
     dispatch(getLessons(courseID));
   }, [isError, isSuccess, message, courseID, dispatch]);
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -249,7 +257,7 @@ function UploadLesson() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
+              {/* <div className="flex flex-col sm:flex-row mx-[5vw] mb-[2vh]">
                 <div className="flex min-w-[100px] mr-[5vw] sm:justify-start justify-center">
                   <label
                     htmlFor="year"
@@ -263,11 +271,11 @@ function UploadLesson() {
                     type="file"
                     name="file"
                     placeholder="add files"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={handleChange}
                     className="min-w-[200px] border-solid border-4 bg-slate-200"
                   />
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex justify-center">
                 <button className="px-5 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl uppercase">

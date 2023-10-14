@@ -10,9 +10,11 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PaidIcon from "@mui/icons-material/Paid";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import AddQuiz from "../../components/Popups/Quiz/AddQuiz";
+import AddFile from "./AddFile";
 
 function LessonDetails(props) {
   const [addQuizPopup, setAddQuizPopup] = useState(false);
+  const [addFilePopup, setAddFilePopup] = useState(false);
 
   const [reqLesson, setLesson] = useState();
   const params = useParams();
@@ -143,16 +145,36 @@ function LessonDetails(props) {
                   </div>
                 </div>
               </div>
-              <div>content</div>
+              <div className="my-10">
+                <h1 className="mb-10 uppercase">Lesson Content</h1>
+
+                <Link
+                  to={`http://localhost:3001/Lessons/${reqLesson.file}`}
+                  target="_blank"
+                >
+                  <div>
+                    <h1 className="ml-10 hover:text-blue-500 hover:cursor-pointer">
+                      {reqLesson.file}
+                    </h1>
+                  </div>
+                </Link>
+              </div>
               <div>
                 {role == "teacher" ? (
                   <>
                     <div className="flex justify-center w-full">
                       <button
                         onClick={() => setAddQuizPopup(true)}
-                        className="w-1/2 py-3 text-xl font-extrabold tracking-widest text-white uppercase rounded-2xl hover:text-btn_color hover:bg-black bg-btn_color"
+                        className="w-1/2 py-3 mx-2 text-xl font-extrabold tracking-widest text-white uppercase rounded-2xl hover:text-btn_color hover:bg-black bg-btn_color"
                       >
                         add quiz
+                      </button>
+
+                      <button
+                        onClick={() => setAddFilePopup(true)}
+                        className="w-1/2 py-3 mx-2 text-xl font-extrabold tracking-widest text-white uppercase rounded-2xl hover:text-btn_color hover:bg-black bg-btn_color"
+                      >
+                        add file
                       </button>
                     </div>
 
@@ -235,6 +257,12 @@ function LessonDetails(props) {
         trigger={addQuizPopup}
         setTrigger={setAddQuizPopup}
       ></AddQuiz>
+
+      <AddFile
+        lessonId={lessonId}
+        trigger={addFilePopup}
+        setTrigger={setAddFilePopup}
+      ></AddFile>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import axios from "axios";
 
 function AddQuiz(props) {
   const lessonId = props.lessonId;
-  console.log(lessonId);
+  //console.log(lessonId);
   const [formData, setFormData] = useState({
     question: "",
     correctAnswer: "",

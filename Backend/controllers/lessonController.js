@@ -21,8 +21,9 @@ const setLesson = asyncHandler(async (req, res) => {
     const description = req.body.description;
     const teacher = req.teacher.id;
     const course = req.body.course
+    const file = ''
 
-    console.log(req.file);
+    // console.log(req.file);
 
 
     const newLesson = new Lesson({
@@ -31,7 +32,8 @@ const setLesson = asyncHandler(async (req, res) => {
         duration,
         description,
         teacher,
-        course
+        course,
+        file
     })
 
     newLesson.save()
@@ -172,6 +174,23 @@ const markQuiz = asyncHandler(async (req, res) => {
     }
 })
 
+const setLessonFile = asyncHandler(async (req, res) => {
+    try {
+        res.status(200).json('kk')
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+const addFile = asyncHandler(async (req, res) => {
+    try {
+        const lesson = await Lesson.findByIdAndUpdate(req.params.id, { file: req.file.filename })
+        res.status(200).json(lesson)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 
 
 module.exports = {
@@ -182,5 +201,7 @@ module.exports = {
     getLessonByCourse,
     getSingleLesson,
     setQuiz,
-    markQuiz
+    markQuiz,
+    setLessonFile,
+    addFile
 }
