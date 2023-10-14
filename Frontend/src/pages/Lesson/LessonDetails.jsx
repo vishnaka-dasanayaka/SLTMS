@@ -13,6 +13,8 @@ import AddQuiz from "../../components/Popups/Quiz/AddQuiz";
 import AddFile from "./AddFile";
 
 function LessonDetails(props) {
+  const [teacherName, setTeacherName] = useState();
+  const [reqTeacher, setTeacher] = useState("");
   const [addQuizPopup, setAddQuizPopup] = useState(false);
   const [addFilePopup, setAddFilePopup] = useState(false);
 
@@ -31,8 +33,19 @@ function LessonDetails(props) {
     }
   };
 
+  const getTeacher = async () => {
+    try {
+      const teacher = await axios.get(`/lessons/getteacher/${lessonId}`);
+      setTeacher(teacher.data.image);
+      setTeacherName(teacher.data.firstName + " " + teacher.data.lastName);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getLesson();
+    getTeacher();
   });
 
   if (!reqLesson) return <Spinner></Spinner>;
@@ -83,7 +96,7 @@ function LessonDetails(props) {
                   <div className="w-56 h-56 my-3">
                     <img
                       className="w-full h-full"
-                      src="../img/teacher.png"
+                      src={`/TeacherPhoto/${reqTeacher}`}
                       alt=""
                     />
                   </div>
@@ -96,7 +109,7 @@ function LessonDetails(props) {
                     <div className="items-center justify-center my-2 ">
                       <div className="p-2">
                         <h2 className="font-mono text-lg uppercase ">
-                          Keerthi Dharmasiri
+                          {teacherName}
                         </h2>
                       </div>
 

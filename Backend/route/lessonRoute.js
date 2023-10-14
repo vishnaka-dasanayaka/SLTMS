@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { addFile, markQuiz, setLessonFile, setQuiz, getSingleLesson, setLesson, getLessons, updateLesson, deleteLesson, getLessonByCourse } = require('../controllers/lessonController')
+const { getTeacher, addFile, markQuiz, setLessonFile, setQuiz, getSingleLesson, setLesson, getLessons, updateLesson, deleteLesson, getLessonByCourse } = require('../controllers/lessonController')
 const { protect } = require('../middleware/authMiddleware');
 const multer = require('multer');
 const path = require('path')
@@ -31,5 +31,7 @@ router.post('/markquiz/:id', markQuiz);
 router.post('/setlessonfile/:id', setLessonFile);
 
 router.put('/addfile/:id', upload.single('file'), addFile)
+
+router.get('/getTeacher/:id', getTeacher);
 
 module.exports = router;

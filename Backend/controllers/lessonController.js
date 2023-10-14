@@ -191,6 +191,16 @@ const addFile = asyncHandler(async (req, res) => {
     }
 })
 
+const getTeacher = asyncHandler(async (req, res) => {
+    try {
+        const lesson = await Lesson.findById(req.params.id);
+        const teacher = await Teacher.findById(lesson.teacher);
+        res.status(200).json(teacher);
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 
 
 module.exports = {
@@ -203,5 +213,6 @@ module.exports = {
     setQuiz,
     markQuiz,
     setLessonFile,
-    addFile
+    addFile,
+    getTeacher
 }
