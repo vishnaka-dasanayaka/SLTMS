@@ -129,6 +129,49 @@ const getSingleLesson = asyncHandler(async (req, res) => {
 })
 
 
+const setQuiz = asyncHandler(async (req, res) => {
+    try {
+        const lesson = await Lesson.findById(req.params.id);
+
+        if (!lesson) { res.status(400).json('lesson not found') }
+
+        for (let index = 0; index < req.body.length; index++) {
+            lesson.quiz.push(req.body[index])
+
+            const updatedLesson = await lesson.save();
+
+        }
+
+        res.status(200).json(updateLesson);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+const markQuiz = asyncHandler(async (req, res) => {
+    try {
+        const lesson = await Lesson.findById(req.params.id);
+
+        if (!lesson) { res.status(400).json('not found') }
+
+        let mark = 0;
+
+
+        for (let index = 0; index < req.body.length; index++) {
+
+            if (req.body[index].value == lesson.quiz[index].correctAnswer) mark++;
+
+
+        }
+
+
+
+        res.status(200).json(mark);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 
 
 module.exports = {
