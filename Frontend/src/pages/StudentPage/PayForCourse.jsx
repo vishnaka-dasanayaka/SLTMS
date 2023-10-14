@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navigation/Navbar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -10,8 +10,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { enrollCourse, reset } from "../../features/user/userSlice";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner/Spinner";
+import axios from "axios";
+import StripeCheckout from "react-stripe-checkout";
 
 function PayForCourse() {
+
+  const [reqCourse,setCourse] = useState();
+
+  const getSingleCourse = async () => {
+    try {
+      const course = await axios.get(`/courses/getsinglecourse/${courseId}`)
+      setCourse(course.data);
+      console.log(course);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -24,19 +39,68 @@ function PayForCourse() {
   );
 
   useEffect(() => {
+
+    getSingleCourse();
     if (isSuccess) toast.success("Enrollment Successfull");
     if (isError) toast.error("Error Occured");
 
     return () => {
       dispatch(reset());
     };
-  }, [isError, isSuccess, message, dispatch]);
+  }, [isError, isSuccess, message, dispatch, reqCourse]);
 
-  const onCLick = () => {
-    dispatch(enrollCourse({ courseId, studentId }));
-  };
+  // const onCLick = () => {
+  //   dispatch(enrollCourse({ courseId, studentId }));
+  // };
 
   if (isLoading) return <Spinner />;
+
+  if(!reqCourse) return <Spinner/>
+
+  console.log(reqCourse);
+
+ // const publishableKey =
+ // 'pk_test_51KAs34JBPfp3exDP5KZ00E3s265wlWQ2O3pKoxEWxuOhzpsfVTqZ3qPMgtLweUqwbmabFS1xrTboUY6MxEAMsBOG00pmyBOyR8';
+// const [product, setProduct] = useState({
+//   name: 'Headphone',
+//   price: 5,
+// });
+// const priceForStripe = product.price * 100;
+
+// const handleSuccess = () => {
+//   MySwal.fire({
+//     icon: 'success',
+//     title: 'Payment was successful',
+//     time: 4000,
+//   });
+// };
+// const handleFailure = () => {
+//   MySwal.fire({
+//     icon: 'error',
+//     title: 'Payment was not successful',
+//     time: 4000,
+//   });
+// };
+const payNow = async token => {
+  try {
+    const response = await axios({
+      url: '/payment',
+      method: 'post',
+      data: {
+        amount: reqCourse.fee,
+        token,
+      },
+    });
+    if (response.status === 200) {
+      //handleSuccess();
+      dispatch(enrollCourse({ courseId, studentId }));
+      toast.success("Payment Success");
+    }
+  } catch (error) {
+   // handleFailure();
+    console.log(error);
+  }
+};
 
   return (
     <div>
@@ -89,20 +153,20 @@ function PayForCourse() {
             <div className="flex justify-between w-full bg-gradient-to-r from-slate-100 to-slate-300 -ml-[2vw] px-[1vw] items-center py-[2vh]">
               <div className="">
                 <div className="text-lg font-bold">
-                  <h1>Matlab for Beginners</h1>
+                  <h1>{reqCourse.courseTitle}</h1>
                 </div>
                 <div>
-                  <h3>3 Month course-Certificate</h3>
+                  <h3>{reqCourse.desc}</h3>
                 </div>
               </div>
-              <div className="text-lg font-bold">
-                <h1>Rs. 25000</h1>
+              <div className="text-lg font-bold w-[300px] mx-[5vw]">
+                <h1>Rs  {reqCourse.fee}</h1>
               </div>
             </div>
           </div>
 
-          <div className="flex">
-            <div className="flex flex-col w-1/2 mr-2 border border-black">
+          <div className="flex justify-center">
+            {/* <div className="flex flex-col w-1/2 mr-2 border border-black">
               <div className="pl-3 mt-2 text-lg font-bold">
                 <h1>Payment Method</h1>
               </div>
@@ -144,7 +208,7 @@ function PayForCourse() {
                   </label>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex flex-col w-1/2 ml-2 border border-black bg-gradient-to-b from-slate-300 to-slate-200">
               <div className="pl-5 my-2 mb-6 text-lg font-bold">
@@ -160,7 +224,7 @@ function PayForCourse() {
                     <h1>:</h1>
                   </div>
                   <div>
-                    <h1>Rs. 25000</h1>
+                    <h1>Rs. {reqCourse.fee}</h1>
                   </div>
                 </div>
 
@@ -188,18 +252,30 @@ function PayForCourse() {
                     <h1>:</h1>
                   </div>
                   <div>
-                    <h1>Rs. 24800</h1>
+                    <h1>Rs. {reqCourse.fee - 200}</h1>
                   </div>
                 </div>
               </div>
 
               <div className="flex justify-center">
-                <button
+                {/* <button
                   onClick={onCLick}
                   className="px-10 py-2 text-white bg-orange-500 rounded-xl border-[1px] border-orange-500 hover:bg-white hover:text-orange-500 cursor-pointer tracking-wider text-xl uppercase"
                 >
                   proceed
-                </button>
+                </button> */}
+
+                <StripeCheckout
+                  stripeKey="pk_test_51O0787EjLYednQFI3Ht6MARytVheTePMYtd0a9sTgdUJbadsiyZm2GJ0uwfuTYwXIOjJl3leDVcoU0YrliMXA8My00NdEujPEi"
+                  label="Proceed"
+                  name="Pay With Credit Card"
+                  // billingAddress
+                  // shippingAddress
+                  amount={reqCourse.fee}
+                  description={`Your total is Rs. ${reqCourse.fee - 200}`}
+                  token={payNow}
+                />
+
               </div>
             </div>
           </div>
